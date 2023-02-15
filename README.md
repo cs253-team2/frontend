@@ -18,3 +18,5 @@
 ### contributing guide:
 * after doing your changes make sure to push the code to your branch only.
   `git push <your branch name>`
+* occasionally you will be notified to pull your branch, as and when any one person updates the main branch
+* just checkout to your branch. (`git checkout <your branch>`) then `git pull`.
