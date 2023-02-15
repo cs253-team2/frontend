@@ -1,2 +1,0 @@
-# frontend
-CampusPay frontend
