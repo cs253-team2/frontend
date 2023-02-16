@@ -8,15 +8,13 @@
 ---
 ###  the initial setup for your frontend.
 * make a folder named 'CampusPay' this will contain both the frontend and backend folders.
-* now `git clone <repo url>` inside your 'CampusPay' folder.
-* this will create a folder name 'frontend' inside your 'CampusPay' folder.
-* now move to your respective branch by using `git checkout <your branch name>`.
+* fork the repository, and make changes only in your forked repo only.
+* clone the forked repo on your computer, go the folder.
 * now `npm install` - this will install all the initial dependencies.
 * you are ready with the initial setup.
 
 ---
 ### contributing guide:
-* after doing your changes make sure to push the code to your branch only.
-  `git push <your branch name>`
-* occasionally you will be notified to pull your branch, as and when any one person updates the main branch
-* just checkout to your branch. (`git checkout <your branch>`) then `git pull`.
+* after making any changes on your forked repo, make a pull request to the original repo on the cs253 organization,
+* your pull request will be verified and merged or a request for changes will be made.
+* more modalities will be conveyed in a meet on how to work with forked repos and making PRs.
