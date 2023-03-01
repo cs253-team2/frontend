@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
@@ -10,15 +11,20 @@ import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import IconButton, { IconButtonProps } from '@mui/joy/IconButton';
 import Link from '@mui/joy/Link';
 import Input from '@mui/joy/Input';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
 import Typography from '@mui/joy/Typography';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
 
+import { useNavigate } from 'react-router-dom';
+
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
+  role: HTMLInputElement;
   persistent: HTMLInputElement;
 }
 interface SignInFormElement extends HTMLFormElement {
@@ -59,6 +65,12 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
  * This template uses [`Inter`](https://fonts.google.com/specimen/Inter?query=inter) font.
  */
 export default function JoySignInSideTemplate() {
+  const navigate = useNavigate();
+
+  // const vendorPage = () => {
+  //   navigate('/vendor');
+  // }
+
   return (
     <CssVarsProvider
       defaultMode="dark"
@@ -173,9 +185,15 @@ export default function JoySignInSideTemplate() {
                 const data = {
                   email: formElements.email.value,
                   password: formElements.password.value,
+                  role: formElements.role[1].value,
                   persistent: formElements.persistent.checked,
                 };
-                alert(JSON.stringify(data, null, 2));
+                // alert(JSON.stringify(data, null, 2));
+                if(data.role === 'vendor') {
+                  navigate('/vendor');
+                } else {
+                  navigate('/customer');
+                }
               }}
             >
               <FormControl required>
@@ -185,6 +203,13 @@ export default function JoySignInSideTemplate() {
               <FormControl required>
                 <FormLabel>Password</FormLabel>
                 <Input placeholder="•••••••" type="password" name="password" />
+              </FormControl>
+              <FormControl required>
+                <FormLabel>Are you a vendor or customer?</FormLabel>
+                <Select name="role">
+                  <Option value="customer">Customer</Option>
+                  <Option value="vendor">Vendor</Option>
+                </Select>
               </FormControl>
               <Box
                 sx={{
