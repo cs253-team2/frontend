@@ -82,7 +82,7 @@ export default function SecondSidebar() {
               <ListItemDecorator>
                 <i data-feather="bell" />
               </ListItemDecorator>
-              <ListItemContent>Change 2</ListItemContent>
+              <ListItemContent>Slight Change</ListItemContent>
               <Chip variant="soft" size="sm">
                 10
               </Chip>
