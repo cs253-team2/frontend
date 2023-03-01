@@ -5,6 +5,7 @@ import SignIn from "./pages/signin/App";
 // import Blogs from "./pages/Blogs";
 import Vendor from "./pages/vendor/App";
 import NoPage from "./pages/error/App";
+import Customer from "./pages/customer/App";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<SignIn />} />
         {/* <Route index element={<Home />} /> */}
         <Route path="/vendor" element={<Vendor />} />
+        <Route path="/customer" element={<Customer />} />
         {/* <Route path="contact" element={<Contact />} /> */}
         <Route path="*" element={<NoPage />} />
       </Routes>
