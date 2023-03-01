@@ -188,7 +188,7 @@ export default function JoySignInSideTemplate() {
                   role: formElements.role[1].value,
                   persistent: formElements.persistent.checked,
                 };
-                alert(JSON.stringify(data, null, 2));
+                // alert(JSON.stringify(data, null, 2));
                 if(data.role === 'vendor') {
                   navigate('/vendor');
                 } else {
