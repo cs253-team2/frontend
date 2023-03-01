@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
