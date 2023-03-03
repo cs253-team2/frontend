@@ -28,22 +28,22 @@ export default function JoyOrderDashboardTemplate() {
     if(options.overview){
       return <Overview/>
     } else if(options.notifications){
-      console.log("notifications")
+      console.log("notifications");
       // <Notifications/>
     } else if(options.analytics){
-      console.log("analytics")
+      console.log("analytics");
       // <Analytics/>
     } else if(options.saved_reports){
-      console.log("saved_reports")
+      console.log("saved_reports");
       // <SavedReports/>
     } else if(options.orders){
-      console.log("orders")
+      console.log("orders");
       // <OrderTable/>
     } else if(options.user_reports){
-      console.log("user_reports")
+      console.log("user_reports");
       // <UserReports/>
     } else if(options.settings){
-      console.log("settings")
+      console.log("settings");
       // <Settings/>
     }
   }
