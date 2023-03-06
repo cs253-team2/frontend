@@ -50,7 +50,7 @@ export default function App() {
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Notifications
+                All Dues
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
@@ -71,7 +71,7 @@ export default function App() {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-                Notifications
+              All Dues
             </Typography>
             <Box sx={{ flex: 999 }} />
            

@@ -5,8 +5,11 @@ import SignIn from "./pages/signin/SignIn";
 // import Blogs from "./pages/Blogs";
 import VendorOverview from "./pages/vendor/Overview";
 import NoPage from "./pages/error/App";
-import CustomerOverview from "./pages/customer/App";
+
+import Customer from "./pages/customer/App";
 import Notifications from "./pages/customer/Notifications";
+import AllduesCustomer from "./pages/customer/AllDues";
+// import AllduesCustomer from "./pages/customer/alldues/Alldues";
 
 export default function App() {
   return (
@@ -14,9 +17,15 @@ export default function App() {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/vendor/overview" element={<VendorOverview />} />
-        <Route path="/customer/overview" element={<CustomerOverview />} />
-        <Route path="/customer/notifications" element={<Notifications />} />
+        <Route path="/customer/overview" element={<Customer tabsel={'overview'} />} />
+        <Route path="/customer/notifications" element={<Customer tabsel={'notifications'} />} />
+        <Route path="/customer/alldues" element={<Customer tabsel={'alldues'} />} />
+        <Route path="/customer/transaction_history" element={<Customer tabsel={'transaction_history'} />} />
+        <Route path="/customer/vendor" element={<Customer tabsel={'vendors'} />} />
+        <Route path="/customer/profile" element={<Customer tabsel={'profile'} />} />
+        <Route path="/customer/settings" element={<Customer tabsel={'settings'} />} />
         <Route path="*" element={<NoPage />} />
+
       </Routes>
     </BrowserRouter>
   );

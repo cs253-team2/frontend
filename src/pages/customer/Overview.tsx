@@ -44,7 +44,7 @@ export default function OverviewComponent() {
                 underline="hover"
                 color="neutral"
                 fontSize="inherit"
-                href="#some-link"
+                href="/customer/overview"
               >
                 Dashboard
               </Link>
@@ -73,7 +73,7 @@ export default function OverviewComponent() {
               Orders
             </Typography>
             <Box sx={{ flex: 999 }} />
-            <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
+            {/* <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
               <Button
                 variant="outlined"
                 color="neutral"
@@ -88,9 +88,9 @@ export default function OverviewComponent() {
               >
                 Download CSV
               </Button>
-            </Box>
+            </Box> */}
           </Box>
-          {/* <OrderTable /> */}
+          <OrderTable />
         </div>
     )
 }
