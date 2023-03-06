@@ -16,47 +16,137 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import Overview from './Overview';
+import Notifications from './Notifications';
+import AllDues from './AllDues';
+import TransactionHistory from './TransactionHistory';
+import Vendors from './Vendors';
+import Profile from './Profile';
+import Settings from './Settings';
 
 const useEnhancedEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
-export default function JoyOrderDashboardTemplate() {
+export default function JoyOrderDashboardTemplate(props) {
+  const {tabsel} = props;
+  
   const status = useScript(`https://unpkg.com/feather-icons`);
 
+  
+  const [options, setOptions] = React.useState({
+    overview: tabsel=="overview" ? true : false,
+    notifications: tabsel=="notifications" ? true : false,
+    alldues: tabsel=="alldues" ? true : false,
+    transaction_history: tabsel=="transaction_history" ? true : false,
+    vendors: tabsel=="vendors" ? true : false,
+    profile: tabsel=="profile" ? true : false,
+    settings: tabsel=="settings" ? true : false,
+  });
+
+  // React.useEffect(() => {
+  //   if(tabsel=="overview"){
+  //     setOptions({
+  //       overview: true,
+  //       notifications: false,
+  //       alldues: false,
+  //       transaction_history: false,
+  //       vendors: false,
+  //       profile: false,
+  //       settings: false,
+  //     });
+  //   } else if(tabsel=="notifications"){
+  //     setOptions({
+  //       overview: false,
+  //       notifications: true,
+  //       alldues: false,
+  //       transaction_history: false,
+  //       vendors: false,
+  //       profile: false,
+  //       settings: false,
+  //     });
+  //   } else if(tabsel=="alldues"){
+  //     setOptions({
+  //       overview: false,
+  //       notifications: false,
+  //       alldues: true,
+  //       transaction_history: false,
+  //       vendors: false,
+  //       profile: false,
+  //       settings: false,
+  //     });
+  //   } else if(tabsel=="transaction_history"){
+  //     setOptions({
+  //       overview: false,
+  //       notifications: false,
+  //       alldues: false,
+  //       transaction_history: true,
+  //       vendors: false,
+  //       profile: false,
+  //       settings: false,
+  //     });
+  //   } else if(tabsel=="vendors"){
+  //     setOptions({
+  //       overview: false,
+  //       notifications: false,
+  //       alldues: false,
+  //       transaction_history: false,
+  //       vendors: true,
+  //       profile: false,
+  //       settings: false,
+  //     });
+  //   } else if(tabsel=="profile"){
+  //     setOptions({
+  //       overview: false,
+  //       notifications: false,
+  //       alldues: false,
+  //       transaction_history: false,
+  //       vendors: false,
+  //       profile: true,
+  //       settings: false,
+  //     });
+  //   } else if(tabsel=="settings"){
+  //     setOptions({
+  //       overview: false,
+  //       notifications: false,
+  //       alldues: false,
+  //       transaction_history: false,
+  //       vendors: false,
+  //       profile: false,
+  //       settings: true,
+  //     });
+  //   }
+  
+  // }, [tabsel]);
+
+  
+  
   function ExportComponent(){
     console.log(options);
     if(options.overview){
       return <Overview/>
     } else if(options.notifications){
       console.log("notifications");
-      // <Notifications/>
-    } else if(options.analytics){
-      console.log("analytics");
-      // <Analytics/>
-    } else if(options.saved_reports){
-      console.log("saved_reports");
-      // <SavedReports/>
-    } else if(options.orders){
-      console.log("orders");
-      // <OrderTable/>
-    } else if(options.user_reports){
-      console.log("user_reports");
-      // <UserReports/>
+      return <Notifications/>
+    } else if(options.alldues){
+      console.log("Alldues");
+
+      return <AllDues/>
+    } else if(options.transaction_history){
+      console.log("transaction_history");
+      return <TransactionHistory/>
+    } else if(options.vendors){
+      console.log("vendors");
+      return <Vendors/>
+    } else if(options.profile){
+      console.log("profile");
+      return <Profile/>
     } else if(options.settings){
       console.log("settings");
-      // <Settings/>
+      return <Settings/>
     }
   }
 
-  const [options, setOptions] = React.useState({
-    overview: true,
-    notifications: false,
-    analytics: false,
-    saved_reports: false,
-    orders: false,
-    user_reports: false,
-    settings: false,
-  });
+
+  
 
   useEnhancedEffect(() => {
     // Feather icon setup: https://github.com/feathericons/feather#4-replace
@@ -112,79 +202,7 @@ export default function JoyOrderDashboardTemplate() {
           })}
         >
           <ExportComponent/>
-          {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Breadcrumbs
-              size="sm"
-              aria-label="breadcrumbs"
-              separator={<i data-feather="chevron-right" />}
-              sx={{
-                '--Breadcrumbs-gap': '1rem',
-                '--Icon-fontSize': '16px',
-                fontWeight: 'lg',
-                color: 'neutral.400',
-                px: 0,
-              }}
-            >
-              <Link
-                underline="none"
-                color="neutral"
-                fontSize="inherit"
-                href="#some-link"
-                aria-label="Home"
-              >
-                <i data-feather="home" />
-              </Link>
-              <Link
-                underline="hover"
-                color="neutral"
-                fontSize="inherit"
-                href="#some-link"
-              >
-                Dashboard
-              </Link>
-              <Typography fontSize="inherit" variant="soft" color="primary">
-                Orders
-              </Typography>
-            </Breadcrumbs>
-            <ColorSchemeToggle
-              sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
-            />
-          </Box>  */}
-          {/* <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              my: 1,
-              gap: 1,
-              flexWrap: 'wrap',
-              '& > *': {
-                minWidth: 'clamp(0px, (500px - 100%) * 999, 100%)',
-                flexGrow: 1,
-              },
-            }}
-          >
-            <Typography level="h1" fontSize="xl4">
-              Orders
-            </Typography>
-            <Box sx={{ flex: 999 }} />
-            <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
-              <Button
-                variant="outlined"
-                color="neutral"
-                startDecorator={<i data-feather="download-cloud" />}
-              >
-                Download PDF
-              </Button>
-              <Button
-                variant="outlined"
-                color="neutral"
-                startDecorator={<i data-feather="table" />}
-              >
-                Download CSV
-              </Button>
-            </Box>
-          </Box> */}
-          <OrderTable/>
+          
         </Box>
       </Box>
     </CssVarsProvider>

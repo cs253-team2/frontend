@@ -1,10 +1,10 @@
 export default interface SecondSidebarProps {
     overview: boolean;
     notifications: boolean;
-    analytics: boolean;
-    saved_reports: boolean;
-    orders: boolean;
-    user_reports: boolean;
+    alldues: boolean;
+    transaction_history: boolean;
+    vendors: boolean;
+    profile: boolean;
     settings: boolean;
   }
   

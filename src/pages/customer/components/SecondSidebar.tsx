@@ -11,8 +11,9 @@ import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { closeSidebar } from '../utils';
-import { useNavigate } from 'react-router-dom';
+import { unstable_HistoryRouter, useNavigate, redirect } from 'react-router-dom';
 import SecondSidebarProps from '../customer';
+
 
 
 export default function SecondSidebar(props: any) {
@@ -21,6 +22,40 @@ export default function SecondSidebar(props: any) {
   const handleClick = (data: SecondSidebarProps) => {
     setOptions(data);
   };
+  
+
+  const notificationspage = () => {
+    navigate('/customer/notifications');
+    window.location.reload();
+  };
+
+  const allduespage = () => {
+    navigate('/customer/alldues');
+    window.location.reload();
+  };
+  const transaction_historypage = () => {
+    navigate('/customer/transaction_history');
+    window.location.reload();
+  };
+  const overviewpage = () => {
+   navigate('/customer/overview');
+   window.location.reload(false);
+  };
+  const profilepage = () => {
+    navigate('/customer/profile');
+    window.location.reload();
+  };
+  
+const vendorpage = () => {
+    navigate('/customer/vendor');
+    window.location.reload();
+  };
+
+  const settingspage= () => {
+    navigate('/customer/settings');
+    window.location.reload();
+  };
+  
 
 
   return (
@@ -77,18 +112,10 @@ export default function SecondSidebar(props: any) {
           }}
         >
           <ListSubheader role="presentation" sx={{ color: 'text.primary' }}>
-            Dashboard
+            Customer Dashboard
           </ListSubheader>
           <ListItem>
-            <ListItemButton selected={options.overview} variant={options.overview?"soft":"plain"} onClick={() => handleClick({
-              overview: true,
-              notifications: false,
-              analytics: false,
-              saved_reports: false,
-              orders: false,
-              user_reports: false,
-              settings: false,
-            })}>
+            <ListItemButton selected={options.overview} variant={options.overview?"soft":"plain"} onClick={overviewpage}>
               <ListItemDecorator>
                 <i data-feather="activity" />
               </ListItemDecorator>
@@ -96,15 +123,7 @@ export default function SecondSidebar(props: any) {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.notifications} variant={options.notifications?"soft":"plain"} onClick={() => handleClick({
-              overview: false,
-              notifications: true,
-              analytics: false,
-              saved_reports: false,
-              orders: false,
-              user_reports: false,
-              settings: false,
-            })}>
+            <ListItemButton selected={options.notifications} variant={options.notifications?"soft":"plain"} onClick={notificationspage}>
               <ListItemDecorator>
                 <i data-feather="bell" />
               </ListItemDecorator>
@@ -115,79 +134,39 @@ export default function SecondSidebar(props: any) {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.analytics} variant={options.analytics?"soft":"plain"} onClick={() => handleClick({
-              overview: false,
-              notifications: false,
-              analytics: true,
-              saved_reports: false,
-              orders: false,
-              user_reports: false,
-              settings: false,
-            })}>
+            <ListItemButton selected={options.alldues} variant={options.alldues?"soft":"plain"} onClick={allduespage}>
               <ListItemDecorator>
                 <i data-feather="bar-chart" />
               </ListItemDecorator>
-              <ListItemContent>Analytics</ListItemContent>
+              <ListItemContent>All Dues</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.saved_reports} variant={options.saved_reports?"soft":"plain"} onClick={() => handleClick({
-              overview: false,
-              notifications: false,
-              analytics: false,
-              saved_reports: true,
-              orders: false,
-              user_reports: false,
-              settings: false,
-            })}>
+            <ListItemButton selected={options.transaction_history} variant={options.transaction_history?"soft":"plain"} onClick={transaction_historypage}>
               <ListItemDecorator>
                 <i data-feather="star" />
               </ListItemDecorator>
-              <ListItemContent>Saved reports</ListItemContent>
+              <ListItemContent>Transaction History</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.orders} variant={options.orders?"soft":"plain"} onClick={()=>handleClick({
-              overview: false,
-              notifications: false,
-              analytics: false,
-              saved_reports: false,
-              orders: true,
-              user_reports: false,
-              settings: false,
-            })}>
+            <ListItemButton selected={options.vendors} variant={options.vendors?"soft":"plain"} onClick={vendorpage}>
               <ListItemDecorator>
                 <i data-feather="shopping-cart" />
               </ListItemDecorator>
-              <ListItemContent>Orders</ListItemContent>
+              <ListItemContent>Vendors</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.user_reports} variant={options.user_reports?"soft":"plain"} onClick={() => handleClick({
-              overview: false,
-              notifications: false,
-              analytics: false,
-              saved_reports: false,
-              orders: false,
-              user_reports: true,
-              settings: false,
-            })}>
+            <ListItemButton selected={options.profile} variant={options.profile?"soft":"plain"} onClick={profilepage}>
               <ListItemDecorator>
                 <i data-feather="user" />
               </ListItemDecorator>
-              <ListItemContent>User reports</ListItemContent>
+              <ListItemContent>Profile</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.settings} variant={options.settings?"soft":"plain"} onClick={() => handleClick({
-              overview: false,
-              notifications: false,
-              analytics: false,
-              saved_reports: false,
-              orders: false,
-              user_reports: false,
-              settings: true,
-            })}>
+            <ListItemButton selected={options.settings} variant={options.settings?"soft":"plain"} onClick={settingspage}>
               <ListItemDecorator>
                 <i data-feather="settings" />
               </ListItemDecorator>
@@ -198,9 +177,9 @@ export default function SecondSidebar(props: any) {
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
             <Typography fontWeight="lg" level="body2">
-              Olivia Ryhe
+              Username
             </Typography>
-            <Typography level="body2">olivia@email.com</Typography>
+            <Typography level="body2">emailid@email.com</Typography>
           </div>
           <IconButton variant="plain" sx={{ ml: 'auto' }}>
             <i data-feather="log-out" />
