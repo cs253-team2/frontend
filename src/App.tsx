@@ -19,6 +19,5 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
-    //some useless commit
   );
 }
