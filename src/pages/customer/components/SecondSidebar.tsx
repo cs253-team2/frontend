@@ -11,8 +11,18 @@ import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { closeSidebar } from '../utils';
+import { useNavigate } from 'react-router-dom';
+import SecondSidebarProps from '../customer';
 
-export default function SecondSidebar() {
+
+export default function SecondSidebar(props: any) {
+  const navigate = useNavigate();
+  const {setOptions, options} = props;
+  const handleClick = (data: SecondSidebarProps) => {
+    setOptions(data);
+  };
+
+
   return (
     <React.Fragment>
       <Box
@@ -70,7 +80,15 @@ export default function SecondSidebar() {
             Dashboard
           </ListSubheader>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.overview} variant={options.overview?"soft":"plain"} onClick={() => handleClick({
+              overview: true,
+              notifications: false,
+              analytics: false,
+              saved_reports: false,
+              orders: false,
+              user_reports: false,
+              settings: false,
+            })}>
               <ListItemDecorator>
                 <i data-feather="activity" />
               </ListItemDecorator>
@@ -78,18 +96,34 @@ export default function SecondSidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.notifications} variant={options.notifications?"soft":"plain"} onClick={() => handleClick({
+              overview: false,
+              notifications: true,
+              analytics: false,
+              saved_reports: false,
+              orders: false,
+              user_reports: false,
+              settings: false,
+            })}>
               <ListItemDecorator>
                 <i data-feather="bell" />
               </ListItemDecorator>
-              <ListItemContent>Slight Change</ListItemContent>
-              <Chip variant="soft" size="sm">
+              <ListItemContent>Notifications</ListItemContent>
+              {/* <Chip variant="soft" size="sm">
                 10
-              </Chip>
+              </Chip> */}
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.analytics} variant={options.analytics?"soft":"plain"} onClick={() => handleClick({
+              overview: false,
+              notifications: false,
+              analytics: true,
+              saved_reports: false,
+              orders: false,
+              user_reports: false,
+              settings: false,
+            })}>
               <ListItemDecorator>
                 <i data-feather="bar-chart" />
               </ListItemDecorator>
@@ -97,7 +131,15 @@ export default function SecondSidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.saved_reports} variant={options.saved_reports?"soft":"plain"} onClick={() => handleClick({
+              overview: false,
+              notifications: false,
+              analytics: false,
+              saved_reports: true,
+              orders: false,
+              user_reports: false,
+              settings: false,
+            })}>
               <ListItemDecorator>
                 <i data-feather="star" />
               </ListItemDecorator>
@@ -105,7 +147,15 @@ export default function SecondSidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected variant="soft">
+            <ListItemButton selected={options.orders} variant={options.orders?"soft":"plain"} onClick={()=>handleClick({
+              overview: false,
+              notifications: false,
+              analytics: false,
+              saved_reports: false,
+              orders: true,
+              user_reports: false,
+              settings: false,
+            })}>
               <ListItemDecorator>
                 <i data-feather="shopping-cart" />
               </ListItemDecorator>
@@ -113,7 +163,15 @@ export default function SecondSidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.user_reports} variant={options.user_reports?"soft":"plain"} onClick={() => handleClick({
+              overview: false,
+              notifications: false,
+              analytics: false,
+              saved_reports: false,
+              orders: false,
+              user_reports: true,
+              settings: false,
+            })}>
               <ListItemDecorator>
                 <i data-feather="user" />
               </ListItemDecorator>
@@ -121,11 +179,19 @@ export default function SecondSidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.settings} variant={options.settings?"soft":"plain"} onClick={() => handleClick({
+              overview: false,
+              notifications: false,
+              analytics: false,
+              saved_reports: false,
+              orders: false,
+              user_reports: false,
+              settings: true,
+            })}>
               <ListItemDecorator>
                 <i data-feather="settings" />
               </ListItemDecorator>
-              <ListItemContent>Manage notifications</ListItemContent>
+              <ListItemContent>Settings</ListItemContent>
             </ListItemButton>
           </ListItem>
         </List>

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as React from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
@@ -14,12 +15,48 @@ import OrderTable from './components/OrderTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
+import Overview from './Overview';
 
 const useEnhancedEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
 export default function JoyOrderDashboardTemplate() {
   const status = useScript(`https://unpkg.com/feather-icons`);
+
+  function ExportComponent(){
+    console.log(options);
+    if(options.overview){
+      return <Overview/>
+    } else if(options.notifications){
+      console.log("notifications");
+      // <Notifications/>
+    } else if(options.analytics){
+      console.log("analytics");
+      // <Analytics/>
+    } else if(options.saved_reports){
+      console.log("saved_reports");
+      // <SavedReports/>
+    } else if(options.orders){
+      console.log("orders");
+      // <OrderTable/>
+    } else if(options.user_reports){
+      console.log("user_reports");
+      // <UserReports/>
+    } else if(options.settings){
+      console.log("settings");
+      // <Settings/>
+    }
+  }
+
+  const [options, setOptions] = React.useState({
+    overview: true,
+    notifications: false,
+    analytics: false,
+    saved_reports: false,
+    orders: false,
+    user_reports: false,
+    settings: false,
+  });
 
   useEnhancedEffect(() => {
     // Feather icon setup: https://github.com/feathericons/feather#4-replace
@@ -47,7 +84,7 @@ export default function JoyOrderDashboardTemplate() {
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
         <Header />
         <FirstSidebar />
-        <SecondSidebar />
+        <SecondSidebar setOptions={setOptions} options = {options}/>
         <Box
           component="main"
           className="MainContent"
@@ -74,7 +111,8 @@ export default function JoyOrderDashboardTemplate() {
             gap: 1,
           })}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <ExportComponent/>
+          {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
               aria-label="breadcrumbs"
@@ -111,8 +149,8 @@ export default function JoyOrderDashboardTemplate() {
             <ColorSchemeToggle
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
-          </Box>
-          <Box
+          </Box>  */}
+          {/* <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -145,8 +183,8 @@ export default function JoyOrderDashboardTemplate() {
                 Download CSV
               </Button>
             </Box>
-          </Box>
-          <OrderTable />
+          </Box> */}
+          <OrderTable/>
         </Box>
       </Box>
     </CssVarsProvider>
