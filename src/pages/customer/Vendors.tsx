@@ -13,7 +13,7 @@ import SecondSidebar from "./components/SecondSidebar";
 import Header from "./components/Header";
 import ColorSchemeToggle from "./components/ColorSchemeToggle";
 import customTheme from "./theme";
-import VendorTable2 from "./components/VendorTable2";
+import VendorTable from "./components/VendorTable";
 export default function App() {
   return (
     <div>
@@ -77,7 +77,7 @@ export default function App() {
         </Button>
       </Box>
       <Box>
-        <VendorTable2/>
+        <VendorTable/>
       </Box>
     </div>
   );
