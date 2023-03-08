@@ -1,8 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/signin/signin";
-// import Home from "./pages/Home";
-// import Blogs from "./pages/Blogs";
+import Register from "./pages/signin/register";
 import VendorOverview from "./pages/vendor/Overview";
 import NoPage from "./pages/error/App";
 
@@ -16,6 +15,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/vendor/overview" element={<VendorOverview />} />
         <Route path="/customer/overview" element={<Customer tabsel={'overview'} />} />
         <Route path="/customer/notifications" element={<Customer tabsel={'notifications'} />} />
