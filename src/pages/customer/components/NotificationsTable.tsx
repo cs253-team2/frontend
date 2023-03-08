@@ -72,6 +72,8 @@ const rows = [
       name: 'Olivia Ryhe',
       email: 'olivia@email.com',
     },
+    title: 'Invoice #INV-1234',
+    content: 'Thank you for your business. We look forward to working with you again.',
    
   },
   {
@@ -83,6 +85,8 @@ const rows = [
       name: 'Steve Hampton',
       email: 'steve.hamp@email.com',
     },
+    title: 'Invoice #INV-1233',
+    content: 'Paid in full. Thank you for your business.'
     
   },
   {
@@ -94,6 +98,8 @@ const rows = [
       name: 'Ciaran Murray',
       email: 'ciaran.murray@email.com',
     },
+    title: 'Invoice #INV-1232',
+    content: 'Paid in full. Thank you for your business.'
    
   },
   {
@@ -105,6 +111,8 @@ const rows = [
       name: 'Maria Macdonald',
       email: 'maria.mc@email.com',
     },
+    title: 'Invoice #INV-1231',
+    content: 'Paid in full. Thank you for your business.'
     
   },
   {
@@ -116,7 +124,8 @@ const rows = [
       name: 'Charles Fulton',
       email: 'fulton@email.com',
     },
-    subscription: 'Yearly',
+    title: 'Invoice #INV-1230',
+    content: 'Paid in full. Thank you for your business.'
   },
   {
     id: 'INV-1229',
@@ -127,6 +136,8 @@ const rows = [
       name: 'Jay Hooper',
       email: 'hooper@email.com',
     },
+    title: 'Invoice #INV-1229',
+    content: 'Paid in full. Thank you for your business.'
    
   },
   {
@@ -138,6 +149,8 @@ const rows = [
       name: 'Krystal Stevens',
       email: 'k.stevens@email.com',
     },
+    title: 'Invoice #INV-1228',
+    content: 'Paid in full. Thank you for your business.'
    
   },
   {
@@ -149,6 +162,8 @@ const rows = [
       name: 'Sachin Flynn',
       email: 's.flyn@email.com',
     },
+    title: 'Invoice #INV-1227',
+    content: 'Paid in full. Thank you for your business.'
     
   },
   {
@@ -160,13 +175,30 @@ const rows = [
       name: 'Bradley Rosales',
       email: 'brad123@email.com',
     },
+    title: 'Invoice #INV-1226',
+    content: 'Paid in full. Thank you for your business.'
   },
 ];
 
+const style = {
+  position: 'relative',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function OrderTable() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const renderFilters = () => (
     <React.Fragment>
       <FormControl size="sm">
@@ -387,9 +419,22 @@ export default function OrderTable() {
                   </Box>
                 </td>
                 <td>
-                    <Button>
-                        Expand
-                    </Button>
+                <Button onClick={handleOpen}>Open modal</Button>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <Typography id="modal-modal-title" variant="h6" component="h2">
+                        {row.title}
+                      </Typography>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        {row.content}
+                      </Typography>
+                    </Box>
+                  </Modal>
                 </td>
               </tr>
             ))}
