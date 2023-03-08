@@ -72,7 +72,7 @@ const rows = [
       name: 'Olivia Ryhe',
       email: 'olivia@email.com',
     },
-    subscription: 'Yearly',
+   
   },
   {
     id: 'INV-1233',
@@ -83,7 +83,7 @@ const rows = [
       name: 'Steve Hampton',
       email: 'steve.hamp@email.com',
     },
-    subscription: 'Monthly',
+    
   },
   {
     id: 'INV-1232',
@@ -94,7 +94,7 @@ const rows = [
       name: 'Ciaran Murray',
       email: 'ciaran.murray@email.com',
     },
-    subscription: 'Yearly',
+   
   },
   {
     id: 'INV-1231',
@@ -105,7 +105,7 @@ const rows = [
       name: 'Maria Macdonald',
       email: 'maria.mc@email.com',
     },
-    subscription: 'Yearly',
+    
   },
   {
     id: 'INV-1230',
@@ -127,7 +127,7 @@ const rows = [
       name: 'Jay Hooper',
       email: 'hooper@email.com',
     },
-    subscription: 'Yearly',
+   
   },
   {
     id: 'INV-1228',
@@ -138,7 +138,7 @@ const rows = [
       name: 'Krystal Stevens',
       email: 'k.stevens@email.com',
     },
-    subscription: 'Monthly',
+   
   },
   {
     id: 'INV-1227',
@@ -149,7 +149,7 @@ const rows = [
       name: 'Sachin Flynn',
       email: 's.flyn@email.com',
     },
-    subscription: 'Monthly',
+    
   },
   {
     id: 'INV-1226',
@@ -160,7 +160,6 @@ const rows = [
       name: 'Bradley Rosales',
       email: 'brad123@email.com',
     },
-    subscription: 'Monthly',
   },
 ];
 
@@ -327,14 +326,14 @@ export default function OrderTable() {
                     },
                   }}
                 >
-                  Invoice
+                  Notification ID
                 </Link>
               </th>
               <th style={{ width: 120, padding: 12 }}>Date</th>
-              <th style={{ width: 120, padding: 12 }}>Status</th>
-              <th style={{ width: 220, padding: 12 }}>Customer</th>
-              <th style={{ width: 120, padding: 12 }}>Subscription</th>
-              <th style={{ width: 160, padding: 12 }}> </th>
+              <th style={{ width: 120, padding: 12 }}>Type</th>
+              <th style={{ width: 220, padding: 12 }}>CustomerID</th>
+              <th style={{ width: 120, padding: 12 }}>Content</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -396,19 +395,10 @@ export default function OrderTable() {
                     </div>
                   </Box>
                 </td>
-                <td>{row.subscription}</td>
                 <td>
-                  <Link fontWeight="lg" component="button" color="neutral">
-                    Archive
-                  </Link>
-                  <Link
-                    fontWeight="lg"
-                    component="button"
-                    color="primary"
-                    sx={{ ml: 2 }}
-                  >
-                    Download
-                  </Link>
+                    <Button>
+                        Expand
+                    </Button>
                 </td>
               </tr>
             ))}

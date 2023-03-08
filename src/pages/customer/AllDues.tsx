@@ -74,6 +74,7 @@ export default function App() {
               All Dues
             </Typography>
             <Box sx={{ flex: 999 }} />
+
            
           </Box>
         </div>
