@@ -20,9 +20,7 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 const rows = [
   {
     id: 'INV-1234',
@@ -32,7 +30,6 @@ const rows = [
       initial: 'O',
       name: 'Olivia Ryhe',
       email: 'olivia@email.com',
-      vendorID:'XXXX',
     },
     amount: '69',
   },
@@ -44,7 +41,6 @@ const rows = [
       initial: 'S',
       name: 'Steve Hampton',
       email: 'steve.hamp@email.com',
-      vendorID:'XXXX',
     },
     amount: '420',
   },
@@ -56,7 +52,6 @@ const rows = [
       initial: 'C',
       name: 'Ciaran Murray',
       email: 'ciaran.murray@email.com',
-      vendorID:'XXXX',
     },
     amount: '69',
   },
@@ -68,7 +63,6 @@ const rows = [
       initial: 'M',
       name: 'Maria Macdonald',
       email: 'maria.mc@email.com',
-      vendorID:'XXXX',
     },
     amount: '69',
   },
@@ -80,7 +74,6 @@ const rows = [
       initial: 'C',
       name: 'Charles Fulton',
       email: 'fulton@email.com',
-      vendorID:'XXXX',
     },
     amount: '69',
   },
@@ -92,7 +85,6 @@ const rows = [
       initial: 'J',
       name: 'Jay Hooper',
       email: 'hooper@email.com',
-      vendorID:'XXXX',
     },
     amount: '69',
   },
@@ -104,7 +96,6 @@ const rows = [
       initial: 'K',
       name: 'Krystal Stevens',
       email: 'k.stevens@email.com',
-      vendorID:'XXXX',
     },
     amount: '420',
   },
@@ -116,7 +107,6 @@ const rows = [
       initial: 'S',
       name: 'Sachin Flynn',
       email: 's.flyn@email.com',
-      vendorID:'XXXX',
     },
     amount: '420',
   },
@@ -128,7 +118,6 @@ const rows = [
       initial: 'B',
       name: 'Bradley Rosales',
       email: 'brad123@email.com',
-      vendorID:'XXXX',
     },
     amount: '420',
   },
@@ -174,44 +163,16 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-
-export function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box >
-          <Typography id="modal-modal-title" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-    </div>
-  );
-}
-
-
 export default function OrderTable() {
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [open, setOpen] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
   const renderFilters = () => (
     <React.Fragment>
     </React.Fragment>
   );
   // const [open, setOpen] = React.useState(false);
-
   return (
     <React.Fragment>
       <Sheet
@@ -235,24 +196,20 @@ export default function OrderTable() {
           size="sm"
           variant="outlined"
           color="neutral"
-          onClick={() => setOpen(true)}
+          onClick={() => setVisible(true)}
         >
           <i data-feather="filter" />
         </IconButton>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <ModalDialog aria-labelledby="filter-modal" layout="fullscreen">
-            <ModalClose />
+        <Modal open={visible} onClose={() => setVisible(false)}>
+          {/* <ModalClose/> */}
+          <ModalDialog aria-labelledby="filter-modal">
+            {/* <ModalClose /> */}
+            <ModalClose/>
             <Typography id="filter-modal" level="h2">
               Filters
             </Typography>
-            <Divider sx={{ my: 2 }} />
-            <Sheet sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {renderFilters()}
-              <Button color="primary" onClick={() => setOpen(false)}>
-                Submit
-              </Button>
-            </Sheet>
           </ModalDialog>
+
         </Modal>
       </Sheet>
       <Box
@@ -377,33 +334,13 @@ export default function OrderTable() {
                 <td>{row.amount}</td>
                 <td>
                   <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }} onClick={() => setOpen(true)}>
-                    {/* <Modal open = {open} onClose = {handleClose}>
-                    <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                      </Typography>
-                    </Box>
-                    </Modal> */}
-                    <Typography>
-                     {row.vendor.initial}
-                    </Typography>
+                  <Avatar size="sm">{row.vendor.initial}</Avatar>
                     <Modal open={open} onClose={() => setOpen(false)}>
-                      <ModalDialog aria-labelledby="filter-modal">
-                        {/*<ModalClose />*/}
-                        <Typography id="filter-modal" level="h2">
-                          {row.vendor.vendorID}
-                        </Typography>
-                        <Typography id="filter-modal" level="h2">
-                          {row.vendor.email}
-                        </Typography>
-                        <Typography id="filter-modal" level="h2">
-                          {row.vendor.name}
-                        </Typography>
-                        {/* <Divider sx={{ my: 2 }} /> */}
-                
+                      <ModalDialog variant="plain">
+                        {/* <ModalClose /> */}
+                        <Typography>{row.vendor.initial}</Typography>
+                        <Typography>{row.vendor.name}</Typography>
+                        <Typography>{row.vendor.email}</Typography>
                       </ModalDialog>
                     </Modal>
                     <div>
