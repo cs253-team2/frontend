@@ -175,22 +175,13 @@ export default function OrderTable() {
           placeholder="Filter by status"
           slotProps={{ button: { sx: { whiteSpace: 'nowrap' } } }}
         >
-          <Option value="paid">Paid</Option>
-          <Option value="pending">Pending</Option>
-          <Option value="refunded">Refunded</Option>
-          <Option value="cancelled">Cancelled</Option>
+          <Option value="read">Read</Option>
+          <Option value="unread">Unread</Option>
         </Select>
       </FormControl>
 
       <FormControl size="sm">
         <FormLabel>Category</FormLabel>
-        <Select placeholder="All">
-          <Option value="all">All</Option>
-        </Select>
-      </FormControl>
-
-      <FormControl size="sm">
-        <FormLabel>Customer</FormLabel>
         <Select placeholder="All">
           <Option value="all">All</Option>
         </Select>
@@ -405,7 +396,7 @@ export default function OrderTable() {
           </tbody>
         </Table>
       </Sheet>
-      <Box
+      {/* <Box
         className="Pagination-mobile"
         sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
       >
@@ -428,8 +419,8 @@ export default function OrderTable() {
         >
           <i data-feather="arrow-right" />
         </IconButton>
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className="Pagination-laptopUp"
         sx={{
           pt: 4,
@@ -470,8 +461,8 @@ export default function OrderTable() {
           endDecorator={<i data-feather="arrow-right" />}
         >
           Next
-        </Button>
-      </Box>
+        </Button> */}
+      {/* </Box> */}
     </React.Fragment>
   );
 }
