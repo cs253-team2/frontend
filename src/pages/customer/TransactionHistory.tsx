@@ -10,10 +10,10 @@ import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
-import OrderTable from './components/OrderTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
+import TransactionTable from './components/TransactionTable';
 
 
 export default function App() {
@@ -76,8 +76,13 @@ export default function App() {
             <Box sx={{ flex: 999 }} />
            
           </Box>
+          <Box>
+            <TransactionTable />
+          </Box>
+
+      
         </div>
-        
+      
 
     )
 }
