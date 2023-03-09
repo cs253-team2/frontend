@@ -19,7 +19,7 @@ import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
 import Validate from './Validate';
-import RegistrationForm from './RegistrationForm2';
+import RegistrationForm from './RASRegistrationForm';
 
 // import { Form, Button } from 'semantic-ui-css/components/form';
 import { useForm } from "react-hook-form";
@@ -192,7 +192,7 @@ export default function JoySignInSideTemplate() {
                 Fields marked with * are compulsory
               </Typography>
             </div>
-            {/* <form
+            <form
               onSubmit={(event: React.FormEvent<SignInFormElement>) => {
                 event.preventDefault();
                 const formElements = event.currentTarget.elements;
@@ -217,8 +217,8 @@ export default function JoySignInSideTemplate() {
                   navigate('/customer');
                 }
               }}
-            > */}
-              {/* <FormControl required>
+            > 
+              <FormControl required>
                 <FormLabel>First Name *</FormLabel>
                   <Input placeholder="Enter your first name" type="text" name="fname" />
               </FormControl>
@@ -229,24 +229,24 @@ export default function JoySignInSideTemplate() {
               </FormControl>
               <FormControl required>
                 <FormLabel>Phone Number *</FormLabel>
-                <Input placeholder="10 digit phone number" type="text" name="phoneno" /> */}
-                  {/* {errors.phoneNumber && <p style={{color:"red"}}>{errors.phoneNumber}</p>} */}
-              {/* </FormControl>
+                <Input placeholder="10 digit phone number" type="text" name="phoneno" />
+                  {errors.phoneNumber && <p style={{color:"red"}}>{errors.phoneNumber}</p>}
+              </FormControl>
               <FormControl required>
                 <FormLabel>Email ID *</FormLabel>
-                <Input placeholder="Enter your email" type="text" name="email" /> */}
-                  {/* {errors.email && <p style={{color:"red"}}>{errors.email}</p>} */}
-              {/* </FormControl>
+                <Input placeholder="Enter your email" type="text" name="email" />
+                  {errors.email && <p style={{color:"red"}}>{errors.email}</p>}
+              </FormControl>
               <FormControl required>
                 <FormLabel>Password *</FormLabel>
-                <Input placeholder="Enter your password" type="password" name="password" /> */}
-                  {/* {errors.password && <p style={{color:"red"}}>{errors.password}</p>} */}
-              {/* </FormControl>
+                <Input placeholder="Enter your password" type="password" name="password" />
+                  {errors.password && <p style={{color:"red"}}>{errors.password}</p>}
+              </FormControl>
               <FormControl required>
                 <FormLabel>Confirm  Password *</FormLabel>
-                <Input placeholder="Renter your password" type="password" name="reenterpassword" /> */}
-                {/* {errors.cnfpassword && <p style={{color:"red"}}>{errors.cnfpassword}</p>} */}
-              {/* </FormControl>
+                <Input placeholder="Renter your password" type="password" name="reenterpassword" />
+                {errors.cnfpassword && <p style={{color:"red"}}>{errors.cnfpassword}</p>}
+              </FormControl>
               <FormControl required>
                 <FormLabel>Are you registering as a vendor or customer?</FormLabel>
                 <Select name="role">
@@ -257,7 +257,7 @@ export default function JoySignInSideTemplate() {
               <Button type="submit" fullWidth>
                 Register
               </Button>
-            </form> */}
+            </form>
 
             {/* <Typography component="h4" textAlign="center">OR</Typography> */}
 
@@ -317,7 +317,7 @@ export default function JoySignInSideTemplate() {
                     <Button type='submit'>Submit</Button>
             </form> */}
 
-            <RegistrationForm />
+            {/* <RegistrationForm /> */}
           </Box>
 
 

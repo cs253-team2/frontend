@@ -18,7 +18,7 @@ export default function RegistrationForm() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(console.log)}>
+            {/* <form onSubmit={handleSubmit(console.log)}>
                 <label>First Name *</label>
                 <input {...register("firstName", { required: true })} placeholder="First name" type="text" name="fname"/>
                 {errors.firstName && <p style={{color: "red"}}>Please enter the name</p>}
@@ -56,7 +56,7 @@ export default function RegistrationForm() {
 
                 <input type="submit"/>
 
-            </form>
+            </form> */}
         </div>
     )
 }
