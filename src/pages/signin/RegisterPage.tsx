@@ -18,12 +18,8 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
-import Validate from './Validate';
-import RegistrationForm from './RASRegistrationForm';
-
-// import { Form, Button } from 'semantic-ui-css/components/form';
+import RegistrationForm from './RegistrationForm';
 import { useForm } from "react-hook-form";
-
 import { useNavigate } from 'react-router-dom';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -189,75 +185,11 @@ export default function JoySignInSideTemplate() {
               </Typography>
               <Typography level="body2" sx={{ my: 1, mb: 3 }}>
                 <b>Registe Here. Please enter the following details.</b><br /><br />
-                Fields marked with * are compulsory
+                Fields marked with * are compulsory <br /><br />
+                Password must have at least 8 characters, with at least 1 digit and 1 special character
               </Typography>
             </div>
-            <form
-              onSubmit={(event: React.FormEvent<SignInFormElement>) => {
-                event.preventDefault();
-                const formElements = event.currentTarget.elements;
-                const data = {
-                  firstName: formElements.fname.value,
-                  lastName: formElements.lname.value,
-                  phoneNumber: formElements.phoneno.value,
-                  email: formElements.email.value,
-                  password: formElements.password.value,
-                  cnfpassword: formElements.reenterpassword.value,
-                  role: formElements.role[1].value,
-                  persistent: formElements.persistent.checked,
-                };
-                
-                setErrors(Validate(data))
-                
-
-                alert(JSON.stringify(data, null, 2));
-                if(data.role === 'vendor') {
-                  navigate('/vendor');
-                } else {
-                  navigate('/customer');
-                }
-              }}
-            > 
-              <FormControl required>
-                <FormLabel>First Name *</FormLabel>
-                  <Input placeholder="Enter your first name" type="text" name="fname" />
-              </FormControl>
-
-              <FormControl>
-              <FormLabel>Last Name</FormLabel>
-                  <Input placeholder="Enter your last name" type="text" name="lname" />
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Phone Number *</FormLabel>
-                <Input placeholder="10 digit phone number" type="text" name="phoneno" />
-                  {errors.phoneNumber && <p style={{color:"red"}}>{errors.phoneNumber}</p>}
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Email ID *</FormLabel>
-                <Input placeholder="Enter your email" type="text" name="email" />
-                  {errors.email && <p style={{color:"red"}}>{errors.email}</p>}
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Password *</FormLabel>
-                <Input placeholder="Enter your password" type="password" name="password" />
-                  {errors.password && <p style={{color:"red"}}>{errors.password}</p>}
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Confirm  Password *</FormLabel>
-                <Input placeholder="Renter your password" type="password" name="reenterpassword" />
-                {errors.cnfpassword && <p style={{color:"red"}}>{errors.cnfpassword}</p>}
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Are you registering as a vendor or customer?</FormLabel>
-                <Select name="role">
-                  <Option value="customer">Customer</Option>
-                  <Option value="vendor">Vendor</Option>
-                </Select>
-              </FormControl>
-              <Button type="submit" fullWidth>
-                Register
-              </Button>
-            </form>
+              <RegistrationForm />
 
             {/* <Typography component="h4" textAlign="center">OR</Typography> */}
 
@@ -269,55 +201,6 @@ export default function JoySignInSideTemplate() {
             >
               Register with Google
             </Button> */}
-
-            {/* <form onSubmit={handleSubmit(onSubmit)}>
-                <label>
-                    <label>First Name</label>
-                    <input
-                        placeholder='First Name'
-                        type="text"
-                        {...register("firstName", { required: true, maxLength: 10 })}
-                    />
-                </label>
-                {errors.firstName && <p>Please check the First Name</p>}
-                <label>
-                    <label>Last Name</label>
-                    <input
-                        placeholder='Last Name'
-                        type="text"
-                        {...register("lastName", { required: true, maxLength: 10 })}
-                    />
-                </label>
-                {errors.lastName && <p>Please check the Last Name</p>}
-                <label>
-                    <label>Email</label>
-                    <input
-                        placeholder='Email'
-                        type="email"
-                        {...register("email",
-                            {
-                                required: true,
-                                pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                            })}
-                    />
-                </label>
-                {errors.email && <p>Please check the Email</p>}
-                <label>
-                    <label>Password</label>
-                    <input
-                        placeholder='Password'
-                        type="password"
-                        {...register("password", {
-                            required: true,
-                            pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
-                        })}
-                    />
-                </label>
-                {errors.password && <p>Please check the Password</p>}
-                    <Button type='submit'>Submit</Button>
-            </form> */}
-
-            {/* <RegistrationForm /> */}
           </Box>
 
 
