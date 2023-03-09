@@ -74,6 +74,7 @@ const rows = [
     },
     title: 'Invoice #INV-1234',
     content: 'Thank you for your business. We look forward to working with you again.',
+    // open: false,
    
   },
   {
@@ -86,7 +87,8 @@ const rows = [
       email: 'steve.hamp@email.com',
     },
     title: 'Invoice #INV-1233',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
     
   },
   {
@@ -99,7 +101,8 @@ const rows = [
       email: 'ciaran.murray@email.com',
     },
     title: 'Invoice #INV-1232',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
    
   },
   {
@@ -112,7 +115,8 @@ const rows = [
       email: 'maria.mc@email.com',
     },
     title: 'Invoice #INV-1231',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
     
   },
   {
@@ -125,7 +129,8 @@ const rows = [
       email: 'fulton@email.com',
     },
     title: 'Invoice #INV-1230',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
   },
   {
     id: 'INV-1229',
@@ -137,7 +142,8 @@ const rows = [
       email: 'hooper@email.com',
     },
     title: 'Invoice #INV-1229',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
    
   },
   {
@@ -150,7 +156,8 @@ const rows = [
       email: 'k.stevens@email.com',
     },
     title: 'Invoice #INV-1228',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
    
   },
   {
@@ -163,7 +170,8 @@ const rows = [
       email: 's.flyn@email.com',
     },
     title: 'Invoice #INV-1227',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
     
   },
   {
@@ -176,7 +184,8 @@ const rows = [
       email: 'brad123@email.com',
     },
     title: 'Invoice #INV-1226',
-    content: 'Paid in full. Thank you for your business.'
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
   },
 ];
 
@@ -419,7 +428,7 @@ export default function OrderTable() {
                   </Box>
                 </td>
                 <td>
-                <Button onClick={handleOpen}>Open modal</Button>
+                <Button onClick={handleOpen}>Expand Notiification</Button>
                   <Modal
                     open={open}
                     onClose={handleClose}
