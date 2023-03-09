@@ -130,22 +130,20 @@ export default function JoySignInSideTemplate() {
               startDecorator={
                 <Box
                   component="span"
-                  // sx={{
-                  //   width: 40,
-                  //   height: 40,
-                  //   background: (theme) =>
-                  //     `linear-gradient(45deg, ${theme.vars.palette.primary.solidBg}, ${theme.vars.palette.primary.solidBg} 30%, ${theme.vars.palette.primary.softBg})`,
-                  //   borderRadius: '50%',
-                  //   boxShadow: (theme) => theme.shadow.md,
-                  //   '--joy-shadowChannel': (theme) =>
-                  //     theme.vars.palette.primary.mainChannel,
-                  // }}
-                >
-                  <img width={40} height={40} src= "https://www.shutterstock.com/image-vector/initial-letter-cp-linked-circle-260nw-463344173.jpg" alt="CampusPay Logo"></img>
-                </Box>
+                  sx={{
+                    width: 24,
+                    height: 24,
+                    background: (theme) =>
+                      `linear-gradient(45deg, ${theme.vars.palette.primary.solidBg}, ${theme.vars.palette.primary.solidBg} 30%, ${theme.vars.palette.primary.softBg})`,
+                    borderRadius: '50%',
+                    boxShadow: (theme) => theme.shadow.md,
+                    '--joy-shadowChannel': (theme) =>
+                      theme.vars.palette.primary.mainChannel,
+                  }}
+                />
               }
             >
-              Campus Pay
+              Logo
             </Typography>
             <ColorSchemeToggle />
           </Box>
@@ -229,17 +227,15 @@ export default function JoySignInSideTemplate() {
                 Sign in
               </Button>
             </form>
-            {/* <Button
+            <Button
               variant="outlined"
               color="neutral"
               fullWidth
               startDecorator={<GoogleIcon />}
             >
               Sign in with Google
-            </Button> */}
+            </Button>
           </Box>
-
-
           <Box component="footer" sx={{ py: 3 }}>
             <Typography level="body3" textAlign="center">
               © Your company {new Date().getFullYear()}
