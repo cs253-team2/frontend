@@ -11,6 +11,7 @@ import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
 import OrderTable from './components/OrderTable';
+import DuesTable from './components/DuesTable'
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
@@ -74,8 +75,10 @@ export default function App() {
               All Dues
             </Typography>
             <Box sx={{ flex: 999 }} />
+
            
           </Box>
+          <DuesTable />
         </div>
         
 
