@@ -18,7 +18,8 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
-
+import RegistrationForm from './RegistrationForm';
+import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -64,12 +65,18 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
 /**
  * This template uses [`Inter`](https://fonts.google.com/specimen/Inter?query=inter) font.
  */
+
+//   const [errors, setErrors] = React.useState({
+//     email: "",
+//     phoneNumber: "",
+//     password: "",
+//     cnfpassword: "",
+//   })
+
 export default function JoySignInSideTemplate() {
   const navigate = useNavigate();
 
-  // const vendorPage = () => {
-  //   navigate('/vendor');
-  // }
+  const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
 
   return (
     <CssVarsProvider
@@ -174,68 +181,25 @@ export default function JoySignInSideTemplate() {
           >
             <div>
               <Typography component="h2" fontSize="xl2" fontWeight="lg">
-                Welcome back
+                Join Us
               </Typography>
               <Typography level="body2" sx={{ my: 1, mb: 3 }}>
-                Let&apos;s get started! Please enter your details.
+                <b>Registe Here. Please enter the following details.</b><br /><br />
+                Fields marked with * are compulsory <br /><br />
+                Password must have at least 8 characters, with at least 1 digit and 1 special character
               </Typography>
             </div>
-            <form
-              onSubmit={(event: React.FormEvent<SignInFormElement>) => {
-                event.preventDefault();
-                const formElements = event.currentTarget.elements;
-                const data = {
-                  email: formElements.email.value,
-                  password: formElements.password.value,
-                  role: formElements.role[1].value,
-                  persistent: formElements.persistent.checked,
-                };
-                // alert(JSON.stringify(data, null, 2));
-                if(data.role === 'vendor') {
-                  navigate('/vendor');
-                } else {
-                  navigate('/customer');
-                }
-              }}
-            >
-              <FormControl required>
-                <FormLabel>Email</FormLabel>
-                <Input placeholder="Enter your email" type="email" name="email" />
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Password</FormLabel>
-                <Input placeholder="•••••••" type="password" name="password" />
-              </FormControl>
-              <FormControl required>
-                <FormLabel>Are you a vendor or customer?</FormLabel>
-                <Select name="role">
-                  <Option value="customer">Customer</Option>
-                  <Option value="vendor">Vendor</Option>
-                </Select>
-              </FormControl>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <Checkbox size="sm" label="Remember for 30 days" name="persistent" />
-                <Link fontSize="sm" href="#replace-with-a-link" fontWeight="lg">
-                  Forgot password
-                </Link>
-              </Box>
-              <Button type="submit" fullWidth>
-                Sign in
-              </Button>
-            </form>
+              <RegistrationForm />
+
+            {/* <Typography component="h4" textAlign="center">OR</Typography> */}
+
             {/* <Button
               variant="outlined"
               color="neutral"
               fullWidth
               startDecorator={<GoogleIcon />}
             >
-              Sign in with Google
+              Register with Google
             </Button> */}
           </Box>
 
