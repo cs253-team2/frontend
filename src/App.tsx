@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/signin/signin";
-import Register from "./pages/signin/RegisterPage";
+// import Home from "./pages/Home";
+// import Blogs from "./pages/Blogs";
 import VendorOverview from "./pages/vendor/Overview";
 import NoPage from "./pages/error/App";
 
@@ -11,7 +12,10 @@ import AllduesCustomer from "./pages/customer/AllDues";
 // import AllduesCustomer from "./pages/customer/alldues/Alldues";
 
 export default function App() {
+
+  
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />} />

@@ -127,50 +127,6 @@ export default function App() {
             <Box sx={{ flex: 999 }} />
            
           </Box>
-          <br />
-
-          {/*Table with details listed below heading */}
-
-          {/* <Table>
-            <tr>
-                <td>
-                  <h1 style={tableHeader}>Credit Score</h1>
-                </td>
-                <td>
-                  <h1 style={tableHeader}>Total Number of Transactions</h1>
-                </td>
-                <td>
-                  <div style={tableHeader}>
-                    <img style={profilePicture} src={info.picture} alt="Profile picture"></img>
-                  </div>
-                </td>
-                <td>
-                  <h1 style={tableHeader}>Member Since</h1>
-                </td>
-                <td>
-                  <h1 style={tableHeader}>Contact Details</h1>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                <h1 style={tableContent}>{info.creditScore}</h1>
-              </td>
-              <td>
-                <h1 style={tableContent}>{info.totalTransactions}</h1>
-              </td>
-              <td>
-                <h1 style={nameDisplay}>{info.name}</h1>
-                <h1 style={tableContent}>ID: {info.userid}</h1>
-              </td>
-              <td>
-                <h1 style={tableContent}>{info.joiningDate}</h1>
-              </td>
-              <td>
-                <h1 style={tableContent}>{info.email}</h1>
-                <h1 style={tableContent}>{info.phoneNo}</h1>
-              </td>
-            </tr>
-          </Table> */}
 
           <div style={ProfileContainer}>
             <div className="ProfilePhoto">
