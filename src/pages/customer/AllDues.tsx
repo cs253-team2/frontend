@@ -11,11 +11,10 @@ import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
 import OrderTable from './components/OverviewTable';
-import DuesTable from './deprecated_components/DuesTabledeprecated'
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import DuesTableTemp from './components/DuesTable';
+import DuesTable from './components/DuesTable';
 
 const rows = [
   {
@@ -180,8 +179,7 @@ export default function App() {
 
            
           </Box>
-          {/* <DuesTable /> */}
-          <DuesTableTemp placeholder="Enter to search" rows={rows}/>
+          <DuesTable placeholder="Enter to search" rows={rows}/>
         </div>
         
 
