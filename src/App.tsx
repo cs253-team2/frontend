@@ -21,7 +21,7 @@ export default function App() {
     
     <BrowserRouter>
       <Routes>
-        <Route path="/cleardues" element={<ClearDues />} />
+        {/* <Route path="/cleardues" element={<ClearDues />} /> */}
         <Route path="/" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/vendor/overview" element={<Vendor tabsel={'overview'}/>} />
@@ -46,7 +46,10 @@ export default function App() {
         {/* <Route path="/vendor/profile" element={<Vendor  tabsel={'profile'}/>} /> */}
         {/* <Route path="/vendor/update_profile" element={<Vendor  tabsel={'settings'}/>} /> */}
         {/* <Route path="/register" element={<Register />} /> */}
-        <Route path="/clearduestest" element={<ClearDuesTest />} />
+        {/* <Route path="/clearduestest" element={<ClearDuesTest />} /> */}
+        <Route path="/customer/ipayment" element={<Customer tabsel={'ipayment'}/>} />
+        <Route path="/customer/adddues" element={<Customer tabsel={'adddues'}/>} />
+        
 
 
 

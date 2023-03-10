@@ -21,7 +21,7 @@ import IconButton, { IconButtonProps } from '@mui/joy/IconButton';
 import Input from '@mui/joy/Input';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import UpdateForm from './UpdateForm';
+import UpdateForm from './components/UpdateProfileComponent';
 import { TagLeftIcon } from '@chakra-ui/react';
 
 const profilePicture = {
@@ -113,7 +113,6 @@ export default function App() {
               display: 'flex',
               flexDirection: 'column',
               gap: 2,
-              width: 400,
               maxWidth: '100%',
               mx: 'auto',
               borderRadius: 'sm',
@@ -127,7 +126,7 @@ export default function App() {
               },
             }}>
           <div>
-          <UpdateForm />
+              <UpdateForm />
           </div>
           </Box>
           </div>

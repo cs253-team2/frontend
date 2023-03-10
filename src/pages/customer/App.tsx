@@ -21,7 +21,9 @@ import AllDues from './AllDues';
 import TransactionHistory from './TransactionHistory';
 import Vendors from './Vendors';
 import Profile from './Profile';
+import Ipayment from './InstantPayment';
 import Settings from './Settings';
+import AddDues from './AddDues';
 
 const useEnhancedEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -40,6 +42,8 @@ export default function JoyOrderDashboardTemplate(props) {
     vendors: tabsel=="vendors" ? true : false,
     profile: tabsel=="profile" ? true : false,
     settings: tabsel=="settings" ? true : false,
+    ipayment: tabsel=="ipayment" ? true : false,
+    adddues: tabsel=="adddues" ? true : false,
   });
 
    
@@ -68,7 +72,14 @@ export default function JoyOrderDashboardTemplate(props) {
     } else if(options.settings){
       console.log("settings");
       return <Settings/>
+    }else if(options.ipayment){
+      console.log("ipayment");
+      return <Ipayment/>
+    }else if(options.adddues){
+      console.log("adddues");
+      return <AddDues/>
     }
+
   }
 
 
