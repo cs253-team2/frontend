@@ -5,7 +5,7 @@ import SignIn from "./pages/signin/signin";
 // import Blogs from "./pages/Blogs";
 import VendorOverview from "./pages/vendor/Overview";
 import NoPage from "./pages/error/App";
-
+import Register from "./pages/signin/RegisterPage";
 import Customer from "./pages/customer/App";
 import Notifications from "./pages/customer/Notifications";
 import AllduesCustomer from "./pages/customer/AllDues";
@@ -19,6 +19,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/vendor/overview" element={<VendorOverview />} />
         <Route path="/customer/overview" element={<Customer tabsel={'overview'} />} />
         <Route path="/customer/notifications" element={<Customer tabsel={'notifications'} />} />
