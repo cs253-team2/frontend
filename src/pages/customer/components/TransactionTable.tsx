@@ -20,8 +20,11 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
+import { useState } from "react"
+import SearchBar from './searchBar';
 
-const rows = [
+
+export const rows = [
   {
     id: 'INV-1234',
     date: 'Feb 3, 2023',
@@ -86,6 +89,18 @@ const rows = [
     amount : '1234',
   },
 ];
+
+/*const [nrows, setRows] = useState<people[]>(rows);
+  const [searched, setSearched] = useState<string>("");
+  
+
+  const requestSearch = (searchedVal: string) => {
+    const filteredRows = rows.filter((row) => {
+      return row.id.toLowerCase().includes(searchedVal.toLowerCase()); 
+    });
+    setRows(filteredRows);
+  };*/
+  
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -217,14 +232,13 @@ export default function TransactionTable() {
           },
         }}
       >
-        <FormControl sx={{ flex: 1 }} size="sm">
-          <FormLabel>Search for order</FormLabel>
-          <Input placeholder="Search" startDecorator={<i data-feather="search" />} />
-        </FormControl>
+       
+        <SearchBar placeholder="Enter to Search" data={rows} />
+       
 
-        {renderFilters()}
+  
       </Box>
-      <Sheet
+      {/* <Sheet
         className="OrderTableContainer"
         variant="outlined"
         sx={{
@@ -357,7 +371,7 @@ export default function TransactionTable() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
+      </Sheet> */}
       <Box
         className="Pagination-mobile"
         sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
