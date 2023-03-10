@@ -6,5 +6,7 @@ export default interface SecondSidebarProps {
     vendors: boolean;
     profile: boolean;
     settings: boolean;
+    ipayment: boolean;
+    adddues: boolean;
   }
   

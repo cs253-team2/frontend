@@ -56,6 +56,16 @@ const vendorpage = () => {
     window.location.reload();
   };
   
+  const ipaymentpage= () => {
+    navigate('/customer/ipayment');
+    window.location.reload();
+  };
+
+  const addduespage= () => {
+    navigate('/customer/adddues');
+    window.location.reload();
+  };
+  
 
 
   return (
@@ -173,7 +183,24 @@ const vendorpage = () => {
               <ListItemContent>Update Profile</ListItemContent>
             </ListItemButton>
           </ListItem>
+          <ListItem>
+            <ListItemButton selected={options.ipayment} variant={options.ipayment?"soft":"plain"} onClick={ipaymentpage}>
+              <ListItemDecorator>
+                <i data-feather="dollar-sign" />
+              </ListItemDecorator>
+              <ListItemContent>Make Instant Payment</ListItemContent>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton selected={options.adddues} variant={options.adddues?"soft":"plain"} onClick={addduespage}>
+              <ListItemDecorator>
+                <i data-feather="book-open" />
+              </ListItemDecorator>
+              <ListItemContent>Add Dues</ListItemContent>
+            </ListItemButton>
+          </ListItem>
         </List>
+
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
             <Typography fontWeight="lg" level="body2">
