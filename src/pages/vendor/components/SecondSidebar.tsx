@@ -11,8 +11,53 @@ import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { closeSidebar } from '../utils';
+import { unstable_HistoryRouter, useNavigate, redirect } from 'react-router-dom';
+import SecondSidebarProps from '../vendor';
 
-export default function SecondSidebar() {
+
+
+export default function SecondSidebar(props: any) {
+  const navigate = useNavigate();
+  const {setOptions, options} = props;
+  const handleClick = (data: SecondSidebarProps) => {
+    setOptions(data);
+  };
+  
+
+  const notificationspage = () => {
+    navigate('/vendor/notifications');
+    window.location.reload();
+  };
+
+  const allduespage = () => {
+    navigate('/vendor/alldues');
+    window.location.reload();
+  };
+  const transaction_historypage = () => {
+    navigate('/vendor/transaction_history');
+    window.location.reload();
+  };
+  const overviewpage = () => {
+   navigate('/vendor/overview');
+   window.location.reload();
+  };
+  const profilepage = () => {
+    navigate('/vendor/profile');
+    window.location.reload();
+  };
+  
+const vendorpage = () => {
+    navigate('/vendor/customers');
+    window.location.reload();
+  };
+
+  const settingspage= () => {
+    navigate('/vendor/settings');
+    window.location.reload();
+  };
+  
+
+
   return (
     <React.Fragment>
       <Box
@@ -67,10 +112,10 @@ export default function SecondSidebar() {
           }}
         >
           <ListSubheader role="presentation" sx={{ color: 'text.primary' }}>
-            Dashboard
+            Vendor Dashboard
           </ListSubheader>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.overview} variant={options.overview?"soft":"plain"} onClick={overviewpage}>
               <ListItemDecorator>
                 <i data-feather="activity" />
               </ListItemDecorator>
@@ -78,63 +123,63 @@ export default function SecondSidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.notifications} variant={options.notifications?"soft":"plain"} onClick={notificationspage}>
               <ListItemDecorator>
                 <i data-feather="bell" />
               </ListItemDecorator>
-              <ListItemContent>Slight Change</ListItemContent>
-              <Chip variant="soft" size="sm">
+              <ListItemContent>Notifications</ListItemContent>
+              {/* <Chip variant="soft" size="sm">
                 10
-              </Chip>
+              </Chip> */}
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.alldues} variant={options.alldues?"soft":"plain"} onClick={allduespage}>
               <ListItemDecorator>
                 <i data-feather="bar-chart" />
               </ListItemDecorator>
-              <ListItemContent>Analytics</ListItemContent>
+              <ListItemContent>All Dues</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.transaction_history} variant={options.transaction_history?"soft":"plain"} onClick={transaction_historypage}>
               <ListItemDecorator>
                 <i data-feather="star" />
               </ListItemDecorator>
-              <ListItemContent>Saved reports</ListItemContent>
+              <ListItemContent>Transaction History</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected variant="soft">
+            <ListItemButton selected={options.vendors} variant={options.vendors?"soft":"plain"} onClick={vendorpage}>
               <ListItemDecorator>
-                <i data-feather="shopping-cart" />
+                <i data-feather="users" />
               </ListItemDecorator>
-              <ListItemContent>Orders</ListItemContent>
+              <ListItemContent>Customers</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.profile} variant={options.profile?"soft":"plain"} onClick={profilepage}>
               <ListItemDecorator>
                 <i data-feather="user" />
               </ListItemDecorator>
-              <ListItemContent>User reports</ListItemContent>
+              <ListItemContent>Profile</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => closeSidebar()}>
+            <ListItemButton selected={options.settings} variant={options.settings?"soft":"plain"} onClick={settingspage}>
               <ListItemDecorator>
                 <i data-feather="settings" />
               </ListItemDecorator>
-              <ListItemContent>Manage notifications</ListItemContent>
+              <ListItemContent>Settings</ListItemContent>
             </ListItemButton>
           </ListItem>
         </List>
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
             <Typography fontWeight="lg" level="body2">
-              Olivia Ryhe
+              Username
             </Typography>
-            <Typography level="body2">olivia@email.com</Typography>
+            <Typography level="body2">emailid@email.com</Typography>
           </div>
           <IconButton variant="plain" sx={{ ml: 'auto' }}>
             <i data-feather="log-out" />
