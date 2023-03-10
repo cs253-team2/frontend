@@ -1,3 +1,4 @@
+//ts-nocheck
 import React, {useState} from 'react'
 import { ColorPaletteProp } from '@mui/joy/styles';
 import Avatar from '@mui/joy/Avatar';
@@ -53,17 +54,18 @@ function getComparator<Key extends keyof any>(
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-function SearchBar({placeholder,data}){
+function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]}){
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState([]);
-  const handleFilter =(event) =>{
+  const [filteredData, setFilteredData] =useState<any>(data);
+  const handleFilter =(event:any) =>{
+    console.log(event);
     const searchWord = event.target.value;
     const newFilter = data.filter((value) =>{
       return value.id.toLowerCase().includes(searchWord.toLowerCase());
     })
     if(searchWord ==""){
-      setFilteredData([]);
+      setFilteredData(data);
     }else{
       setFilteredData(newFilter);
     }
@@ -96,8 +98,7 @@ function SearchBar({placeholder,data}){
             
             </Box>
             <div className="dataResults">
-                {filteredData.map((value,key)=>{
-                    return <div>
+                  <div>
                       <Sheet
                           className="OrderTableContainer"
                           variant="outlined"
@@ -168,17 +169,18 @@ function SearchBar({placeholder,data}){
                             </tr>
                           </thead>
                           <tbody>
-                            {stableSort(data, getComparator(order, 'id')).map((row) => (
+                            {/* {stableSort(filteredData, getComparator(order, 'id')).map((row) => ( */}
+                            {filteredData.map((row:any) => (
                               <tr key={row.id}>
                                 <td style={{ textAlign: 'center' }}>
                                   <Checkbox
-                                    checked={selected.includes(value.id)}
-                                    color={selected.includes(value.id) ? 'primary' : undefined}
+                                    checked={selected.includes(row.id)}
+                                    color={selected.includes(row.id) ? 'primary' : undefined}
                                     onChange={(event) => {
                                       setSelected((ids) =>
                                         event.target.checked
-                                          ? ids.concat(value.id)
-                                          : ids.filter((itemId) => itemId !== value.id),
+                                          ? ids.concat(row.id)
+                                          : ids.filter((itemId) => itemId !== row.id),
                                       );
                                     }}
                                     slotProps={{ checkbox: { sx: { textAlign: 'left' } } }}
@@ -186,9 +188,9 @@ function SearchBar({placeholder,data}){
                                   />
                                 </td>
                                 <td>
-                                  <Typography fontWeight="md">{value.id}</Typography>
+                                  <Typography fontWeight="md">{row.id}</Typography>
                                 </td>
-                                <td>{value.date}</td>
+                                <td>{row.date}</td>
                                 <td>
                                   <Chip
                                     variant="soft"
@@ -198,17 +200,17 @@ function SearchBar({placeholder,data}){
                                         Paid: <i data-feather="check" />,
                                         Refunded: <i data-feather="corner-up-left" />,
                                         Cancelled: <i data-feather="x" />,
-                                      }[value.status]
+                                      }[row.status]
                                     }
                                     color={
                                       {
                                         Paid: 'success',
                                         Refunded: 'neutral',
                                         Cancelled: 'danger',
-                                      }[value.status] as ColorPaletteProp
+                                      }[row.status] as ColorPaletteProp
                                     }
                                   >
-                                    {value.status}
+                                    {row.status}
                                   </Chip>
                                 </td>
                                 <td>
@@ -220,20 +222,20 @@ function SearchBar({placeholder,data}){
                                         level="body3"
                                         textColor="text.primary"
                                       >
-                                        {value.transactionid}
+                                        {row.transaction_id}
                                       </Typography>
                                       
                                     </div>
                                   </Box>
                                 </td>
-                                <td>{value.amount}</td>
+                                <td>{row.amount}</td>
                               </tr>
                             ))}
                           </tbody>
                         </Table>
                       </Sheet>
                         </div>
-                })}
+                
             </div>
             
         </div>

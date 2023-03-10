@@ -372,7 +372,7 @@ export default function TransactionTable() {
           </tbody>
         </Table>
       </Sheet> */}
-      <Box
+      {/* <Box
         className="Pagination-mobile"
         sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
       >
@@ -395,8 +395,8 @@ export default function TransactionTable() {
         >
           <i data-feather="arrow-right" />
         </IconButton>
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className="Pagination-laptopUp"
         sx={{
           pt: 4,
@@ -438,7 +438,7 @@ export default function TransactionTable() {
         >
           Next
         </Button>
-      </Box>
+      </Box> */}
     </React.Fragment>
   );
 }
