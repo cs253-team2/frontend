@@ -20,6 +20,7 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -201,12 +202,25 @@ const style = {
   p: 4,
 };
 
+interface modalDataType {
+  title: string;
+  content: string;
+}
+
 export default function OrderTable() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
+  const [modalData, setModalData] = React.useState<modalDataType>({title: '', content: ''});
+  
+  
+  const handleOpen = ({title, content}:modalDataType) =>{
+    setModalData({title, content});
+    setOpen(true);
+  };
+
+
   // const [open, setOpen] = React.useState(false);
   const renderFilters = () => (
     <React.Fragment>
@@ -427,22 +441,26 @@ export default function OrderTable() {
                     </div>
                   </Box>
                 </td>
-                <td>
-                <Button onClick={handleOpen}>Expand Notiification</Button>
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">
-                        {row.title}
+                <td style={{textAlign: "center"}}>
+                <Button
+                onClick={() => handleOpen({title: row.title, content: row.content})}
+                variant='soft'
+                >
+                  <NotificationsIcon></NotificationsIcon>
+                </Button>
+                  <Modal open={open} onClose={handleClose}>
+                    <ModalDialog
+                      aria-labelledby="layout-modal-title"
+                      aria-describedby="layout-modal-description"
+                    >
+                      <ModalClose />
+                      <Typography id="layout-modal-title" component="h2">
+                        {modalData.title}
                       </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        {row.content}
+                      <Typography id="layout-modal-description" textColor="text.tertiary">
+                        {modalData.content}
                       </Typography>
-                    </Box>
+                    </ModalDialog>
                   </Modal>
                 </td>
               </tr>
