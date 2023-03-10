@@ -206,7 +206,7 @@ export default function JoySignInSideTemplate() {
 
           <Box component="footer" sx={{ py: 3 }}>
             <Typography level="body3" textAlign="center">
-              © Your company {new Date().getFullYear()}
+              © CS253 TEAM2 {new Date().getFullYear()}
             </Typography>
           </Box>
         </Box>

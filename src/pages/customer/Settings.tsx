@@ -77,7 +77,7 @@ export default function App() {
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Settings
+                Update Profile
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
@@ -98,7 +98,7 @@ export default function App() {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-              Settings
+              Update Profile
             </Typography>
             <Box sx={{ flex: 999 }} />
            
