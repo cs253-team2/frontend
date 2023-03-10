@@ -15,9 +15,40 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import Card from '@mui/joy/Card';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import ModalClose from '@mui/joy/ModalClose';
+import { useNavigate } from 'react-router-dom';
 
 export default function OverviewComponent() {
-    return(
+  interface modalDataType {
+    title: string;
+    content: string;
+}
+
+  
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+  // const [modalData, setModalData] = React.useState<modalDataType>({title: 'Hello', content: 'World'});
+
+  const handleOpen = () =>{
+    setOpen(true);
+  };
+  const navigate = useNavigate();
+  const ipaymentpage= () => {
+    navigate('/customer/ipayment');
+    window.location.reload();
+  };
+
+  const addduespage= () => {
+    navigate('/customer/adddues');
+    window.location.reload();
+  };
+  
+
+
+  
+  return(
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
@@ -57,21 +88,7 @@ export default function OverviewComponent() {
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
           </Box>
-          {/* <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              my: 1,
-              gap: 1,
-              flexWrap: 'wrap',
-              '& > *': {
-                minWidth: 'clamp(0px, (500px - 100%) * 999, 100%)',
-                flexGrow: 1,
-              },
-            }}
-          >
-            <Box sx={{ flex: 999 }} />
-          </Box> */}
+          
           <Box
           sx={{
             display: 'flex',
@@ -119,9 +136,29 @@ export default function OverviewComponent() {
               alignItems: 'center',
             }}
             >
-              <Button color="success" href="#contained-buttons">
-                Make Payment
+              <Button
+                      onClick={() => handleOpen()}
+                      color='success'
+              >
+                      Make Payment
               </Button>
+              <Modal open={open} onClose={handleClose}>
+                  <ModalDialog
+                  aria-labelledby="layout-modal-title"
+                  aria-describedby="layout-modal-description"
+                  // layout={open || undefined}
+                  >
+                  <ModalClose />
+                  <Button onClick={ipaymentpage}>
+                    Make Instant Payment
+                  </Button>
+                  <br/>
+                  <Button onClick={addduespage}>
+                    Add Due
+                  </Button>
+                  </ModalDialog>
+              </Modal>
+              
             </Box>
           </Box>
           <br />
@@ -145,6 +182,7 @@ export default function OverviewComponent() {
             <OverviewTable />
 
           </Box>
+          
         </div>
     )
 }
