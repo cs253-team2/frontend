@@ -42,6 +42,8 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
   if (!mounted) {
     return <IconButton size="sm" variant="plain" color="neutral" disabled />;
   }
+  
+
   return (
     <IconButton
       id="toggle-mode"
@@ -68,6 +70,10 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
  */
 export default function JoySignInSideTemplate() {
   const navigate = useNavigate();
+  const registerpage = () => {
+    navigate('/register');
+    window.location.reload();
+  };
 
   // const vendorPage = () => {
   //   navigate('/vendor');
@@ -228,7 +234,11 @@ export default function JoySignInSideTemplate() {
                 </Link>
               </Box>
               <Button type="submit" fullWidth>
-                Sign in
+                SIGN IN
+              </Button>
+
+              <Button onClick={registerpage} fullWidth>
+                NOT REGISTERED? SIGN UP
               </Button>
             </form>
             {/* <Button
@@ -244,7 +254,7 @@ export default function JoySignInSideTemplate() {
 
           <Box component="footer" sx={{ py: 3 }}>
             <Typography level="body3" textAlign="center">
-              © Your company {new Date().getFullYear()}
+              © CS253 TEAM 2 {new Date().getFullYear()}
             </Typography>
           </Box>
         </Box>

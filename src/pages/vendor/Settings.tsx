@@ -14,112 +14,37 @@ import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import DuesTable from './components/DuesTable';
+import profilePic from '../assets/default_profile_img.jpg';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
+import IconButton, { IconButtonProps } from '@mui/joy/IconButton';
+import Input from '@mui/joy/Input';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import UpdateForm from './UpdateForm';
+import { TagLeftIcon } from '@chakra-ui/react';
 
-const rows = [
-  {
-    id: 'INV-1234',
-    date: 'Jan 3, 2023',
-    status: 'Paid',
-    vendor: {
-      initial: 'O',
-      name: 'Olivia Ryhe',
-      email: 'olivia@email.com',
-    },
-    amount: '69',
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    vendor: {
-      initial: 'S',
-      name: 'Steve Hampton',
-      email: 'steve.hamp@email.com',
-    },
-    amount: '420',
-  },
-  {
-    id: 'INV-1232',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    vendor: {
-      initial: 'C',
-      name: 'Ciaran Murray',
-      email: 'ciaran.murray@email.com',
-    },
-    amount: '69',
-  },
-  {
-    id: 'INV-1231',
-    date: 'March 3, 2023',
-    status: 'Refunded',
-    vendor: {
-      initial: 'M',
-      name: 'Maria Macdonald',
-      email: 'maria.mc@email.com',
-    },
-    amount: '69',
-  },
-  {
-    id: 'INV-1230',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    vendor: {
-      initial: 'C',
-      name: 'Charles Fulton',
-      email: 'fulton@email.com',
-    },
-    amount: '69',
-  },
-  {
-    id: 'INV-1229',
-    date: 'Dec 3, 2023',
-    status: 'Cancelled',
-    vendor: {
-      initial: 'J',
-      name: 'Jay Hooper',
-      email: 'hooper@email.com',
-    },
-    amount: '69',
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    vendor: {
-      initial: 'K',
-      name: 'Krystal Stevens',
-      email: 'k.stevens@email.com',
-    },
-    amount: '420',
-  },
-  {
-    id: 'INV-1227',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    vendor: {
-      initial: 'S',
-      name: 'Sachin Flynn',
-      email: 's.flyn@email.com',
-    },
-    amount: '420',
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    vendor: {
-      initial: 'B',
-      name: 'Bradley Rosales',
-      email: 'brad123@email.com',
-    },
-    amount: '420',
-  },
-];
+const profilePicture = {
+  borderRadius: "50%",
+  alignItems: 'center',
+  // maxHeight: "150px",
+  // minHeight: "150px",
+}
 
+const info = 
+{
+  name: 'Jack',
+  userid: '21A4',
+  email: 'jack@email.com',
+  phoneNo: '1234567890',
+  picture: profilePic,
+  joiningDate: '1.3.2023',
+  pendingDues: '500',
+  walletBalance: '623',
+};
 export default function App() {
-    return (
+  
+  return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
@@ -152,7 +77,7 @@ export default function App() {
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                All Dues
+                Settings
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
@@ -173,15 +98,40 @@ export default function App() {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-              All Dues
+              Settings
             </Typography>
             <Box sx={{ flex: 999 }} />
-
            
           </Box>
-          <DuesTable placeholder="Enter to search" rows={rows}/>
-        </div>
-        
-
-    )
-}
+          {/* <div className="ProfilePhoto">
+              <img style={{borderRadius: "50%", float: 'left', marginRight: 50}} src={info.picture}></img>
+          </div> */}
+          <Box sx={{
+              my: 'auto',
+              py: 2,
+              pb: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+              width: 400,
+              maxWidth: '100%',
+              mx: 'auto',
+              borderRadius: 'sm',
+              '& form': {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+              },
+              [`& .${formLabelClasses.asterisk}`]: {
+                visibility: 'hidden',
+              },
+            }}>
+          <div>
+          <UpdateForm onSubmit={function (values: { firstName: string; lastName: string; phoneNumber: string; email: string; password: string; confirmPassword: string; }): void {
+            throw new Error('Function not implemented.');
+          } } />
+          </div>
+          </Box>
+          </div>
+  )
+   }

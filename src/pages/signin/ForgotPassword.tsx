@@ -18,8 +18,7 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
-import RegistrationForm from './RegistrationForm';
-import { useForm } from "react-hook-form";
+
 import { useNavigate } from 'react-router-dom';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -65,18 +64,12 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
 /**
  * This template uses [`Inter`](https://fonts.google.com/specimen/Inter?query=inter) font.
  */
-
-//   const [errors, setErrors] = React.useState({
-//     email: "",
-//     phoneNumber: "",
-//     password: "",
-//     cnfpassword: "",
-//   })
-
 export default function JoySignInSideTemplate() {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
+  // const vendorPage = () => {
+  //   navigate('/vendor');
+  // }
 
   return (
     <CssVarsProvider
@@ -137,22 +130,20 @@ export default function JoySignInSideTemplate() {
               startDecorator={
                 <Box
                   component="span"
-                  // sx={{
-                  //   width: 40,
-                  //   height: 40,
-                  //   background: (theme) =>
-                  //     `linear-gradient(45deg, ${theme.vars.palette.primary.solidBg}, ${theme.vars.palette.primary.solidBg} 30%, ${theme.vars.palette.primary.softBg})`,
-                  //   borderRadius: '50%',
-                  //   boxShadow: (theme) => theme.shadow.md,
-                  //   '--joy-shadowChannel': (theme) =>
-                  //     theme.vars.palette.primary.mainChannel,
-                  // }}
-                >
-                  <img width={40} height={40} src= "https://www.shutterstock.com/image-vector/initial-letter-cp-linked-circle-260nw-463344173.jpg" alt="CampusPay Logo"></img>
-                </Box>
+                  sx={{
+                    width: 24,
+                    height: 24,
+                    background: (theme) =>
+                      `linear-gradient(45deg, ${theme.vars.palette.primary.solidBg}, ${theme.vars.palette.primary.solidBg} 30%, ${theme.vars.palette.primary.softBg})`,
+                    borderRadius: '50%',
+                    boxShadow: (theme) => theme.shadow.md,
+                    '--joy-shadowChannel': (theme) =>
+                      theme.vars.palette.primary.mainChannel,
+                  }}
+                />
               }
             >
-              Campus Pay
+              Logo
             </Typography>
             <ColorSchemeToggle />
           </Box>
@@ -181,32 +172,44 @@ export default function JoySignInSideTemplate() {
           >
             <div>
               <Typography component="h2" fontSize="xl2" fontWeight="lg">
-                Join Us
+                Don't Worry!
               </Typography>
               <Typography level="body2" sx={{ my: 1, mb: 3 }}>
-                <b>Registe Here. Please enter the following details.</b><br /><br />
-                Fields marked with * are compulsory <br /><br />
-                Password must have at least 8 characters, with at least 1 digit and 1 special character
+                Let&apos;s restore access to your account.
               </Typography>
             </div>
-              <RegistrationForm />
-
-            {/* <Typography component="h4" textAlign="center">OR</Typography> */}
-
-            {/* <Button
-              variant="outlined"
-              color="neutral"
-              fullWidth
-              startDecorator={<GoogleIcon />}
+            <form
+              onSubmit={(event: React.FormEvent<SignInFormElement>) => {
+                event.preventDefault();
+                const formElements = event.currentTarget.elements;
+                const data = {
+                  email: formElements.email.value,
+                };
+                // alert(JSON.stringify(data, null, 2));
+              }}
             >
-              Register with Google
-            </Button> */}
+              <FormControl required>
+                <FormLabel>Email</FormLabel>
+                <Input placeholder="Enter your email" type="email" name="email" />
+              </FormControl>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                {/* <Checkbox size="sm" label="Remember for 30 days" name="persistent" /> */}
+              </Box>
+              <Button type="submit" fullWidth>
+                Send OTP
+              </Button>
+            </form>
+
           </Box>
-
-
           <Box component="footer" sx={{ py: 3 }}>
             <Typography level="body3" textAlign="center">
-              © CS253 TEAM2 {new Date().getFullYear()}
+              © Your company {new Date().getFullYear()}
             </Typography>
           </Box>
         </Box>

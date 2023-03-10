@@ -19,7 +19,7 @@ import Overview from './Overview';
 import Notifications from './Notifications';
 import AllDues from './AllDues';
 import TransactionHistory from './TransactionHistory';
-import Vendors from './Vendors';
+import Customers from './Customers';
 import Profile from './Profile';
 import Settings from './Settings';
 
@@ -37,7 +37,7 @@ export default function JoyOrderDashboardTemplate(props) {
     notifications: tabsel=="notifications" ? true : false,
     alldues: tabsel=="alldues" ? true : false,
     transaction_history: tabsel=="transaction_history" ? true : false,
-    vendors: tabsel=="vendors" ? true : false,
+    customers: tabsel=="customers" ? true : false,
     profile: tabsel=="profile" ? true : false,
     settings: tabsel=="settings" ? true : false,
   });
@@ -59,9 +59,9 @@ export default function JoyOrderDashboardTemplate(props) {
     } else if(options.transaction_history){
       console.log("transaction_history");
       return <TransactionHistory/>
-    } else if(options.vendors){
+    } else if(options.customers){
       console.log("vendors");
-      return <Vendors/>
+      return <Customers/>
     } else if(options.profile){
       console.log("profile");
       return <Profile/>

@@ -20,87 +20,7 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import { useState } from "react"
-import SearchBar from './searchBar';
 
-
-export const rows = [
-  {
-    id: 'INV-1234',
-    date: 'March 3, 2023',
-    status: 'Paid',
-    transactionid : '657489',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transactionid : '688489',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1232',
-    date: 'Jan 3, 2023',
-    status: 'Paid',
-    transactionid : '768947',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1231',
-    date: 'Feb 3, 2023',
-    status: 'Refunded',
-    transactionid : '876457',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1230',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transactionid : '567868',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1229',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '123456',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '667878',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1227',
-    date: 'April 3, 2023',
-    status: 'Paid',
-    transactionid : '657678',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '456789',
-    amount : '1234',
-  },
-];
-
-/*const [nrows, setRows] = useState<people[]>(rows);
-  const [searched, setSearched] = useState<string>("");
-  
-
-  const requestSearch = (searchedVal: string) => {
-    const filteredRows = rows.filter((row) => {
-      return row.id.toLowerCase().includes(searchedVal.toLowerCase()); 
-    });
-    setRows(filteredRows);
-  };*/
-  
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -142,7 +62,46 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function TransactionTable() {
+const rows = [
+  {
+    id: 'INV-1234',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    transaction_id: '123123',
+    amount: 1234
+  },
+  {
+    id: 'INV-1233',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    transaction_id: '123123',
+    amount: 1234
+  },
+  {
+    id: 'INV-1232',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    transaction_id: '123123',
+    amount: 1234
+  },
+  {
+    id: 'INV-1231',
+    date: 'Feb 3, 2023',
+    status: 'Refunded',
+    transaction_id: '123123',
+    amount: 1234
+  },
+  {
+    id: 'INV-1230',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    transaction_id: '123123',
+    amount: 1234
+  },
+
+];
+
+export default function OverviewTable() {
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [open, setOpen] = React.useState(false);
@@ -161,9 +120,15 @@ export default function TransactionTable() {
         </Select>
       </FormControl>
 
+      <FormControl size="sm">
+        <FormLabel>Category</FormLabel>
+        <Select placeholder="All">
+          <Option value="all">All</Option>
+        </Select>
+      </FormControl>
 
       <FormControl size="sm">
-        <FormLabel>TransactionID</FormLabel>
+        <FormLabel>Customer</FormLabel>
         <Select placeholder="All">
           <Option value="all">All</Option>
         </Select>
@@ -172,7 +137,7 @@ export default function TransactionTable() {
   );
   return (
     <React.Fragment>
-      <Sheet
+      {/* <Sheet
         className="SearchAndFilters-mobile"
         sx={{
           display: {
@@ -212,8 +177,8 @@ export default function TransactionTable() {
             </Sheet>
           </ModalDialog>
         </Modal>
-      </Sheet>
-      <Box
+      </Sheet> */}
+      {/* <Box
         className="SearchAndFilters-tabletUp"
         sx={{
           borderRadius: 'sm',
@@ -232,13 +197,14 @@ export default function TransactionTable() {
           },
         }}
       >
-       
-        <SearchBar placeholder="Enter to Search" data={rows} />
-       
+        <FormControl sx={{ flex: 1 }} size="sm">
+          <FormLabel>Search</FormLabel>
+          <Input placeholder="Search" startDecorator={<i data-feather="search" />} />
+        </FormControl>
 
-  
-      </Box>
-      {/* <Sheet
+        {renderFilters()}
+      </Box> */}
+      <Sheet
         className="OrderTableContainer"
         variant="outlined"
         sx={{
@@ -298,12 +264,12 @@ export default function TransactionTable() {
                     },
                   }}
                 >
-                  VendorID
+                  Invoice
                 </Link>
               </th>
               <th style={{ width: 120, padding: 12 }}>Date</th>
               <th style={{ width: 120, padding: 12 }}>Status</th>
-              <th style={{ width: 220, padding: 12 }}>TransactionID</th>
+              <th style={{ width: 220, padding: 12 }}>Transaction ID</th>
               <th style={{ width: 120, padding: 12 }}>Amount</th>
             </tr>
           </thead>
@@ -352,27 +318,30 @@ export default function TransactionTable() {
                   </Chip>
                 </td>
                 <td>
-                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                   
+                  {/* <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                    <Avatar size="sm">{row.customer.initial}</Avatar>
                     <div>
                       <Typography
                         fontWeight="lg"
                         level="body3"
                         textColor="text.primary"
                       >
-                        {row.transactionid}
+                        {row.customer.name}
                       </Typography>
-                      
+                      <Typography level="body3">{row.customer.email}</Typography>
                     </div>
-                  </Box>
+                  </Box> */}
+                  {
+                    row.transaction_id
+                  }
                 </td>
                 <td>{row.amount}</td>
               </tr>
             ))}
           </tbody>
         </Table>
-      </Sheet> */}
-      {/* <Box
+      </Sheet>
+      <Box
         className="Pagination-mobile"
         sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
       >
@@ -395,7 +364,7 @@ export default function TransactionTable() {
         >
           <i data-feather="arrow-right" />
         </IconButton>
-      </Box> */}
+      </Box>
       {/* <Box
         className="Pagination-laptopUp"
         sx={{

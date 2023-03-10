@@ -9,68 +9,24 @@ import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
-import FirstSidebar from './components/FirstSidebar';
-import SecondSidebar from './components/SecondSidebar';
-import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import Overview from './Overview';
-import Notifications from './Notifications';
-import AllDues from './AllDues';
-import TransactionHistory from './TransactionHistory';
-import Vendors from './Vendors';
-import Profile from './Profile';
-import Settings from './Settings';
+import Checkout from './Checkout';
+
+
+
 
 const useEnhancedEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
-export default function JoyOrderDashboardTemplate(props) {
-  const {tabsel} = props;
+export default function JoyOrderDashboardTemplate() {
+  
   
   const status = useScript(`https://unpkg.com/feather-icons`);
 
   
-  const [options, setOptions] = React.useState({
-    overview: tabsel=="overview" ? true : false,
-    notifications: tabsel=="notifications" ? true : false,
-    alldues: tabsel=="alldues" ? true : false,
-    transaction_history: tabsel=="transaction_history" ? true : false,
-    vendors: tabsel=="vendors" ? true : false,
-    profile: tabsel=="profile" ? true : false,
-    settings: tabsel=="settings" ? true : false,
-  });
-
-   
   
-  
-  function ExportComponent(){
-    console.log(options);
-    if(options.overview){
-      return <Overview/>
-    } else if(options.notifications){
-      console.log("notifications");
-      return <Notifications/>
-    } else if(options.alldues){
-      console.log("Alldues");
-
-      return <AllDues/>
-    } else if(options.transaction_history){
-      console.log("transaction_history");
-      return <TransactionHistory/>
-    } else if(options.vendors){
-      console.log("vendors");
-      return <Vendors/>
-    } else if(options.profile){
-      console.log("profile");
-      return <Profile/>
-    } else if(options.settings){
-      console.log("settings");
-      return <Settings/>
-    }
-  }
-
 
   
 
@@ -99,8 +55,7 @@ export default function JoyOrderDashboardTemplate(props) {
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
         <Header />
-        <FirstSidebar />
-        <SecondSidebar setOptions={setOptions} options = {options}/>
+        
         <Box
           component="main"
           className="MainContent"
@@ -127,7 +82,51 @@ export default function JoyOrderDashboardTemplate(props) {
             gap: 1,
           })}
         >
-          <ExportComponent/>
+          
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Breadcrumbs
+              size="sm"
+              aria-label="breadcrumbs"
+              separator={<i data-feather="chevron-right" />}
+              sx={{
+                '--Breadcrumbs-gap': '1rem',
+                '--Icon-fontSize': '16px',
+                fontWeight: 'lg',
+                color: 'neutral.400',
+                px: 0,
+              }}
+            >
+              <Link
+                underline="none"
+                color="neutral"
+                fontSize="inherit"
+                href="#some-link"
+                aria-label="Home"
+              >
+                <i data-feather="home" />
+              </Link>
+              <Link
+                underline="hover"
+                color="neutral"
+                fontSize="inherit"
+                href="#some-link"
+              >
+                Dashboard
+              </Link>
+              <Typography fontSize="inherit" variant="soft" color="primary">
+                Clear Dues
+              </Typography>
+            </Breadcrumbs>
+            <ColorSchemeToggle
+              sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
+            />
+          </Box>
+          <Box>
+          {/* <Checkout/> */}
+         
+          </Box>
+          
+
           
         </Box>
       </Box>

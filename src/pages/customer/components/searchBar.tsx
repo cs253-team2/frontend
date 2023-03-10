@@ -20,7 +20,6 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
@@ -55,35 +54,20 @@ function getComparator<Key extends keyof any>(
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
-interface modalDataType {
-    title: string;
-    content: string;
-}
-
-function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]}){
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(rows);
-  const [modalData, setModalData] = React.useState<modalDataType>({title: '', content: ''});
-  
-  
-  const handleOpen = ({title, content}:modalDataType) =>{
-    setModalData({title, content});
-    setOpen(true);
-  };
+  const [filteredData, setFilteredData] =useState<any>(data);
   const handleFilter =(event:any) =>{
-    console.log(event);
     const searchWord = event.target.value;
-    const newFilter = rows.filter((value:any) =>{
+    const newFilter = data.filter((value) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
               value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
-              value.status.toLowerCase().includes(searchWord.toLowerCase()))
+              value.status.toLowerCase().includes(searchWord.toLowerCase())||
+              value.transactionid.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
-      setFilteredData(rows);
+      setFilteredData(data);
     }else{
       setFilteredData(newFilter);
     }
@@ -142,104 +126,6 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                         >
                           <thead>
                             <tr>
-                            <th style={{ width: 140, padding: 12 }}>
-                                <Link
-                                underline="none"
-                                color="primary"
-                                component="button"
-                                onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
-                                fontWeight="lg"
-                                endDecorator={<i data-feather="arrow-down" />}
-                                sx={{
-                                    '& svg': {
-                                    transition: '0.2s',
-                                    transform:
-                                        order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
-                                    },
-                                }}
-                                >
-                                Notification ID
-                                </Link>
-                            </th>
-                            <th style={{ width: 120, padding: 12 }}>Date</th>
-                            <th style={{ width: 120, padding: 12 }}>Type</th>
-                            <th style={{ width: 220, padding: 12 }}>CustomerID</th>
-                            <th style={{ width: 120, padding: 12 }}>Content</th>
-                            
-                            </tr>
-                        </thead>  
-                        <tbody>
-                            {filteredData.map((row:any) => (
-                            <tr key={row.id}>
-                                <td>
-                                <Typography fontWeight="md">{row.id}</Typography>
-                                </td>
-                                <td>{row.date}</td>
-                                <td>
-                                <Chip
-                                    variant="soft"
-                                    size="sm"
-                                    startDecorator={
-                                    {
-                                        Paid: <i data-feather="check" />,
-                                        Refunded: <i data-feather="corner-up-left" />,
-                                        Cancelled: <i data-feather="x" />,
-                                    }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
-                                    }
-                                    color={
-                                    {
-                                        Paid: 'success',
-                                        Refunded: 'neutral',
-                                        Cancelled: 'danger',
-                                    }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
-                                    }
-                                >
-                                    {row.status}
-                                </Chip>
-                                </td>
-                                <td>
-                                <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                                    <Avatar size="sm">{row.customer.initial}</Avatar>
-                                    <div>
-                                    <Typography
-                                        fontWeight="lg"
-                                        level="body3"
-                                        textColor="text.primary"
-                                    >
-                                        {row.customer.name}
-                                    </Typography>
-                                    <Typography level="body3">{row.customer.email}</Typography>
-                                    </div>
-                                </Box>
-                                </td>
-                                <td style={{textAlign: "center"}}>
-                                <Button
-                                onClick={() => handleOpen({title: row.title, content: row.content})}
-                                variant='soft'
-                                >
-                                <NotificationsIcon></NotificationsIcon>
-                                </Button>
-                                <Modal open={open} onClose={handleClose}>
-                                    <ModalDialog
-                                    aria-labelledby="layout-modal-title"
-                                    aria-describedby="layout-modal-description"
-                                    // layout={open || undefined}
-                                    >
-                                    <ModalClose />
-                                    <Typography id="layout-modal-title" component="h2">
-                                        {modalData.title}
-                                    </Typography>
-                                    <Typography id="layout-modal-description" textColor="text.tertiary">
-                                        {modalData.content}
-                                    </Typography>
-                                    </ModalDialog>
-                                </Modal>
-                                </td>
-                            </tr>
-                            ))}
-                        </tbody>
-                          {/* <thead>
-                            <tr>
                               <th style={{ width: 48, textAlign: 'center', padding: 12 }}>
                                 <Checkbox
                                   indeterminate={
@@ -283,8 +169,9 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                               <th style={{ width: 220, padding: 12 }}>TransactionID</th>
                               <th style={{ width: 120, padding: 12 }}>Amount</th>
                             </tr>
-                          </thead> */}
-                          {/* <tbody>
+                          </thead>
+                          <tbody>
+                            {/* {stableSort(filteredData, getComparator(order, 'id')).map((row) => ( */}
                             {filteredData.map((row:any) => (
                               <tr key={row.id}>
                                 <td style={{ textAlign: 'center' }}>
@@ -315,14 +202,14 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                         Paid: <i data-feather="check" />,
                                         Refunded: <i data-feather="corner-up-left" />,
                                         Cancelled: <i data-feather="x" />,
-                                      }[row.status]
+                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
                                     }
                                     color={
                                       {
                                         Paid: 'success',
                                         Refunded: 'neutral',
                                         Cancelled: 'danger',
-                                      }[row.status] as ColorPaletteProp
+                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
                                     }
                                   >
                                     {row.status}
@@ -346,7 +233,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                 <td>{row.amount}</td>
                               </tr>
                             ))}
-                          </tbody> */}
+                          </tbody>
                         </Table>
                       </Sheet>
                         </div>

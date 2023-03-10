@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
-import { Select } from "@mui/material";
-import Option from '@mui/joy/Option';
+import { Input, Select, Option} from '@mui/joy';
+import { useNavigate } from 'react-router-dom';
 
 
 type RegistrationFormProps = {
@@ -18,6 +18,17 @@ type RegistrationFormValues = {
   confirmPassword: string;
   userType: string;
 };
+
+const selectStyle = {
+  padding: "8px 12px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+  backgroundColor: "background.body",
+  // color: "#444",
+  fontSize: "16px",
+  cursor: "pointer",
+  width:"100%",
+}
 
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -78,6 +89,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(values);
+    const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
+    setValues((prevValues) => ({
+      ...prevValues,
+      userType: userTypeInputElement.value,
+    }));
+
     const errors = validate(values);
     setErrors(errors);
 
@@ -96,12 +114,18 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     setErrors((errors) => ({ ...errors, [name]: ''}));
   };
 
+  const navigate = useNavigate();
+  const signinpage = () => {
+    navigate('/');
+    window.location.reload();
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="firstName"><b>First Name *</b></label>
         <br />
-        <input
+        <Input
           type="text"
           id="firstName"
           name="firstName"
@@ -115,7 +139,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       <div>
         <label htmlFor="lastName"><b>Last Name</b></label>
         <br />
-        <input
+        <Input
           type="text"
           id="lastName"
           name="lastName"
@@ -128,7 +152,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       <div>
         <label htmlFor="phoneNumber"><b>Phone Number *</b></label>
         <br />
-        <input
+        <Input
           type="text"
           id="phoneNumber"
           name="phoneNumber"
@@ -142,7 +166,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       <div>
         <label htmlFor="email"><b>Email ID *</b></label>
         <br />
-        <input
+        <Input
           type="email"
           id="email"
           name="email"
@@ -156,7 +180,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       <div>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
-        <input
+        <Input
           type="password"
           id="password"
           name="password"
@@ -170,7 +194,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       <div>
         <label htmlFor="confirmPassword"><b>Confirm Password *</b></label>
         <br />
-        <input
+        <Input
           type="password"
           id="confirmPassword"
           name="confirmPassword"
@@ -189,7 +213,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
             name="userType" 
             value={values.userType} 
             onChange={handleChange}
-            style={{width:"100%"}}>
+            style={selectStyle}
+          >
           <option defaultValue="" disabled></option>
           <option value="customer">Customer</option>
           <option value="vendor">Vendor</option>
@@ -198,8 +223,14 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       </div>
       <br />
       <Button type="submit" fullWidth>
-                Register
-              </Button>
+                REGISTER
+      </Button>
+      <Button onClick={signinpage} fullWidth>
+               ALREADY REGISTERED? SIGN IN
+      </Button>
+      
+
+
     </form>
   );
 };
