@@ -7,9 +7,11 @@ import VendorOverview from "./pages/vendor/Overview";
 import NoPage from "./pages/error/App";
 
 import Customer from "./pages/customer/App";
+import Vendor from "./pages/vendor/App";
 import Notifications from "./pages/customer/Notifications";
 import AllduesCustomer from "./pages/customer/AllDues";
 // import AllduesCustomer from "./pages/customer/alldues/Alldues";
+
 
 export default function App() {
 
@@ -19,14 +21,23 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />} />
-        <Route path="/vendor/overview" element={<VendorOverview />} />
         <Route path="/customer/overview" element={<Customer tabsel={'overview'} />} />
         <Route path="/customer/notifications" element={<Customer tabsel={'notifications'} />} />
         <Route path="/customer/alldues" element={<Customer tabsel={'alldues'} />} />
         <Route path="/customer/transaction_history" element={<Customer tabsel={'transaction_history'} />} />
         <Route path="/customer/vendor" element={<Customer tabsel={'vendors'} />} />
         <Route path="/customer/profile" element={<Customer tabsel={'profile'} />} />
-        <Route path="/customer/settings" element={<Customer tabsel={'settings'} />} />
+        <Route path="/customer/update_profile" element={<Customer tabsel={'settings'} />} />
+        <Route path="/vendor/overview" element={<Vendor  tabsel={'overview'}/>} />
+        <Route path="/vendor/notifications" element={<Vendor  tabsel={'notifications'}/>} />
+        <Route path="/vendor/alldues" element={<Vendor  tabsel={'alldues'}/>} />
+        <Route path="/vendor/transaction_history" element={<Vendor  tabsel={'transaction_history'}/>} />
+        <Route path="/vendor/customer" element={<Vendor  tabsel={'customers'}/>} />
+        <Route path="/vendor/profile" element={<Vendor  tabsel={'profile'}/>} />
+        <Route path="/vendor/update_profile" element={<Vendor  tabsel={'settings'}/>} />
+
+
+
         <Route path="*" element={<NoPage />} />
 
       </Routes>

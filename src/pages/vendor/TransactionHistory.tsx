@@ -10,13 +10,14 @@ import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
-import OrderTable from './components/OrderTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
+import TransactionTable from './components/TransactionTable';
 
-export default function OverviewComponent() {
-    return(
+
+export default function App() {
+    return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
@@ -44,12 +45,12 @@ export default function OverviewComponent() {
                 underline="hover"
                 color="neutral"
                 fontSize="inherit"
-                href="/customer/overview"
+                href="#some-link"
               >
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Overview
+                Transaction History
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
@@ -70,27 +71,18 @@ export default function OverviewComponent() {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-              Orders
+              Transaction History
             </Typography>
             <Box sx={{ flex: 999 }} />
-            {/* <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
-              <Button
-                variant="outlined"
-                color="neutral"
-                startDecorator={<i data-feather="download-cloud" />}
-              >
-                Download PDF
-              </Button>
-              <Button
-                variant="outlined"
-                color="neutral"
-                startDecorator={<i data-feather="table" />}
-              >
-                Download CSV
-              </Button>
-            </Box> */}
+           
           </Box>
-          <OrderTable />
+          <Box>
+            <TransactionTable />
+          </Box>
+
+      
         </div>
+      
+
     )
 }

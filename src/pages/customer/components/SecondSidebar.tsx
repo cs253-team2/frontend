@@ -39,7 +39,7 @@ export default function SecondSidebar(props: any) {
   };
   const overviewpage = () => {
    navigate('/customer/overview');
-   window.location.reload(false);
+   window.location.reload();
   };
   const profilepage = () => {
     navigate('/customer/profile');
@@ -52,7 +52,7 @@ const vendorpage = () => {
   };
 
   const settingspage= () => {
-    navigate('/customer/settings');
+    navigate('/customer/update_profile');
     window.location.reload();
   };
   
@@ -170,7 +170,7 @@ const vendorpage = () => {
               <ListItemDecorator>
                 <i data-feather="settings" />
               </ListItemDecorator>
-              <ListItemContent>Settings</ListItemContent>
+              <ListItemContent>Update Profile</ListItemContent>
             </ListItemButton>
           </ListItem>
         </List>
