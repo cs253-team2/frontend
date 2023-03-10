@@ -20,11 +20,14 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
+import { useState } from "react"
+import SearchBar from './searchBar';
 
-const rows = [
+
+export const rows = [
   {
     id: 'INV-1234',
-    date: 'Feb 3, 2023',
+    date: 'March 3, 2023',
     status: 'Paid',
     transactionid : '657489',
     amount : '1234',
@@ -38,7 +41,7 @@ const rows = [
   },
   {
     id: 'INV-1232',
-    date: 'Feb 3, 2023',
+    date: 'Jan 3, 2023',
     status: 'Paid',
     transactionid : '768947',
     amount : '1234',
@@ -73,7 +76,7 @@ const rows = [
   },
   {
     id: 'INV-1227',
-    date: 'Feb 3, 2023',
+    date: 'April 3, 2023',
     status: 'Paid',
     transactionid : '657678',
     amount : '1234',
@@ -86,6 +89,18 @@ const rows = [
     amount : '1234',
   },
 ];
+
+/*const [nrows, setRows] = useState<people[]>(rows);
+  const [searched, setSearched] = useState<string>("");
+  
+
+  const requestSearch = (searchedVal: string) => {
+    const filteredRows = rows.filter((row) => {
+      return row.id.toLowerCase().includes(searchedVal.toLowerCase()); 
+    });
+    setRows(filteredRows);
+  };*/
+  
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -217,14 +232,13 @@ export default function TransactionTable() {
           },
         }}
       >
-        <FormControl sx={{ flex: 1 }} size="sm">
-          <FormLabel>Search for order</FormLabel>
-          <Input placeholder="Search" startDecorator={<i data-feather="search" />} />
-        </FormControl>
+       
+        <SearchBar placeholder="Enter to Search" data={rows} />
+       
 
-        {renderFilters()}
+  
       </Box>
-      <Sheet
+      {/* <Sheet
         className="OrderTableContainer"
         variant="outlined"
         sx={{
@@ -357,8 +371,8 @@ export default function TransactionTable() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
-      <Box
+      </Sheet> */}
+      {/* <Box
         className="Pagination-mobile"
         sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
       >
@@ -381,8 +395,8 @@ export default function TransactionTable() {
         >
           <i data-feather="arrow-right" />
         </IconButton>
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className="Pagination-laptopUp"
         sx={{
           pt: 4,
@@ -424,7 +438,7 @@ export default function TransactionTable() {
         >
           Next
         </Button>
-      </Box>
+      </Box> */}
     </React.Fragment>
   );
 }
