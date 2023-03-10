@@ -13,7 +13,7 @@ import SecondSidebar from "./components/SecondSidebar";
 import Header from "./components/Header";
 import ColorSchemeToggle from "./components/ColorSchemeToggle";
 import customTheme from "./theme";
-import VendorTable from "./components/CustomerTable";
+import VendorTable from "./components/VendorTable";
 export default function App() {
   return (
     <div>
@@ -69,11 +69,11 @@ export default function App() {
         }}
       >
         <Typography level="h1" fontSize="xl4">
-          Customers
+          Vendors
         </Typography>
         <Box sx={{ flex: 999 }} />
         <Button color="success" href="#contained-buttons">
-          Add Customer
+          Add Vendor
         </Button>
       </Box>
       <Box>

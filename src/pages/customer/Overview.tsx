@@ -57,7 +57,7 @@ export default function OverviewComponent() {
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
           </Box>
-          <Box
+          {/* <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -98,7 +98,7 @@ export default function OverviewComponent() {
                 <Typography level="h5">
                   Total Dues
                 </Typography>
-                kajdsf
+                1000
               </Card>
               <Card
               sx={{
@@ -110,7 +110,7 @@ export default function OverviewComponent() {
                 <Typography level='h5'>
                   Due Date
                 </Typography>
-                lkadsjf
+                April 1, 2023
               </Card>
             </Box>
             <Box

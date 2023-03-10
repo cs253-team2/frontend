@@ -47,12 +47,12 @@ export default function SecondSidebar(props: any) {
   };
   
 const vendorpage = () => {
-    navigate('/vendor/customer');
+    navigate('/vendor/customers');
     window.location.reload();
   };
 
   const settingspage= () => {
-    navigate('/vendor/update_profile');
+    navigate('/vendor/settings');
     window.location.reload();
   };
   
@@ -112,7 +112,7 @@ const vendorpage = () => {
           }}
         >
           <ListSubheader role="presentation" sx={{ color: 'text.primary' }}>
-            Customer Dashboard
+            Vendor Dashboard
           </ListSubheader>
           <ListItem>
             <ListItemButton selected={options.overview} variant={options.overview?"soft":"plain"} onClick={overviewpage}>
@@ -150,9 +150,9 @@ const vendorpage = () => {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.customers} variant={options.customers?"soft":"plain"} onClick={vendorpage}>
+            <ListItemButton selected={options.vendors} variant={options.vendors?"soft":"plain"} onClick={vendorpage}>
               <ListItemDecorator>
-                <i data-feather="shopping-cart" />
+                <i data-feather="users" />
               </ListItemDecorator>
               <ListItemContent>Customers</ListItemContent>
             </ListItemButton>
@@ -170,7 +170,7 @@ const vendorpage = () => {
               <ListItemDecorator>
                 <i data-feather="settings" />
               </ListItemDecorator>
-              <ListItemContent>Update Profile</ListItemContent>
+              <ListItemContent>Settings</ListItemContent>
             </ListItemButton>
           </ListItem>
         </List>

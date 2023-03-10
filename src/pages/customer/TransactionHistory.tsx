@@ -10,13 +10,16 @@ import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
-import Header from './components/Header';
+import Header from './components/Header'; 
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import TransactionTable from './components/TransactionTable';
 
 
+
 export default function App() {
+ 
+
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>

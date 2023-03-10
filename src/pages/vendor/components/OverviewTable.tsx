@@ -67,104 +67,41 @@ const rows = [
     id: 'INV-1234',
     date: 'Feb 3, 2023',
     status: 'Paid',
-    customer: {
-      initial: 'O',
-      name: 'Olivia Ryhe',
-      email: 'olivia@email.com',
-    },
-    subscription: 'Yearly',
+    transaction_id: '123123',
+    amount: 1234
   },
   {
     id: 'INV-1233',
     date: 'Feb 3, 2023',
     status: 'Paid',
-    customer: {
-      initial: 'S',
-      name: 'Steve Hampton',
-      email: 'steve.hamp@email.com',
-    },
-    subscription: 'Monthly',
+    transaction_id: '123123',
+    amount: 1234
   },
   {
     id: 'INV-1232',
     date: 'Feb 3, 2023',
     status: 'Paid',
-    customer: {
-      initial: 'C',
-      name: 'Ciaran Murray',
-      email: 'ciaran.murray@email.com',
-    },
-    subscription: 'Yearly',
+    transaction_id: '123123',
+    amount: 1234
   },
   {
     id: 'INV-1231',
     date: 'Feb 3, 2023',
     status: 'Refunded',
-    customer: {
-      initial: 'M',
-      name: 'Maria Macdonald',
-      email: 'maria.mc@email.com',
-    },
-    subscription: 'Yearly',
+    transaction_id: '123123',
+    amount: 1234
   },
   {
     id: 'INV-1230',
     date: 'Feb 3, 2023',
     status: 'Paid',
-    customer: {
-      initial: 'C',
-      name: 'Charles Fulton',
-      email: 'fulton@email.com',
-    },
-    subscription: 'Yearly',
+    transaction_id: '123123',
+    amount: 1234
   },
-  {
-    id: 'INV-1229',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'J',
-      name: 'Jay Hooper',
-      email: 'hooper@email.com',
-    },
-    subscription: 'Yearly',
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'K',
-      name: 'Krystal Stevens',
-      email: 'k.stevens@email.com',
-    },
-    subscription: 'Monthly',
-  },
-  {
-    id: 'INV-1227',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'S',
-      name: 'Sachin Flynn',
-      email: 's.flyn@email.com',
-    },
-    subscription: 'Monthly',
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'B',
-      name: 'Bradley Rosales',
-      email: 'brad123@email.com',
-    },
-    subscription: 'Monthly',
-  },
+
 ];
 
-export default function OrderTable() {
+export default function OverviewTable() {
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [open, setOpen] = React.useState(false);
@@ -200,7 +137,7 @@ export default function OrderTable() {
   );
   return (
     <React.Fragment>
-      <Sheet
+      {/* <Sheet
         className="SearchAndFilters-mobile"
         sx={{
           display: {
@@ -240,8 +177,8 @@ export default function OrderTable() {
             </Sheet>
           </ModalDialog>
         </Modal>
-      </Sheet>
-      <Box
+      </Sheet> */}
+      {/* <Box
         className="SearchAndFilters-tabletUp"
         sx={{
           borderRadius: 'sm',
@@ -266,7 +203,7 @@ export default function OrderTable() {
         </FormControl>
 
         {renderFilters()}
-      </Box>
+      </Box> */}
       <Sheet
         className="OrderTableContainer"
         variant="outlined"
@@ -332,9 +269,8 @@ export default function OrderTable() {
               </th>
               <th style={{ width: 120, padding: 12 }}>Date</th>
               <th style={{ width: 120, padding: 12 }}>Status</th>
-              <th style={{ width: 220, padding: 12 }}>Customer</th>
-              <th style={{ width: 120, padding: 12 }}>Subscription</th>
-              <th style={{ width: 160, padding: 12 }}> </th>
+              <th style={{ width: 220, padding: 12 }}>Transaction ID</th>
+              <th style={{ width: 120, padding: 12 }}>Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -382,7 +318,7 @@ export default function OrderTable() {
                   </Chip>
                 </td>
                 <td>
-                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                  {/* <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                     <Avatar size="sm">{row.customer.initial}</Avatar>
                     <div>
                       <Typography
@@ -394,22 +330,12 @@ export default function OrderTable() {
                       </Typography>
                       <Typography level="body3">{row.customer.email}</Typography>
                     </div>
-                  </Box>
+                  </Box> */}
+                  {
+                    row.transaction_id
+                  }
                 </td>
-                <td>{row.subscription}</td>
-                <td>
-                  <Link fontWeight="lg" component="button" color="neutral">
-                    Archive
-                  </Link>
-                  <Link
-                    fontWeight="lg"
-                    component="button"
-                    color="primary"
-                    sx={{ ml: 2 }}
-                  >
-                    Download
-                  </Link>
-                </td>
+                <td>{row.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -439,7 +365,7 @@ export default function OrderTable() {
           <i data-feather="arrow-right" />
         </IconButton>
       </Box>
-      <Box
+      {/* <Box
         className="Pagination-laptopUp"
         sx={{
           pt: 4,
@@ -481,7 +407,7 @@ export default function OrderTable() {
         >
           Next
         </Button>
-      </Box>
+      </Box> */}
     </React.Fragment>
   );
 }
