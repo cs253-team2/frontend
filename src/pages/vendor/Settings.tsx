@@ -127,7 +127,9 @@ export default function App() {
               },
             }}>
           <div>
-          <UpdateForm />
+          <UpdateForm onSubmit={function (values: { firstName: string; lastName: string; phoneNumber: string; email: string; password: string; confirmPassword: string; }): void {
+            throw new Error('Function not implemented.');
+          } } />
           </div>
           </Box>
           </div>
