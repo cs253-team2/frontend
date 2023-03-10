@@ -27,7 +27,7 @@ import SearchBar from './searchBar';
 export const rows = [
   {
     id: 'INV-1234',
-    date: 'Feb 3, 2023',
+    date: 'March 3, 2023',
     status: 'Paid',
     transactionid : '657489',
     amount : '1234',
@@ -41,7 +41,7 @@ export const rows = [
   },
   {
     id: 'INV-1232',
-    date: 'Feb 3, 2023',
+    date: 'Jan 3, 2023',
     status: 'Paid',
     transactionid : '768947',
     amount : '1234',
@@ -76,7 +76,7 @@ export const rows = [
   },
   {
     id: 'INV-1227',
-    date: 'Feb 3, 2023',
+    date: 'April 3, 2023',
     status: 'Paid',
     transactionid : '657678',
     amount : '1234',

@@ -59,10 +59,11 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
   const [order, setOrder] = React.useState<Order>('desc');
   const [filteredData, setFilteredData] =useState<any>(data);
   const handleFilter =(event:any) =>{
-    console.log(event);
     const searchWord = event.target.value;
     const newFilter = data.filter((value) =>{
-      return value.id.toLowerCase().includes(searchWord.toLowerCase());
+      return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
+              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.status.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(data);
