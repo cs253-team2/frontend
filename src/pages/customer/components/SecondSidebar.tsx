@@ -39,7 +39,7 @@ export default function SecondSidebar(props: any) {
   };
   const overviewpage = () => {
    navigate('/customer/overview');
-   window.location.reload(false);
+   window.location.reload();
   };
   const profilepage = () => {
     navigate('/customer/profile');

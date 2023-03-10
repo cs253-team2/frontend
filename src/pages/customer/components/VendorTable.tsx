@@ -143,6 +143,24 @@ const rows = [
 type Order = "asc" | "desc";
 
 export default function VendorTable() {
+  const [filteredData, setFilteredData] = React.useState(rows);
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const filteredRows = rows.filter((row) => {
+      return (row.customer.name.toLowerCase().includes(value.toLowerCase())||
+      row.customer.email.toLowerCase().includes(value.toLowerCase())||
+      row.description.toLowerCase().includes(value.toLowerCase())||
+      row.subscription.toLowerCase().includes(value.toLowerCase())||
+      row.status.toLowerCase().includes(value.toLowerCase())||
+      row.id.toLowerCase().includes(value.toLowerCase())||
+      row.date.toLowerCase().includes(value.toLowerCase()));
+    });
+    if(value === ""){
+      setFilteredData(rows);
+    }else{
+      setFilteredData(filteredRows);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -166,14 +184,12 @@ export default function VendorTable() {
         }}
       >
         <FormControl sx={{ flex: 1 }} size="sm">
-          {/* <FormLabel>Search for vendor</FormLabel> */}
           <Input
             placeholder="Search for vendor"
             startDecorator={<i data-feather="search" />}
+            onChange={handleFilter}
           />
         </FormControl>
-
-        {/* {renderFilters()} */}
       </Box>
       <Sheet
         className="OrderTableContainer"
@@ -190,7 +206,7 @@ export default function VendorTable() {
         }}
       >
         <Box sx = {{width: "100%"}} >
-            {rows.map((row) =>{
+            {filteredData.map((row) =>{
                 return(
                     <div style={{display:'inline-block', margin:'1%', width:'45%', minWidth:'415px'}}>
                     <Card
