@@ -1,4 +1,4 @@
-//ts-nocheck
+
 import React, {useState} from 'react'
 import { ColorPaletteProp } from '@mui/joy/styles';
 import Avatar from '@mui/joy/Avatar';
@@ -63,7 +63,8 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
     const newFilter = data.filter((value) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
               value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
-              value.status.toLowerCase().includes(searchWord.toLowerCase()))
+              value.status.toLowerCase().includes(searchWord.toLowerCase())||
+              value.transactionid.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(data);
@@ -223,7 +224,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                         level="body3"
                                         textColor="text.primary"
                                       >
-                                        {row.transaction_id}
+                                        {row.transactionid}
                                       </Typography>
                                       
                                     </div>
