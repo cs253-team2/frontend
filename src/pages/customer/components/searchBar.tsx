@@ -202,14 +202,14 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                         Paid: <i data-feather="check" />,
                                         Refunded: <i data-feather="corner-up-left" />,
                                         Cancelled: <i data-feather="x" />,
-                                      }[row.status]
+                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
                                     }
                                     color={
                                       {
                                         Paid: 'success',
                                         Refunded: 'neutral',
                                         Cancelled: 'danger',
-                                      }[row.status] as ColorPaletteProp
+                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
                                     }
                                   >
                                     {row.status}
