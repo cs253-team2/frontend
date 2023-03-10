@@ -18,6 +18,8 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
+import LightThemeBackgroundImage from '../../assets/iitkDayImage.jpg';
+import DarkThemeBackgroundImage from '../../assets/iitkNightImage.jpg';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -263,10 +265,13 @@ export default function JoySignInSideTemplate() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+            // 'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+            `url(${LightThemeBackgroundImage})`,
+            // {LightThemeBackgroundImage},
           [theme.getColorSchemeSelector('dark')]: {
             backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+              // 'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+              `url(${DarkThemeBackgroundImage})`,
           },
         })}
       />
