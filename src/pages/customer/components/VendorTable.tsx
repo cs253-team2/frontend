@@ -143,6 +143,7 @@ const rows = [
 type Order = "asc" | "desc";
 
 export default function VendorTable() {
+
   const [filteredData, setFilteredData] = React.useState(rows);
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -206,6 +207,7 @@ export default function VendorTable() {
         }}
       >
         <Box sx = {{width: "100%"}} >
+
             {filteredData.map((row) =>{
                 return(
                     <div style={{display:'inline-block', margin:'1%', width:'45%', minWidth:'415px'}}>
