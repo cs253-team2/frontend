@@ -10,71 +10,16 @@ import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
-import OrderTable from './components/OrderTable';
+import OverviewTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
+import Card from '@mui/joy/Card';
 
-const useEnhancedEffect =
-  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
-
-export default function JoyOrderDashboardTemplate() {
-  const status = useScript(`https://unpkg.com/feather-icons`);
-
-  useEnhancedEffect(() => {
-    // Feather icon setup: https://github.com/feathericons/feather#4-replace
-    // @ts-ignore
-    if (typeof feather !== 'undefined') {
-      // @ts-ignore
-      feather.replace();
-    }
-  }, [status]);
-
-  return (
-    <CssVarsProvider disableTransitionOnChange theme={customTheme}>
-      <GlobalStyles
-        styles={{
-          '[data-feather], .feather': {
-            color: 'var(--Icon-color)',
-            margin: 'var(--Icon-margin)',
-            fontSize: 'var(--Icon-fontSize, 20px)',
-            width: '1em',
-            height: '1em',
-          },
-        }}
-      />
-      <CssBaseline />
-      <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
-        <Header />
-        <FirstSidebar />
-        <SecondSidebar />
-        <Box
-          component="main"
-          className="MainContent"
-          sx={(theme) => ({
-            px: {
-              xs: 2,
-              md: 6,
-            },
-            pt: {
-              xs: `calc(${theme.spacing(2)} + var(--Header-height))`,
-              sm: `calc(${theme.spacing(2)} + var(--Header-height))`,
-              md: 3,
-            },
-            pb: {
-              xs: 2,
-              sm: 2,
-              md: 3,
-            },
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            minWidth: 0,
-            height: '100dvh',
-            gap: 1,
-          })}
-        >
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+export default function OverviewComponent() {
+    return(
+        <div>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
               aria-label="breadcrumbs"
@@ -100,19 +45,19 @@ export default function JoyOrderDashboardTemplate() {
                 underline="hover"
                 color="neutral"
                 fontSize="inherit"
-                href="#some-link"
+                href="/customer/overview"
               >
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Orders
+                Overview
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
           </Box>
-          <Box
+          {/* <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -125,11 +70,97 @@ export default function JoyOrderDashboardTemplate() {
               },
             }}
           >
-            <Typography level="h1" fontSize="xl4">
-              Orders
-            </Typography>
             <Box sx={{ flex: 999 }} />
-            <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
+          </Box> */}
+          <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+          >
+            <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '50%',
+            }}
+            >
+              <Card
+              sx={{
+                alignItems: 'center',
+                marginLeft: '10%',
+              }}
+              variant='plain'
+              >
+                <Typography level="h5">
+                  Total Dues
+                </Typography>
+                1000
+              </Card>
+              <Card
+              sx={{
+                alignItems: 'center',
+                marginRight: '10%',
+              }}
+              variant='plain'
+              >
+                <Typography level='h5'>
+                  Due Date
+                </Typography>
+                April 1, 2023
+              </Card>
+            </Box>
+            <Box
+            sx={{
+              width: '30%',
+              alignItems: 'center',
+            }}
+            >
+              <Button
+              sx={{
+                alignItems: 'center',
+                width: '50%',
+              }}
+              variant='soft'
+              color='primary'
+              size='lg'
+              >
+                <Typography level='h2'>
+                  Pay
+                </Typography>
+              </Button>
+            </Box>
+          </Box>
+          <br />
+          <br />
+          <Box
+          sx={{
+            alignItems: 'center',
+          }}
+          >
+            <Typography level="h3">
+              Recent Vendors
+            </Typography>
+            <br />
+            <OverviewTable />
+            <br />
+            <br />
+            <Typography level="h3">
+              Recent People
+            </Typography>
+            <br />
+            <OverviewTable />
+
+          </Box>
+        </div>
+    )
+}
+
+// download buttons that are removed for now
+            {/* <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
               <Button
                 variant="outlined"
                 color="neutral"
@@ -144,11 +175,4 @@ export default function JoyOrderDashboardTemplate() {
               >
                 Download CSV
               </Button>
-            </Box>
-          </Box>
-          <OrderTable />
-        </Box>
-      </Box>
-    </CssVarsProvider>
-  );
-}
+            </Box> */}
