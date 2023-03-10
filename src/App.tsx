@@ -21,7 +21,6 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />} />
-        <Route path="/vendor/overview" element={<VendorOverview />} />
         <Route path="/customer/overview" element={<Customer tabsel={'overview'} />} />
         <Route path="/customer/notifications" element={<Customer tabsel={'notifications'} />} />
         <Route path="/customer/alldues" element={<Customer tabsel={'alldues'} />} />
