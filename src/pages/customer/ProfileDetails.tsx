@@ -1,5 +1,5 @@
 import React from 'react';
-import profilePic from '../assets/default_profile_img';
+import profilePic from '../assets/default_profile_img.jpg';
 import { Table } from '@mui/joy';
 import { Paper } from '@mui/material';
 
