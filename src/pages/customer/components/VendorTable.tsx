@@ -52,7 +52,7 @@ const rows = [
       email: "steve.hamp@email.com",
     },
     subscription: "Monthly",
-    description: "Hall 12 Stationary Shop",
+    description: "Hall 12 Juice Shop",
   },
   {
     id: "INV-1232",
@@ -142,7 +142,7 @@ const rows = [
 
 type Order = "asc" | "desc";
 
-export default function VendorTable2() {
+export default function VendorTable() {
 
   return (
     <React.Fragment>
@@ -189,18 +189,18 @@ export default function VendorTable2() {
           border:"none"
         }}
       >
-        <Box >
+        <Box sx = {{width: "100%"}} >
             {rows.map((row) =>{
                 return(
-                    <div style={{display:'inline-block', margin:'15px'}}>
+                    <div style={{display:'inline-block', margin:'1%', width:'45%', minWidth:'415px'}}>
                     <Card
                     orientation="horizontal"
                     variant="outlined"
-                    sx={{ width: 490, bgcolor: "background.body", }}
+                    sx={{ width: "100%", bgcolor: "background.body", }}
                   >
                     <CardOverflow>
                       <AspectRatio ratio="1" sx={{ width: 185 }}>
-                        <img
+                        <img 
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQagAOppyMeA7F5Dv98mR8mvCbPtCXO5bI_F-Q3aYg21g&s"
                           srcSet="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQagAOppyMeA7F5Dv98mR8mvCbPtCXO5bI_F-Q3aYg21g&s"
                           loading="lazy"
@@ -208,13 +208,14 @@ export default function VendorTable2() {
                         />
                       </AspectRatio>
                     </CardOverflow>
-                    <CardContent sx={{ pl: 2, pr:1 }}>
+                    <CardContent sx={{ pl:2, pr:2 }}  >
                       <Typography
                         fontWeight="md"
                         textColor="success.plainColor"
                         mb={0.5}
                         fontSize="20px"
-                        mt="-5px"
+                        // mt="-5px"
+                        
                       >
                         {row.description}
                       </Typography>
