@@ -71,7 +71,7 @@ export default function OverviewComponent() {
             }}
           >
             <Box sx={{ flex: 999 }} />
-          </Box>
+          </Box> */}
           <Box
           sx={{
             display: 'flex',
@@ -158,21 +158,3 @@ export default function OverviewComponent() {
         </div>
     )
 }
-
-// download buttons that are removed for now
-            {/* <Box sx={{ display: 'flex', gap: 1, '& > *': { flexGrow: 1 } }}>
-              <Button
-                variant="outlined"
-                color="neutral"
-                startDecorator={<i data-feather="download-cloud" />}
-              >
-                Download PDF
-              </Button>
-              <Button
-                variant="outlined"
-                color="neutral"
-                startDecorator={<i data-feather="table" />}
-              >
-                Download CSV
-              </Button>
-            </Box> */}
