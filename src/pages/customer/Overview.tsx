@@ -19,7 +19,7 @@ import Card from '@mui/joy/Card';
 export default function OverviewComponent() {
     return(
         <div>
-            {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
               aria-label="breadcrumbs"
@@ -56,8 +56,8 @@ export default function OverviewComponent() {
             <ColorSchemeToggle
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
-          </Box> */}
-          {/* <Box
+          </Box>
+          <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -71,7 +71,7 @@ export default function OverviewComponent() {
             }}
           >
             <Box sx={{ flex: 999 }} />
-          </Box> */}
+          </Box>
           <Box
           sx={{
             display: 'flex',

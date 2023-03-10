@@ -12,7 +12,7 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { closeSidebar } from '../utils';
 import { unstable_HistoryRouter, useNavigate, redirect } from 'react-router-dom';
-import SecondSidebarProps from '../vendor';
+import SecondSidebarProps from '../customer';
 
 
 
@@ -25,34 +25,34 @@ export default function SecondSidebar(props: any) {
   
 
   const notificationspage = () => {
-    navigate('/vendor/notifications');
+    navigate('/customer/notifications');
     window.location.reload();
   };
 
   const allduespage = () => {
-    navigate('/vendor/alldues');
+    navigate('/customer/alldues');
     window.location.reload();
   };
   const transaction_historypage = () => {
-    navigate('/vendor/transaction_history');
+    navigate('/customer/transaction_history');
     window.location.reload();
   };
   const overviewpage = () => {
-   navigate('/vendor/overview');
+   navigate('/customer/overview');
    window.location.reload();
   };
   const profilepage = () => {
-    navigate('/vendor/profile');
+    navigate('/customer/profile');
     window.location.reload();
   };
   
 const vendorpage = () => {
-    navigate('/vendor/customer');
+    navigate('/customer/vendor');
     window.location.reload();
   };
 
   const settingspage= () => {
-    navigate('/vendor/update_profile');
+    navigate('/customer/update_profile');
     window.location.reload();
   };
   
@@ -150,11 +150,11 @@ const vendorpage = () => {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton selected={options.customers} variant={options.customers?"soft":"plain"} onClick={vendorpage}>
+            <ListItemButton selected={options.vendors} variant={options.vendors?"soft":"plain"} onClick={vendorpage}>
               <ListItemDecorator>
                 <i data-feather="shopping-cart" />
               </ListItemDecorator>
-              <ListItemContent>Customers</ListItemContent>
+              <ListItemContent>Vendors</ListItemContent>
             </ListItemButton>
           </ListItem>
           <ListItem>

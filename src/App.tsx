@@ -11,6 +11,8 @@ import Vendor from "./pages/vendor/App";
 import Notifications from "./pages/customer/Notifications";
 import AllduesCustomer from "./pages/customer/AllDues";
 // import AllduesCustomer from "./pages/customer/alldues/Alldues";
+import ClearDues from "./pages/ClearDues/App"
+import ClearDuesTest from "./pages/ClearDues/Checkout"
 
 
 export default function App() {
@@ -20,6 +22,7 @@ export default function App() {
     
     <BrowserRouter>
       <Routes>
+        <Route path="/cleardues" element={<ClearDues />} />
         <Route path="/" element={<SignIn />} />
         <Route path="/customer/overview" element={<Customer tabsel={'overview'} />} />
         <Route path="/customer/notifications" element={<Customer tabsel={'notifications'} />} />
@@ -35,6 +38,8 @@ export default function App() {
         <Route path="/vendor/customer" element={<Vendor  tabsel={'customers'}/>} />
         <Route path="/vendor/profile" element={<Vendor  tabsel={'profile'}/>} />
         <Route path="/vendor/update_profile" element={<Vendor  tabsel={'settings'}/>} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/clearduestest" element={<ClearDuesTest />} />
 
 
 

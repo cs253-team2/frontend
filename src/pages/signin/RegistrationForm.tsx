@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
 import { Input, Select, Option} from '@mui/joy';
+import { useNavigate } from 'react-router-dom';
 
 
 type RegistrationFormProps = {
@@ -113,6 +114,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     setErrors((errors) => ({ ...errors, [name]: ''}));
   };
 
+  const navigate = useNavigate();
+  const signinpage = () => {
+    navigate('/');
+    window.location.reload();
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -216,8 +223,14 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       </div>
       <br />
       <Button type="submit" fullWidth>
-                Register
-              </Button>
+                REGISTER
+      </Button>
+      <Button onClick={signinpage} fullWidth>
+               ALREADY REGISTERED? SIGN IN
+      </Button>
+      
+
+
     </form>
   );
 };
