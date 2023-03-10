@@ -82,7 +82,7 @@ export default function App() {
         <ProfileCard />
         {/* <div style={{display:"flex"}}> */}
           <Box sx={{display: 999}}>
-            <Button color='danger' sx={{float: "right", marginTop:"5%", }}>Delete Profile</Button>
+            <Button color='danger' sx={{float: "right", marginTop:"5%", marginRight:"5%"}}>Delete Profile</Button>
             <Button sx={{float:"right", marginTop:"5%", marginRight:"5%"}}>Edit Profile</Button>
           </Box>
         {/* </div> */}

@@ -57,44 +57,44 @@ const ProfilePage = () => {
       <Table>
           <tr>
             <td>
-              <h2 style={{fontSize:"30px"}}>Name:</h2>
+              <h3 style={{fontSize:"25px"}}>Name:</h3>
             </td>
             <td>
-              <h3 style={{fontSize:"20px"}}>{info.name}</h3>
+              <h3 style={{fontSize:"25px"}}>{info.name}</h3>
             </td>
             <td>
-              <h2 style={{fontSize:"30px"}}>UserID:</h2>
+              <h3 style={{fontSize:"25px"}}>UserID:</h3>
             </td>
             <td>
-              <h3 style={{fontSize:"20px"}}>{info.userid}</h3>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h2 style={{fontSize:"30px"}}>Phone Number:</h2>
-            </td>
-            <td>
-              <h3 style={{fontSize:"20px"}}>{info.phoneNo}</h3>
-            </td>
-            <td>
-              <h2 style={{fontSize:"30px"}}>Email ID:</h2>
-            </td>
-            <td>
-              <h3 style={{fontSize:"20px"}}>{info.email}</h3>
+              <h3 style={{fontSize:"25px"}}>{info.userid}</h3>
             </td>
           </tr>
           <tr>
             <td>
-              <h2 style={{fontSize:"30px"}}>Pending Dues:</h2>
+              <h3 style={{fontSize:"25px"}}>Phone Number:</h3>
             </td>
             <td>
-              <h3 style={{fontSize:"20px"}}>{info.pendingDues}</h3>
+              <h3 style={{fontSize:"25px"}}>{info.phoneNo}</h3>
             </td>
             <td>
-              <h2 style={{fontSize:"30px"}}>Current Balance:</h2>
+              <h3 style={{fontSize:"25px"}}>Email ID:</h3>
             </td>
             <td>
-              <h3 style={{fontSize:"20px"}}>{info.walletBalance}</h3>
+              <h3 style={{fontSize:"25px"}}>{info.email}</h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h3 style={{fontSize:"25px"}}>Pending Dues:</h3>
+            </td>
+            <td>
+              <h3 style={{fontSize:"25px"}}>{info.pendingDues}</h3>
+            </td>
+            <td>
+              <h3 style={{fontSize:"25px"}}>Current Balance:</h3>
+            </td>
+            <td>
+              <h3 style={{fontSize:"25px"}}>{info.walletBalance}</h3>
             </td>
           </tr>
       </Table>
