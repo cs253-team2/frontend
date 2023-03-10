@@ -11,7 +11,7 @@ import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
-import OrderTable from './components/OrderTable';
+import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
@@ -42,81 +42,7 @@ export default function JoyOrderDashboardTemplate(props) {
     settings: tabsel=="settings" ? true : false,
   });
 
-  // React.useEffect(() => {
-  //   if(tabsel=="overview"){
-  //     setOptions({
-  //       overview: true,
-  //       notifications: false,
-  //       alldues: false,
-  //       transaction_history: false,
-  //       vendors: false,
-  //       profile: false,
-  //       settings: false,
-  //     });
-  //   } else if(tabsel=="notifications"){
-  //     setOptions({
-  //       overview: false,
-  //       notifications: true,
-  //       alldues: false,
-  //       transaction_history: false,
-  //       vendors: false,
-  //       profile: false,
-  //       settings: false,
-  //     });
-  //   } else if(tabsel=="alldues"){
-  //     setOptions({
-  //       overview: false,
-  //       notifications: false,
-  //       alldues: true,
-  //       transaction_history: false,
-  //       vendors: false,
-  //       profile: false,
-  //       settings: false,
-  //     });
-  //   } else if(tabsel=="transaction_history"){
-  //     setOptions({
-  //       overview: false,
-  //       notifications: false,
-  //       alldues: false,
-  //       transaction_history: true,
-  //       vendors: false,
-  //       profile: false,
-  //       settings: false,
-  //     });
-  //   } else if(tabsel=="vendors"){
-  //     setOptions({
-  //       overview: false,
-  //       notifications: false,
-  //       alldues: false,
-  //       transaction_history: false,
-  //       vendors: true,
-  //       profile: false,
-  //       settings: false,
-  //     });
-  //   } else if(tabsel=="profile"){
-  //     setOptions({
-  //       overview: false,
-  //       notifications: false,
-  //       alldues: false,
-  //       transaction_history: false,
-  //       vendors: false,
-  //       profile: true,
-  //       settings: false,
-  //     });
-  //   } else if(tabsel=="settings"){
-  //     setOptions({
-  //       overview: false,
-  //       notifications: false,
-  //       alldues: false,
-  //       transaction_history: false,
-  //       vendors: false,
-  //       profile: false,
-  //       settings: true,
-  //     });
-  //   }
-  
-  // }, [tabsel]);
-
+   
   
   
   function ExportComponent(){

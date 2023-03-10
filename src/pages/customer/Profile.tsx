@@ -10,10 +10,13 @@ import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
-import OrderTable from './components/OrderTable';
+import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
+import { AlignHorizontalCenter } from '@mui/icons-material';
+import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
+import ProfileCard from './ProfileDetails';
 
 
 export default function App() {
@@ -76,8 +79,25 @@ export default function App() {
             <Box sx={{ flex: 999 }} />
            
           </Box>
-        </div>
-        
+        <ProfileCard />
+        {/* <div style={{display:"flex"}}> */}
+          <Box sx={{display: 999}}>
+            <Button size="lg"color='danger' variant='solid'
+                sx={{
+                  float: "right", 
+                  marginTop:"5%", 
+                  marginRight:"5%",
+                  fontWeight: 600}}>Delete Profile</Button>
+            <Button size="lg" variant='solid'
+                sx={{
+                    float:"right", 
+                    marginTop:"5%", 
+                    marginRight:"5%",
+                    fontWeight: 600}}>Edit Profile</Button>
+          </Box>
+        {/* </div> */}
 
+
+      </div>
     )
 }

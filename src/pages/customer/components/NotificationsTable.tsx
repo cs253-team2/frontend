@@ -20,108 +20,8 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
-const rows = [
-  {
-    id: 'INV-1234',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'O',
-      name: 'Olivia Ryhe',
-      email: 'olivia@email.com',
-    },
-    subscription: 'Yearly',
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'S',
-      name: 'Steve Hampton',
-      email: 'steve.hamp@email.com',
-    },
-    subscription: 'Monthly',
-  },
-  {
-    id: 'INV-1232',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'C',
-      name: 'Ciaran Murray',
-      email: 'ciaran.murray@email.com',
-    },
-    subscription: 'Yearly',
-  },
-  {
-    id: 'INV-1231',
-    date: 'Feb 3, 2023',
-    status: 'Refunded',
-    customer: {
-      initial: 'M',
-      name: 'Maria Macdonald',
-      email: 'maria.mc@email.com',
-    },
-    subscription: 'Yearly',
-  },
-  {
-    id: 'INV-1230',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'C',
-      name: 'Charles Fulton',
-      email: 'fulton@email.com',
-    },
-    subscription: 'Yearly',
-  },
-  {
-    id: 'INV-1229',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'J',
-      name: 'Jay Hooper',
-      email: 'hooper@email.com',
-    },
-    subscription: 'Yearly',
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'K',
-      name: 'Krystal Stevens',
-      email: 'k.stevens@email.com',
-    },
-    subscription: 'Monthly',
-  },
-  {
-    id: 'INV-1227',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'S',
-      name: 'Sachin Flynn',
-      email: 's.flyn@email.com',
-    },
-    subscription: 'Monthly',
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'B',
-      name: 'Bradley Rosales',
-      email: 'brad123@email.com',
-    },
-    subscription: 'Monthly',
-  },
-];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -163,10 +63,165 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
+const rows = [
+  {
+    id: 'INV-1234',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    customer: {
+      initial: 'O',
+      name: 'Olivia Ryhe',
+      email: 'olivia@email.com',
+    },
+    title: 'Invoice #INV-1234',
+    content: 'Thank you for your business. We look forward to working with you again.',
+    // open: false,
+   
+  },
+  {
+    id: 'INV-1233',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    customer: {
+      initial: 'S',
+      name: 'Steve Hampton',
+      email: 'steve.hamp@email.com',
+    },
+    title: 'Invoice #INV-1233',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+    
+  },
+  {
+    id: 'INV-1232',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    customer: {
+      initial: 'C',
+      name: 'Ciaran Murray',
+      email: 'ciaran.murray@email.com',
+    },
+    title: 'Invoice #INV-1232',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+   
+  },
+  {
+    id: 'INV-1231',
+    date: 'Feb 3, 2023',
+    status: 'Refunded',
+    customer: {
+      initial: 'M',
+      name: 'Maria Macdonald',
+      email: 'maria.mc@email.com',
+    },
+    title: 'Invoice #INV-1231',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+    
+  },
+  {
+    id: 'INV-1230',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    customer: {
+      initial: 'C',
+      name: 'Charles Fulton',
+      email: 'fulton@email.com',
+    },
+    title: 'Invoice #INV-1230',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+  },
+  {
+    id: 'INV-1229',
+    date: 'Feb 3, 2023',
+    status: 'Cancelled',
+    customer: {
+      initial: 'J',
+      name: 'Jay Hooper',
+      email: 'hooper@email.com',
+    },
+    title: 'Invoice #INV-1229',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+   
+  },
+  {
+    id: 'INV-1228',
+    date: 'Feb 3, 2023',
+    status: 'Cancelled',
+    customer: {
+      initial: 'K',
+      name: 'Krystal Stevens',
+      email: 'k.stevens@email.com',
+    },
+    title: 'Invoice #INV-1228',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+   
+  },
+  {
+    id: 'INV-1227',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    customer: {
+      initial: 'S',
+      name: 'Sachin Flynn',
+      email: 's.flyn@email.com',
+    },
+    title: 'Invoice #INV-1227',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+    
+  },
+  {
+    id: 'INV-1226',
+    date: 'Feb 3, 2023',
+    status: 'Cancelled',
+    customer: {
+      initial: 'B',
+      name: 'Bradley Rosales',
+      email: 'brad123@email.com',
+    },
+    title: 'Invoice #INV-1226',
+    content: 'Paid in full. Thank you for your business.',
+    // open: false,
+  },
+];
+
+const style = {
+  position: 'relative',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+interface modalDataType {
+  title: string;
+  content: string;
+}
+
 export default function OrderTable() {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
-  const [open, setOpen] = React.useState(false);
+  const [modalData, setModalData] = React.useState<modalDataType>({title: '', content: ''});
+  
+  
+  const handleOpen = ({title, content}:modalDataType) =>{
+    setModalData({title, content});
+    setOpen(true);
+  };
+
+
+  // const [open, setOpen] = React.useState(false);
   const renderFilters = () => (
     <React.Fragment>
       <FormControl size="sm">
@@ -175,22 +230,13 @@ export default function OrderTable() {
           placeholder="Filter by status"
           slotProps={{ button: { sx: { whiteSpace: 'nowrap' } } }}
         >
-          <Option value="paid">Paid</Option>
-          <Option value="pending">Pending</Option>
-          <Option value="refunded">Refunded</Option>
-          <Option value="cancelled">Cancelled</Option>
+          <Option value="read">Read</Option>
+          <Option value="unread">Unread</Option>
         </Select>
       </FormControl>
 
       <FormControl size="sm">
         <FormLabel>Category</FormLabel>
-        <Select placeholder="All">
-          <Option value="all">All</Option>
-        </Select>
-      </FormControl>
-
-      <FormControl size="sm">
-        <FormLabel>Customer</FormLabel>
         <Select placeholder="All">
           <Option value="all">All</Option>
         </Select>
@@ -260,7 +306,7 @@ export default function OrderTable() {
         }}
       >
         <FormControl sx={{ flex: 1 }} size="sm">
-          <FormLabel>Search for order</FormLabel>
+          <FormLabel>Search</FormLabel>
           <Input placeholder="Search" startDecorator={<i data-feather="search" />} />
         </FormControl>
 
@@ -326,14 +372,14 @@ export default function OrderTable() {
                     },
                   }}
                 >
-                  Invoice
+                  Notification ID
                 </Link>
               </th>
               <th style={{ width: 120, padding: 12 }}>Date</th>
-              <th style={{ width: 120, padding: 12 }}>Status</th>
-              <th style={{ width: 220, padding: 12 }}>Customer</th>
-              <th style={{ width: 120, padding: 12 }}>Subscription</th>
-              <th style={{ width: 160, padding: 12 }}> </th>
+              <th style={{ width: 120, padding: 12 }}>Type</th>
+              <th style={{ width: 220, padding: 12 }}>CustomerID</th>
+              <th style={{ width: 120, padding: 12 }}>Content</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -395,26 +441,34 @@ export default function OrderTable() {
                     </div>
                   </Box>
                 </td>
-                <td>{row.subscription}</td>
-                <td>
-                  <Link fontWeight="lg" component="button" color="neutral">
-                    Archive
-                  </Link>
-                  <Link
-                    fontWeight="lg"
-                    component="button"
-                    color="primary"
-                    sx={{ ml: 2 }}
-                  >
-                    Download
-                  </Link>
+                <td style={{textAlign: "center"}}>
+                <Button
+                onClick={() => handleOpen({title: row.title, content: row.content})}
+                variant='soft'
+                >
+                  <NotificationsIcon></NotificationsIcon>
+                </Button>
+                  <Modal open={open} onClose={handleClose}>
+                    <ModalDialog
+                      aria-labelledby="layout-modal-title"
+                      aria-describedby="layout-modal-description"
+                    >
+                      <ModalClose />
+                      <Typography id="layout-modal-title" component="h2">
+                        {modalData.title}
+                      </Typography>
+                      <Typography id="layout-modal-description" textColor="text.tertiary">
+                        {modalData.content}
+                      </Typography>
+                    </ModalDialog>
+                  </Modal>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
       </Sheet>
-      <Box
+      {/* <Box
         className="Pagination-mobile"
         sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
       >
@@ -437,8 +491,8 @@ export default function OrderTable() {
         >
           <i data-feather="arrow-right" />
         </IconButton>
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className="Pagination-laptopUp"
         sx={{
           pt: 4,
@@ -479,8 +533,8 @@ export default function OrderTable() {
           endDecorator={<i data-feather="arrow-right" />}
         >
           Next
-        </Button>
-      </Box>
+        </Button> */}
+      {/* </Box> */}
     </React.Fragment>
   );
 }
