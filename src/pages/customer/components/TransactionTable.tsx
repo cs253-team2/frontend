@@ -21,74 +21,10 @@ import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import { useState } from "react"
-import SearchBar from './searchBar';
 
 
-export const rows = [
-  {
-    id: 'INV-1234',
-    date: 'March 3, 2023',
-    status: 'Paid',
-    transactionid : '657489',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transactionid : '688489',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1232',
-    date: 'Jan 3, 2023',
-    status: 'Paid',
-    transactionid : '768947',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1231',
-    date: 'Feb 3, 2023',
-    status: 'Refunded',
-    transactionid : '876457',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1230',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transactionid : '567868',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1229',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '123456',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '667878',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1227',
-    date: 'April 3, 2023',
-    status: 'Paid',
-    transactionid : '657678',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '456789',
-    amount : '1234',
-  },
-];
+
+
 
 /*const [nrows, setRows] = useState<people[]>(rows);
   const [searched, setSearched] = useState<string>("");
@@ -142,303 +78,194 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function TransactionTable() {
-  const [order, setOrder] = React.useState<Order>('desc');
+function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]}){
   const [selected, setSelected] = React.useState<readonly string[]>([]);
-  const [open, setOpen] = React.useState(false);
-  const renderFilters = () => (
-    <React.Fragment>
-      <FormControl size="sm">
-        <FormLabel>Status</FormLabel>
-        <Select
-          placeholder="Filter by status"
-          slotProps={{ button: { sx: { whiteSpace: 'nowrap' } } }}
-        >
-          <Option value="paid">Paid</Option>
-          <Option value="pending">Pending</Option>
-          <Option value="refunded">Refunded</Option>
-          <Option value="cancelled">Cancelled</Option>
-        </Select>
-      </FormControl>
-
-
-      <FormControl size="sm">
-        <FormLabel>TransactionID</FormLabel>
-        <Select placeholder="All">
-          <Option value="all">All</Option>
-        </Select>
-      </FormControl>
-    </React.Fragment>
-  );
-  return (
-    <React.Fragment>
-      <Sheet
-        className="SearchAndFilters-mobile"
-        sx={{
-          display: {
-            xs: 'flex',
-            sm: 'none',
-          },
-          my: 1,
-          gap: 1,
-        }}
-      >
-        <Input
-          size="sm"
-          placeholder="Search"
-          startDecorator={<i data-feather="search" />}
-          sx={{ flexGrow: 1 }}
-        />
-        <IconButton
-          size="sm"
-          variant="outlined"
-          color="neutral"
-          onClick={() => setOpen(true)}
-        >
-          <i data-feather="filter" />
-        </IconButton>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <ModalDialog aria-labelledby="filter-modal" layout="fullscreen">
-            <ModalClose />
-            <Typography id="filter-modal" level="h2">
-              Filters
-            </Typography>
-            <Divider sx={{ my: 2 }} />
-            <Sheet sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {renderFilters()}
-              <Button color="primary" onClick={() => setOpen(false)}>
-                Submit
-              </Button>
-            </Sheet>
-          </ModalDialog>
-        </Modal>
-      </Sheet>
-      <Box
-        className="SearchAndFilters-tabletUp"
-        sx={{
-          borderRadius: 'sm',
-          py: 2,
-          display: {
-            xs: 'none',
-            sm: 'flex',
-          },
-          flexWrap: 'wrap',
-          gap: 1.5,
-          '& > *': {
-            minWidth: {
-              xs: '120px',
-              md: '160px',
-            },
-          },
-        }}
-      >
-       
-        <SearchBar placeholder="Enter to Search" data={rows} />
-       
-
-  
-      </Box>
-      {/* <Sheet
-        className="OrderTableContainer"
-        variant="outlined"
-        sx={{
-          width: '100%',
-          borderRadius: 'md',
-          flex: 1,
-          overflow: 'auto',
-          minHeight: 0,
-        }}
-      >
-        <Table
-          aria-labelledby="tableTitle"
-          stickyHeader
-          hoverRow
-          sx={{
-            '--TableCell-headBackground': (theme) =>
-              theme.vars.palette.background.level1,
-            '--Table-headerUnderlineThickness': '1px',
-            '--TableRow-hoverBackground': (theme) =>
-              theme.vars.palette.background.level1,
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ width: 48, textAlign: 'center', padding: 12 }}>
-                <Checkbox
-                  indeterminate={
-                    selected.length > 0 && selected.length !== rows.length
-                  }
-                  checked={selected.length === rows.length}
-                  onChange={(event) => {
-                    setSelected(
-                      event.target.checked ? rows.map((row) => row.id) : [],
-                    );
-                  }}
-                  color={
-                    selected.length > 0 || selected.length === rows.length
-                      ? 'primary'
-                      : undefined
-                  }
-                  sx={{ verticalAlign: 'text-bottom' }}
-                />
-              </th>
-              <th style={{ width: 140, padding: 12 }}>
-                <Link
-                  underline="none"
-                  color="primary"
-                  component="button"
-                  onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
-                  fontWeight="lg"
-                  endDecorator={<i data-feather="arrow-down" />}
-                  sx={{
-                    '& svg': {
-                      transition: '0.2s',
-                      transform:
-                        order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
+  const [order, setOrder] = React.useState<Order>('desc');
+  const [filteredData, setFilteredData] =useState<any>(data);
+  const handleFilter =(event:any) =>{
+    const searchWord = event.target.value;
+    const newFilter = data.filter((value) =>{
+      return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
+              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.status.toLowerCase().includes(searchWord.toLowerCase())||
+              value.transactionid.toLowerCase().includes(searchWord.toLowerCase()))
+    })
+    if(searchWord ==""){
+      setFilteredData(data);
+    }else{
+      setFilteredData(newFilter);
+    }
+    
+  }
+    return (
+        <div className="search">
+            <Box className="searchInput" sx={{
+                borderRadius: 'sm',
+                py: 2,
+                display: {
+                    xs: 'none',
+                    sm: 'flex',
+                },
+                flexWrap: 'wrap',
+                gap: 1.5,
+                '& > *': {
+                    minWidth: {
+                    xs: '120px',
+                    md: '160px',
                     },
-                  }}
-                >
-                  VendorID
-                </Link>
-              </th>
-              <th style={{ width: 120, padding: 12 }}>Date</th>
-              <th style={{ width: 120, padding: 12 }}>Status</th>
-              <th style={{ width: 220, padding: 12 }}>TransactionID</th>
-              <th style={{ width: 120, padding: 12 }}>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stableSort(rows, getComparator(order, 'id')).map((row) => (
-              <tr key={row.id}>
-                <td style={{ textAlign: 'center' }}>
-                  <Checkbox
-                    checked={selected.includes(row.id)}
-                    color={selected.includes(row.id) ? 'primary' : undefined}
-                    onChange={(event) => {
-                      setSelected((ids) =>
-                        event.target.checked
-                          ? ids.concat(row.id)
-                          : ids.filter((itemId) => itemId !== row.id),
-                      );
-                    }}
-                    slotProps={{ checkbox: { sx: { textAlign: 'left' } } }}
-                    sx={{ verticalAlign: 'text-bottom' }}
-                  />
-                </td>
-                <td>
-                  <Typography fontWeight="md">{row.id}</Typography>
-                </td>
-                <td>{row.date}</td>
-                <td>
-                  <Chip
-                    variant="soft"
-                    size="sm"
-                    startDecorator={
-                      {
-                        Paid: <i data-feather="check" />,
-                        Refunded: <i data-feather="corner-up-left" />,
-                        Cancelled: <i data-feather="x" />,
-                      }[row.status]
-                    }
-                    color={
-                      {
-                        Paid: 'success',
-                        Refunded: 'neutral',
-                        Cancelled: 'danger',
-                      }[row.status] as ColorPaletteProp
-                    }
-                  >
-                    {row.status}
-                  </Chip>
-                </td>
-                <td>
-                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                   
-                    <div>
-                      <Typography
-                        fontWeight="lg"
-                        level="body3"
-                        textColor="text.primary"
+                },
+                }}>
+                
+                <FormControl sx={{ flex: 1 }} size="sm">
+                    <FormLabel>Search for order</FormLabel>
+                    <Input type="text" placeholder={placeholder} onChange={handleFilter}/>
+                </FormControl>
+                
+            
+            </Box>
+            <div className="dataResults">
+                  <div>
+                      <Sheet
+                          className="OrderTableContainer"
+                          variant="outlined"
+                          sx={{
+                            width: '100%',
+                            borderRadius: 'md',
+                            flex: 1,
+                            overflow: 'auto',
+                            minHeight: 0,
+                          }}
                       >
-                        {row.transactionid}
-                      </Typography>
-                      
-                    </div>
-                  </Box>
-                </td>
-                <td>{row.amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Sheet> */}
-      {/* <Box
-        className="Pagination-mobile"
-        sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}
-      >
-        <IconButton
-          aria-label="previous page"
-          variant="outlined"
-          color="neutral"
-          size="sm"
-        >
-          <i data-feather="arrow-left" />
-        </IconButton>
-        <Typography level="body2" mx="auto">
-          Page 1 of 10
-        </Typography>
-        <IconButton
-          aria-label="next page"
-          variant="outlined"
-          color="neutral"
-          size="sm"
-        >
-          <i data-feather="arrow-right" />
-        </IconButton>
-      </Box> */}
-      {/* <Box
-        className="Pagination-laptopUp"
-        sx={{
-          pt: 4,
-          gap: 1,
-          [`& .${iconButtonClasses.root}`]: { borderRadius: '50%' },
-          display: {
-            xs: 'none',
-            md: 'flex',
-          },
-        }}
-      >
-        <Button
-          size="sm"
-          variant="plain"
-          color="neutral"
-          startDecorator={<i data-feather="arrow-left" />}
-        >
-          Previous
-        </Button>
-
-        <Box sx={{ flex: 1 }} />
-        {['1', '2', '3', '…', '8', '9', '10'].map((page) => (
-          <IconButton
-            key={page}
-            size="sm"
-            variant={Number(page) ? 'outlined' : 'plain'}
-            color="neutral"
-          >
-            {page}
-          </IconButton>
-        ))}
-        <Box sx={{ flex: 1 }} />
-
-        <Button
-          size="sm"
-          variant="plain"
-          color="neutral"
-          endDecorator={<i data-feather="arrow-right" />}
-        >
-          Next
-        </Button>
-      </Box> */}
-    </React.Fragment>
-  );
+                        <Table
+                          aria-labelledby="tableTitle"
+                          stickyHeader
+                          hoverRow
+                          sx={{
+                            '--TableCell-headBackground': (theme) =>
+                              theme.vars.palette.background.level1,
+                            '--Table-headerUnderlineThickness': '1px',
+                            '--TableRow-hoverBackground': (theme) =>
+                              theme.vars.palette.background.level1,
+                          }}
+                        >
+                          <thead>
+                            <tr>
+                              {/* <th style={{ width: 48, textAlign: 'center', padding: 12 }}>
+                                <Checkbox
+                                  indeterminate={
+                                    selected.length > 0 && selected.length !== data.length
+                                  }
+                                  checked={selected.length === data.length}
+                                  onChange={(event) => {
+                                    setSelected(
+                                      event.target.checked ? data.map((row) => row.id) : [],
+                                    );
+                                  }}
+                                  color={
+                                    selected.length > 0 || selected.length === data.length
+                                      ? 'primary'
+                                      : undefined
+                                  }
+                                  sx={{ verticalAlign: 'text-bottom' }}
+                                />
+                              </th> */}
+                              <th style={{ width: 140, padding: 12 }}>
+                                <Link
+                                  underline="none"
+                                  color="primary"
+                                  component="button"
+                                  onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
+                                  fontWeight="lg"
+                                  endDecorator={<i data-feather="arrow-down" />}
+                                  sx={{
+                                    '& svg': {
+                                      transition: '0.2s',
+                                      transform:
+                                        order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
+                                    },
+                                  }}
+                                >
+                                  VendorID
+                                </Link>
+                              </th>
+                              <th style={{ width: 120, padding: 12 }}>Date</th>
+                              <th style={{ width: 120, padding: 12 }}>Status</th>
+                              <th style={{ width: 220, padding: 12 }}>TransactionID</th>
+                              <th style={{ width: 120, padding: 12 }}>Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {/* {stableSort(filteredData, getComparator(order, 'id')).map((row) => ( */}
+                            {filteredData.map((row:any) => (
+                              <tr key={row.id}>
+                                {/* <td style={{ textAlign: 'center' }}>
+                                  <Checkbox
+                                    checked={selected.includes(row.id)}
+                                    color={selected.includes(row.id) ? 'primary' : undefined}
+                                    onChange={(event) => {
+                                      setSelected((ids) =>
+                                        event.target.checked
+                                          ? ids.concat(row.id)
+                                          : ids.filter((itemId) => itemId !== row.id),
+                                      );
+                                    }}
+                                    slotProps={{ checkbox: { sx: { textAlign: 'left' } } }}
+                                    sx={{ verticalAlign: 'text-bottom' }}
+                                  />
+                                </td> */}
+                                <td>
+                                  <Typography fontWeight="md">{row.id}</Typography>
+                                </td>
+                                <td>{row.date}</td>
+                                <td>
+                                  <Chip
+                                    variant="soft"
+                                    size="sm"
+                                    startDecorator={
+                                      {
+                                        Paid: <i data-feather="check" />,
+                                        Refunded: <i data-feather="corner-up-left" />,
+                                        Cancelled: <i data-feather="x" />,
+                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
+                                    }
+                                    color={
+                                      {
+                                        Paid: 'success',
+                                        Refunded: 'neutral',
+                                        Cancelled: 'danger',
+                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
+                                    }
+                                  >
+                                    {row.status}
+                                  </Chip>
+                                </td>
+                                <td>
+                                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                                  
+                                    <div>
+                                      <Typography
+                                        fontWeight="lg"
+                                        level="body3"
+                                        textColor="text.primary"
+                                      >
+                                        {row.transactionid}
+                                      </Typography>
+                                      
+                                    </div>
+                                  </Box>
+                                </td>
+                                <td>{row.amount}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </Sheet>
+                        </div>
+                
+            </div>
+            
+        </div>
+    )
 }
+
+export default SearchBar
