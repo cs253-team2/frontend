@@ -21,6 +21,8 @@ import GoogleIcon from './GoogleIcon';
 import RegistrationForm from './RegistrationForm';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import LightThemeBackgroundImage from '../../assets/iitkDayImage.jpg';
+import DarkThemeBackgroundImage from '../../assets/iitkNightImage.jpg';
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -227,10 +229,12 @@ export default function JoySignInSideTemplate() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+            // 'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8)',
+            `url(${LightThemeBackgroundImage})`,
           [theme.getColorSchemeSelector('dark')]: {
             backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+              // 'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831)',
+              `url(${DarkThemeBackgroundImage})`,
           },
         })}
       />
