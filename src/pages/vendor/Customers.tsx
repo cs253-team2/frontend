@@ -48,7 +48,7 @@ export default function App() {
             Dashboard
           </Link>
           <Typography fontSize="inherit" variant="soft" color="primary">
-            Vendors
+            Customers
           </Typography>
         </Breadcrumbs>
         <ColorSchemeToggle
@@ -69,11 +69,11 @@ export default function App() {
         }}
       >
         <Typography level="h1" fontSize="xl4">
-          Vendors
+          Customers
         </Typography>
         <Box sx={{ flex: 999 }} />
         <Button color="success" href="#contained-buttons">
-          Add Vendor
+          Add Customer
         </Button>
       </Box>
       <Box>

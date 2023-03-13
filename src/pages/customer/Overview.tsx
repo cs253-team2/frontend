@@ -19,6 +19,7 @@ import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import ModalClose from '@mui/joy/ModalClose';
 import { useNavigate } from 'react-router-dom';
+import { Sheet } from '@mui/joy';
 
 export default function OverviewComponent() {
   interface modalDataType {
@@ -49,7 +50,9 @@ export default function OverviewComponent() {
 
   
   return(
+    
         <div>
+          
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
@@ -109,6 +112,7 @@ export default function OverviewComponent() {
               sx={{
                 alignItems: 'center',
                 marginLeft: '10%',
+                marginRight: '5%'
               }}
               variant='plain'
               >
@@ -120,7 +124,8 @@ export default function OverviewComponent() {
               <Card
               sx={{
                 alignItems: 'center',
-                marginRight: '10%',
+                marginLeft: '5%',
+                marginRight: '5%',
               }}
               variant='plain'
               >
@@ -128,6 +133,19 @@ export default function OverviewComponent() {
                   Due Date
                 </Typography>
                 April 1, 2023
+              </Card>
+              <Card
+              sx={{
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRightt: '10%',
+              }}
+              variant='plain'
+              >
+                <Typography level="h5">
+                  Balance
+                </Typography>
+                1000
               </Card>
             </Box>
             <Box
@@ -163,6 +181,17 @@ export default function OverviewComponent() {
           </Box>
           <br />
           <br />
+          <Sheet
+          sx={{
+            width: "100%",
+            height: "71vh",
+            borderRadius: "md",
+            flex: 1,  
+            overflow: "auto",
+            overflowY: "scroll",
+            minHeight: 0,
+            border:"none"
+          }}>
           <Box
           sx={{
             alignItems: 'center',
@@ -180,9 +209,9 @@ export default function OverviewComponent() {
             </Typography>
             <br />
             <OverviewTable />
-
           </Box>
-          
+          </Sheet>
         </div>
+      
     )
 }

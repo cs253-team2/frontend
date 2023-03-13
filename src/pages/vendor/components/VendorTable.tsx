@@ -196,7 +196,7 @@ export default function VendorTable() {
         variant="outlined"
         sx={{
           width: "100%",
-          height: "75vh",
+          height: "73vh",
           borderRadius: "md",
           flex: 1,  
           overflow: "auto",
@@ -244,7 +244,7 @@ export default function VendorTable() {
                       </Typography>
                       <Box sx={{ display: "flex", pt: 1 }}>
                         <div>
-                          <Typography level="body3">Vendor since:</Typography>
+                          <Typography level="body3">Customer since:</Typography>
                           <Typography fontSize="16px" fontWeight="lg">
                             {row.date}
                           </Typography>
