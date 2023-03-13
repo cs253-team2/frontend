@@ -44,7 +44,7 @@ export default function App() {
         {/* <Route path="/vendor/transaction_history" element={<Vendor  tabsel={'transaction_history'}/>} /> */}
         {/* <Route path="/vendor/customer" element={<Vendor  tabsel={'customers'}/>} /> */}
         {/* <Route path="/vendor/profile" element={<Vendor  tabsel={'profile'}/>} /> */}
-        {/* <Route path="/vendor/update_profile" element={<Vendor  tabsel={'settings'}/>} /> */}
+        <Route path="/vendor/update_profile" element={<Vendor  tabsel={'settings'}/>} />
         {/* <Route path="/register" element={<Register />} /> */}
         {/* <Route path="/clearduestest" element={<ClearDuesTest />} /> */}
         <Route path="/customer/ipayment" element={<Customer tabsel={'ipayment'}/>} />

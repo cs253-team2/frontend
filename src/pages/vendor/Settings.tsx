@@ -21,7 +21,7 @@ import IconButton, { IconButtonProps } from '@mui/joy/IconButton';
 import Input from '@mui/joy/Input';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import UpdateForm from './UpdateForm';
+import UpdateForm from './components/UpdateProfileComponent';
 import { TagLeftIcon } from '@chakra-ui/react';
 
 const profilePicture = {
@@ -77,7 +77,7 @@ export default function App() {
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Settings
+                Update Profile
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
@@ -98,7 +98,7 @@ export default function App() {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-              Settings
+              Update Profile
             </Typography>
             <Box sx={{ flex: 999 }} />
            
@@ -113,7 +113,6 @@ export default function App() {
               display: 'flex',
               flexDirection: 'column',
               gap: 2,
-              width: 400,
               maxWidth: '100%',
               mx: 'auto',
               borderRadius: 'sm',
@@ -127,9 +126,7 @@ export default function App() {
               },
             }}>
           <div>
-          <UpdateForm onSubmit={function (values: { firstName: string; lastName: string; phoneNumber: string; email: string; password: string; confirmPassword: string; }): void {
-            throw new Error('Function not implemented.');
-          } } />
+              <UpdateForm />
           </div>
           </Box>
           </div>
