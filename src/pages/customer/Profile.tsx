@@ -8,6 +8,7 @@ import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
+import Sheet from "@mui/joy/Sheet";
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
 import OrderTable from './components/OverviewTable';
@@ -17,9 +18,15 @@ import customTheme from './theme';
 import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './ProfileDetails';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
+
+  const navigate = useNavigate();
+  const updateprofilepage= () => {
+    navigate('/customer/update_profile');
+    window.location.reload();
+  };
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -79,6 +86,21 @@ export default function App() {
             <Box sx={{ flex: 999 }} />
            
           </Box>
+        
+        <Sheet
+          className="ProfileTableContainer"
+          variant="outlined"
+          sx={{
+            width: "100%",
+            height: "83vh",
+            borderRadius: "md",
+            flex: 1,  
+            overflow: "auto",
+            overflowY: "scroll",
+            minHeight: 0,
+            border:"none"
+          }}
+        >
         <ProfileCard />
         {/* <div style={{display:"flex"}}> */}
           <Box sx={{display: 999}}>
@@ -88,13 +110,14 @@ export default function App() {
                   marginTop:"5%", 
                   marginRight:"5%",
                   fontWeight: 600}}>Delete Profile</Button>
-            <Button size="lg" variant='solid'
+            <Button size="lg" variant='solid' onClick={updateprofilepage}
                 sx={{
                     float:"right", 
                     marginTop:"5%", 
                     marginRight:"5%",
                     fontWeight: 600}}>Edit Profile</Button>
           </Box>
+        </Sheet>
         {/* </div> */}
 
 
