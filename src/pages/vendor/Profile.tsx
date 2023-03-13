@@ -17,9 +17,14 @@ import customTheme from './theme';
 import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './ProfileDetails';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
+  const navigate = useNavigate();
+  const updateprofilepage= () => {
+    navigate('/vendor/update_profile');
+    window.location.reload();
+  };
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -88,7 +93,7 @@ export default function App() {
                   marginTop:"5%", 
                   marginRight:"5%",
                   fontWeight: 600}}>Delete Profile</Button>
-            <Button size="lg" variant='solid'
+            <Button size="lg" variant='solid' onClick={updateprofilepage}
                 sx={{
                     float:"right", 
                     marginTop:"5%", 
