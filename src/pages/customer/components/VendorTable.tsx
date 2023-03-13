@@ -197,7 +197,7 @@ export default function VendorTable() {
         variant="outlined"
         sx={{
           width: "100%",
-          height: "75vh",
+          height: "73vh",
           borderRadius: "md",
           flex: 1,  
           overflow: "auto",

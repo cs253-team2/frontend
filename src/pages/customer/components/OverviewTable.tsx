@@ -214,6 +214,7 @@ export default function OverviewTable() {
           overflow: 'auto',
           minHeight: 0,
         }}
+        
       >
         <Table
           aria-labelledby="tableTitle"
@@ -229,7 +230,7 @@ export default function OverviewTable() {
         >
           <thead>
             <tr>
-              <th style={{ width: 48, textAlign: 'center', padding: 12 }}>
+              {/* <th style={{ width: 48, textAlign: 'center', padding: 12 }}>
                 <Checkbox
                   indeterminate={
                     selected.length > 0 && selected.length !== rows.length
@@ -247,7 +248,7 @@ export default function OverviewTable() {
                   }
                   sx={{ verticalAlign: 'text-bottom' }}
                 />
-              </th>
+              </th> */}
               <th style={{ width: 140, padding: 12 }}>
                 <Link
                   underline="none"
@@ -276,7 +277,7 @@ export default function OverviewTable() {
           <tbody>
             {stableSort(rows, getComparator(order, 'id')).map((row) => (
               <tr key={row.id}>
-                <td style={{ textAlign: 'center' }}>
+                {/* <td style={{ textAlign: 'center' }}>
                   <Checkbox
                     checked={selected.includes(row.id)}
                     color={selected.includes(row.id) ? 'primary' : undefined}
@@ -290,7 +291,7 @@ export default function OverviewTable() {
                     slotProps={{ checkbox: { sx: { textAlign: 'left' } } }}
                     sx={{ verticalAlign: 'text-bottom' }}
                   />
-                </td>
+                </td> */}
                 <td>
                   <Typography fontWeight="md">{row.id}</Typography>
                 </td>
@@ -408,6 +409,7 @@ export default function OverviewTable() {
           Next
         </Button>
       </Box> */}
+   
     </React.Fragment>
   );
 }

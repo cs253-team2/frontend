@@ -15,6 +15,7 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import Card from '@mui/joy/Card';
+import { Sheet } from '@mui/joy';
 
 export default function OverviewComponent() {
     return(
@@ -92,6 +93,7 @@ export default function OverviewComponent() {
               sx={{
                 alignItems: 'center',
                 marginLeft: '10%',
+                marginRight: '5%'
               }}
               variant='plain'
               >
@@ -103,7 +105,8 @@ export default function OverviewComponent() {
               <Card
               sx={{
                 alignItems: 'center',
-                marginRight: '10%',
+                marginLeft: '5%',
+                marginRight: '5%',
               }}
               variant='plain'
               >
@@ -111,6 +114,19 @@ export default function OverviewComponent() {
                   Due Date
                 </Typography>
                 April 1, 2023
+              </Card>
+              <Card
+              sx={{
+                alignItems: 'center',
+                marginLeft: '5%',
+                marginRightt: '10%',
+              }}
+              variant='plain'
+              >
+                <Typography level="h5">
+                  Balance
+                </Typography>
+                1000
               </Card>
             </Box>
             <Box
@@ -136,6 +152,17 @@ export default function OverviewComponent() {
           </Box>
           <br />
           <br />
+          <Sheet
+          sx={{
+            width: "100%",
+            height: "71vh",
+            borderRadius: "md",
+            flex: 1,  
+            overflow: "auto",
+            overflowY: "scroll",
+            minHeight: 0,
+            border:"none"
+          }}>
           <Box
           sx={{
             alignItems: 'center',
@@ -155,6 +182,7 @@ export default function OverviewComponent() {
             <OverviewTable />
 
           </Box>
+          </Sheet>
         </div>
     )
 }
