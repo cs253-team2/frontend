@@ -39,7 +39,7 @@ export default function App() {
     
     return (
         <div>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
               aria-label="breadcrumbs"
@@ -76,8 +76,8 @@ export default function App() {
             <ColorSchemeToggle
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -95,7 +95,7 @@ export default function App() {
             </Typography>
             <Box sx={{ flex: 999 }} />
            
-          </Box>
+          </Box> */}
           <Box 
             component="main"
             sx={{
