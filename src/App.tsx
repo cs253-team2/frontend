@@ -12,7 +12,7 @@ import AllduesCustomer from "./pages/customer/AllDues";
 // import AllduesCustomer from "./pages/customer/alldues/Alldues";
 import ClearDues from "./pages/ClearDues/App"
 import ClearDuesTest from "./pages/ClearDues/Checkout"
-
+import {CreditsTable} from "./pages/credits/CreditsTable"
 
 export default function App() {
 
@@ -49,6 +49,7 @@ export default function App() {
         {/* <Route path="/clearduestest" element={<ClearDuesTest />} /> */}
         <Route path="/customer/ipayment" element={<Customer tabsel={'ipayment'}/>} />
         <Route path="/customer/adddues" element={<Customer tabsel={'adddues'}/>} />
+        <Route path="/credits" element={<CreditsTable/>} />
         
 
 
