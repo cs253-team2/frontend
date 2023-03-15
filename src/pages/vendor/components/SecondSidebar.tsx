@@ -45,16 +45,15 @@ export default function SecondSidebar(props: any) {
     navigate('/vendor/profile');
     window.location.reload();
   };
-  
+  const settingspage= () => {
+    navigate('/vendor/update_profile');
+    window.location.reload();
+  };
 const vendorpage = () => {
     navigate('/vendor/customers');
     window.location.reload();
   };
 
-  const settingspage= () => {
-    navigate('/vendor/settings');
-    window.location.reload();
-  };
   
 
 
@@ -170,9 +169,17 @@ const vendorpage = () => {
               <ListItemDecorator>
                 <i data-feather="settings" />
               </ListItemDecorator>
-              <ListItemContent>Settings</ListItemContent>
+              <ListItemContent>Update Profile</ListItemContent>
             </ListItemButton>
           </ListItem>
+          {/* <ListItem>
+            <ListItemButton selected={options.settings} variant={options.settings?"soft":"plain"} onClick={settingspage}>
+              <ListItemDecorator>
+                <i data-feather="settings" />
+              </ListItemDecorator>
+              <ListItemContent>Settings</ListItemContent>
+            </ListItemButton>
+          </ListItem> */}
         </List>
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>

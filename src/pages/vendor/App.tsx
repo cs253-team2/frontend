@@ -54,7 +54,6 @@ export default function JoyOrderDashboardTemplate(props) {
       return <Notifications/>
     } else if(options.alldues){
       console.log("Alldues");
-
       return <AllDues/>
     } else if(options.transaction_history){
       console.log("transaction_history");
