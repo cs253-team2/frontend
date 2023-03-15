@@ -20,6 +20,8 @@ import ModalDialog from '@mui/joy/ModalDialog';
 import ModalClose from '@mui/joy/ModalClose';
 import { useNavigate } from 'react-router-dom';
 import { Sheet } from '@mui/joy';
+import { getVendorData } from '../callbacks/VendorData';
+import { useEffect } from 'react';
 
 export default function OverviewComponent() {
   interface modalDataType {
@@ -46,7 +48,6 @@ export default function OverviewComponent() {
     window.location.reload();
   };
   
-
 
   
   return(
