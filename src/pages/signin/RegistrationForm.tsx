@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
-import { Input, Select, Option} from '@mui/joy';
+import { Input, Select, Option, FormControl} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
+import { userDataFields } from '../callbacks/RegistrationFormUserData';
+import { FormHelperText } from '@mui/material';
 
 
 type RegistrationFormProps = {
-  onSubmit: (values: RegistrationFormValues) => void;
-};
-
-type RegistrationFormValues = {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  userType: string;
+  onSubmit: (values: userDataFields) => void;
 };
 
 const selectStyle = {
@@ -36,9 +28,10 @@ const phoneNumberPattern = /^\d{10}$/;
 
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
-  const [values, setValues] = useState<RegistrationFormValues>({
-    firstName: '',
-    lastName: '',
+  const [values, setValues] = useState<userDataFields>({
+    // firstName: '',
+    // lastName: '',
+    userName: '',
     phoneNumber: '',
     email: '',
     password: '',
@@ -46,13 +39,17 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     userType: '',
   });
 
-  const [errors, setErrors] = useState<Partial<RegistrationFormValues>>({});
+  const [errors, setErrors] = useState<Partial<userDataFields>>({});
 
-  const validate = (values: RegistrationFormValues) => {
-    const errors: Partial<RegistrationFormValues> = {};
+  const validate = (values: userDataFields) => {
+    const errors: Partial<userDataFields> = {};
 
-    if (!values.firstName.trim()) {
-      errors.firstName = 'First name is required';
+    // if (!values.firstName.trim()) {
+    //   errors.firstName = 'First name is required';
+    // }
+
+    if (!values.userName.trim()) {
+      errors.userName = 'User name is required';
     }
 
     if (!values.phoneNumber.trim()) {
@@ -122,7 +119,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      {/* <div>
         <label htmlFor="firstName"><b>First Name *</b></label>
         <br />
         <Input
@@ -135,8 +132,23 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           style={{width:"100%"}}
         />
         {errors.firstName && <span style={{color: "red"}}>{errors.firstName}</span>}
-      </div>
+      </div> */}
+
       <div>
+        <label htmlFor="userName"><b>User Name *</b></label>
+        <br />
+        <Input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder='abc'
+          value={values.userName}
+          onChange={handleChange}
+          style={{width:"100%"}}
+        />
+        {errors.userName && <span style={{color: "red"}}>{errors.userName}</span>}
+      </div>
+      {/* <div>
         <label htmlFor="lastName"><b>Last Name</b></label>
         <br />
         <Input
@@ -148,7 +160,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{width:"100%"}}
         />
-      </div>
+      </div> */}
       <div>
         <label htmlFor="phoneNumber"><b>Phone Number *</b></label>
         <br />
@@ -189,6 +201,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{width:"100%"}}
         />
+        
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
       </div>
       <div>

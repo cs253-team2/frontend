@@ -101,7 +101,7 @@ export default function App() {
             border:"none"
           }}
         >
-        <ProfileCard />
+        <ProfileCard enableComponents={true}/>
         {/* <div style={{display:"flex"}}> */}
           <Box sx={{display: 999}}>
             <Button size="lg"color='danger' variant='solid'
