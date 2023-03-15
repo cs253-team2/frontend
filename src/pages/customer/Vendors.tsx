@@ -14,7 +14,10 @@ import Header from "./components/Header";
 import ColorSchemeToggle from "./components/ColorSchemeToggle";
 import customTheme from "./theme";
 import VendorTable from "./components/VendorTable";
+import { useEffect } from "react";
+import { getVendorData } from "../callbacks/VendorData";
 export default function App() {
+
   return (
     <div>
       <Box sx={{ display: "flex", alignItems: "center" }}>

@@ -28,6 +28,8 @@ import IconButton, { iconButtonClasses } from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import { border } from "@chakra-ui/react";
 import { flexbox } from '@mui/system';
+import { useEffect } from "react";
+import { Vendor, getVendorData } from "../../callbacks/VendorData";
 
 const rows = [
   {
@@ -140,28 +142,59 @@ const rows = [
   },
 ];
 
+// export interface Vendor {
+//   user_id: string;
+//   password: string;
+//   last_login?: any;
+//   type: string;
+//   username: string;
+//   email: string;
+//   phone_number: string;
+//   is_active: boolean;
+//   is_staff: boolean;
+//   is_superuser: boolean;
+//   is_vendor: boolean;
+//   is_customer: boolean;
+//   groups: any[];
+//   user_permissions: any[];
+// }
+
 type Order = "asc" | "desc";
 
 export default function VendorTable() {
 
-  const [filteredData, setFilteredData] = React.useState(rows);
+  const [filteredData, setFilteredData] = React.useState<Vendor[]>([]);
+  const [vendorsData, setVendorsData] = React.useState<Vendor[]>([]);
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    const filteredRows = rows.filter((row) => {
-      return (row.customer.name.toLowerCase().includes(value.toLowerCase())||
-      row.customer.email.toLowerCase().includes(value.toLowerCase())||
-      row.description.toLowerCase().includes(value.toLowerCase())||
-      row.subscription.toLowerCase().includes(value.toLowerCase())||
-      row.status.toLowerCase().includes(value.toLowerCase())||
-      row.id.toLowerCase().includes(value.toLowerCase())||
-      row.date.toLowerCase().includes(value.toLowerCase()));
+    const filteredRows = vendorsData.filter((row) => {
+      return (row.user_id.toLowerCase().includes(value.toLowerCase())||
+      row.email.toLowerCase().includes(value.toLowerCase())||
+      row.username.toLowerCase().includes(value.toLowerCase())||
+      row.phone_number.toLowerCase().includes(value.toLowerCase()));
     });
     if(value === ""){
-      setFilteredData(rows);
+      setFilteredData(vendorsData);
     }else{
       setFilteredData(filteredRows);
     }
   };
+
+  const setVendorData = (data: Vendor[]) => {
+    console.log("inside setter function");
+    setVendorsData(data);
+    setFilteredData(data);
+  };
+
+  useEffect (() => {
+    // console.log("use effect called in vendor table");
+    getVendorData().then((data) => {
+      console.log("data received in vendor table");
+      console.log(data);
+      setVendorData(data);
+      console.log("Vendors Data: ",vendorsData);
+    });
+  }, []);
 
   return (
     <React.Fragment>
@@ -235,20 +268,20 @@ export default function VendorTable() {
                         // mt="-5px"
                         
                       >
-                        {row.description}
+                        {row.username}
                       </Typography>
-                      <Typography level="body1">{row.customer.name}</Typography>
+                      <Typography level="body1">{row.username}</Typography>
                       <Typography level="body3">
-                        {row.customer.email}
+                        {row.email}
                       </Typography>
                       <Typography level="body1" mt="2px">
-                        {row.id}
+                        {row.user_id}
                       </Typography>
                       <Box sx={{ display: "flex", pt: 1 }}>
                         <div>
                           <Typography level="body3">Vendor since:</Typography>
                           <Typography fontSize="16px" fontWeight="lg">
-                            {row.date}
+                            {row.last_login}
                           </Typography>
                         </div>
                         <Button
