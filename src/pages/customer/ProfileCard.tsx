@@ -14,23 +14,29 @@ import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import { AlignHorizontalCenter } from '@mui/icons-material';
+import { AlignHorizontalCenter, WifiProtectedSetupSharp } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './ProfileCard';
-import RegistrationForm from './components/UpdateProfileComponent';
+import UpdateProfileForm from './components/UpdateProfileComponent';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import { useForm } from 'react-hook-form';
 import { userDataFields } from '../callbacks/RegistrationFormUserData';
 
 type ProfileCardProps = {
-  enableComponents: boolean;
+  disableComponents: boolean;
+  UserData: userDataFields;
+}
 
+const onSubmit = (values: userDataFields) => {
+  console.log(values);
 }
 
 
 
 export default function App(props: ProfileCardProps) {
     const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
+
+    console.log("Profile card called");
 
     
     return (
@@ -114,7 +120,7 @@ export default function App(props: ProfileCardProps) {
                 visibility: 'hidden',
               },
             }}>
-            <RegistrationForm enableComponents={props.enableComponents}/>
+            <UpdateProfileForm disableComponents={props.disableComponents} onSubmit={onSubmit} UserData={props.UserData}/>
           </Box>
 
     </div>

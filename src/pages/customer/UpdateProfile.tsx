@@ -19,6 +19,8 @@ import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './ProfileCard';
 import { useNavigate } from 'react-router-dom';
+import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
+import { Card } from '@mui/joy';
 
 export default function App() {
 
@@ -27,6 +29,37 @@ export default function App() {
     navigate('/customer/update_profile');
     window.location.reload();
   };
+
+  console.log(getUserData);
+
+  const [UserData, setUsersData] = React.useState<userDataFields>(
+    {
+      userName: "",
+      userID: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
+      userType: "",
+    }
+  );
+
+  const setUserData = (data: userDataFields) => {
+    console.log("inside setter function");
+    setUsersData(data);
+  };
+
+  React.useEffect (() => {
+    console.log("use effect called in update profile table");
+    getUserData().then((data) => {
+      console.log("data received in update profile page");
+      console.log(data);
+      setUserData(data);
+      console.log("Vendors Data: ", UserData);
+    });
+  }, []);
+
+
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -101,22 +134,10 @@ export default function App() {
             border:"none"
           }}
         >
-        <ProfileCard enableComponents={false} />
+        <Card variant='outlined'>
+          <ProfileCard disableComponents={false} UserData={UserData}/>
+        </Card>
         {/* <div style={{display:"flex"}}> */}
-          <Box sx={{display: 999}}>
-            <Button size="lg"color='danger' variant='solid'
-                sx={{
-                  float: "right", 
-                  marginTop:"5%", 
-                  marginRight:"5%",
-                  fontWeight: 600}}>Delete Profile</Button>
-            <Button size="lg" variant='solid' onClick={updateprofilepage}
-                sx={{
-                    float:"right", 
-                    marginTop:"5%", 
-                    marginRight:"5%",
-                    fontWeight: 600}}>Edit Profile</Button>
-          </Box>
         </Sheet>
         {/* </div> */}
 

@@ -15,10 +15,13 @@ import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import { AlignHorizontalCenter } from '@mui/icons-material';
+import { AlignHorizontalCenter, LocalConvenienceStoreOutlined } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './ProfileCard';
+import ProfileDetailsCard from './ProfileDetailsCard'
 import { useNavigate } from 'react-router-dom';
+import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
+import { useEffect } from 'react';
 
 export default function App() {
 
@@ -27,6 +30,36 @@ export default function App() {
     navigate('/customer/update_profile');
     window.location.reload();
   };
+
+  // console.log(getUserData);
+
+  const [UserData, setUsersData] = React.useState<userDataFields>(
+    {
+      userName: "",
+      userID: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
+      userType: "",
+    }
+  );
+
+
+  const setUserData = (data: userDataFields) => {
+    console.log("inside setter function");
+    setUsersData(data);
+  };
+
+  useEffect (() => {
+    getUserData().then((data) => {
+      console.log("data received in profile page");
+      console.log(data);
+      setUserData(data);
+      console.log("Vendors Data: ", UserData);
+    });
+  }, []);
+
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -101,8 +134,7 @@ export default function App() {
             border:"none"
           }}
         >
-        <ProfileCard enableComponents={true}/>
-        {/* <div style={{display:"flex"}}> */}
+        <ProfileDetailsCard UserData = {UserData} />
           <Box sx={{display: 999}}>
             <Button size="lg"color='danger' variant='solid'
                 sx={{
@@ -118,8 +150,6 @@ export default function App() {
                     fontWeight: 600}}>Edit Profile</Button>
           </Box>
         </Sheet>
-        {/* </div> */}
-
 
       </div>
     )
