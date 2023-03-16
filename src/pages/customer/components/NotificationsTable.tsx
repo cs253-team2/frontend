@@ -1,5 +1,6 @@
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+
 import { ColorPaletteProp } from '@mui/joy/styles';
 import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
@@ -21,6 +22,8 @@ import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { getNotifications } from '../../callbacks/Notifications';
+
 
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
@@ -71,13 +74,14 @@ interface Notification {
 }
     
 
-function SearchBar({placeholder,rows}:{placeholder:string, rows:Notification[]}){
+function SearchBar({placeholder}:{placeholder:string}){
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(rows);
+  const [filteredData, setFilteredData] =useState<any>([]);
   const [modalData, setModalData] = React.useState<modalDataType>({title: '', content: ''});
+
   
   
   const handleOpen = ({title, content}:modalDataType) =>{
@@ -89,8 +93,8 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:Notification[]})
     const searchWord = event.target.value;
     const newFilter = rows.filter((value:any) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
-              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
-              value.status.toLowerCase().includes(searchWord.toLowerCase()))
+              value.timestamp.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.subject.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(rows);
@@ -99,6 +103,26 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:Notification[]})
     }
     
   }
+
+  const [rows, setRows] = useState<Notification[]>([]);
+
+  const setData = (data: Notification[]) => {
+    console.log("inside setter function");
+    setRows(data);
+    setFilteredData(data);
+  };
+
+  useEffect (() => {
+    getNotifications().then((data) => {
+      console.log("data received in notifications table");
+      console.log(data);
+      setData(data);
+      
+      console.log("Notifications: ", data);
+    });
+  }, []);
+
+
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -184,7 +208,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:Notification[]})
                                 <td>
                                 <Typography fontWeight="md">{row.id}</Typography>
                                 </td>
-                                {/* <td>{row.timestamp}</td> */}
+                                <td>{row.timestamp}</td>
                                 {/* <td>
                                 <Chip
                                     variant="soft"

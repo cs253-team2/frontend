@@ -18,6 +18,8 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import NotificationsTable from "./components/NotificationsTable";
 import axios from "axios";
+import { json } from 'stream/consumers';
+import { getNotifications } from '../callbacks/Notifications';
 
 interface Notification {
   id: number;
@@ -52,33 +54,9 @@ interface Notification {
 
 
 export default function App() {
-  const [appState, setAppState] = useState({
-    loading: false,
-    notifs: [] as Notification[],
-    });
 
-    const [rows, setRows] = useState([] as Notification[]);
 
-    
-
-    React.useEffect(() => {
-      const apiUrl = 'http://127.0.0.1:8000/api/notifications';
-      axios.get(apiUrl).then((response) => {
-        setRows(response.data);
-      });
-    }, [setRows]);
-  
-  // useEffect(() => {
-  //   setAppState({loading: true , notifs: []});
-    
-  //   fetch(apiUrl)
-  //   .then((data: any) => data.json())
-  //   .then((notifications: Notification) => {
-  //   setAppState({ loading: false, notifs: notifications });
-  //   setRows(notifications);
-  //   });
-  //   }, [setAppState, setRows]);
-
+      
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -138,13 +116,13 @@ export default function App() {
             <Box sx={{ flex: 999 }} />
            
           </Box>
+          
+          
+          
 
-          {/* <NotificationsTable /> */}
+          
+          <NotificationsTable placeholder="Enter to Search"/>
 
-
-          {/* <p>{(JSON.stringify(appState.notifs, null, 2))}</p> */}
-          <p>{(JSON.stringify(rows,null, 2))}</p>
-          <NotificationsTable placeholder="Enter to Search" rows={rows} />
         </div>
         
 
