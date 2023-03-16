@@ -3,20 +3,14 @@ import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
 import { Input, Select, Option} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
+import { userDataFields } from '../../callbacks/RegistrationFormUserData';
 
 
 type RegistrationFormProps = {
-  onSubmit: (values: RegistrationFormValues) => void;
+  onSubmit: (values: userDataFields) => void;
+  enableComponents: boolean;
 };
 
-type RegistrationFormValues = {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 
 const selectStyle = {
   padding: "8px 12px",
@@ -34,25 +28,24 @@ const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+
 const phoneNumberPattern = /^\d{10}$/;
 
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
-  const [values, setValues] = useState<RegistrationFormValues>({
-    firstName: '',
-    lastName: '',
+const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableComponents }) => {
+  const [values, setValues] = useState<userDataFields>({
+    userName: '',
     phoneNumber: '',
     email: '',
     password: '',
     confirmPassword: '',
-   
+    userType: '',
   });
 
-  const [errors, setErrors] = useState<Partial<RegistrationFormValues>>({});
+  const [errors, setErrors] = useState<Partial<userDataFields>>({});
 
-  const validate = (values: RegistrationFormValues) => {
-    const errors: Partial<RegistrationFormValues> = {};
+  const validate = (values: userDataFields) => {
+    const errors: Partial<userDataFields> = {};
 
-    if (!values.firstName.trim()) {
-      errors.firstName = 'First name is required';
-    }
+    // if (!values.firstName.trim()) {
+    //   errors.firstName = 'First name is required';
+    // }
 
     if (!values.phoneNumber.trim()) {
       errors.phoneNumber = 'Phone number is required';
@@ -80,7 +73,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       errors.confirmPassword = 'Passwords do not match';
     }
 
-    
+    return errors;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -118,7 +111,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      {/* <div>
         <label htmlFor="firstName"><b>First Name *</b></label>
         <br />
         <Input
@@ -144,6 +137,21 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{width:"100%"}}
         />
+      </div> */}
+
+      <div>
+        <label htmlFor="userName"><b>User Type *</b></label>
+        <br />
+        <Input
+          type="text"
+          id="userName"
+          name="userName"
+          placeholder='abc'
+          value={values.userName}
+          onChange={handleChange}
+          style={{width:"100%"}}
+          disabled= {true}
+        />
       </div>
       <div>
         <label htmlFor="phoneNumber"><b>Phone Number *</b></label>
@@ -156,6 +164,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.phoneNumber}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {enableComponents}
         />
         {errors.phoneNumber && <span style={{color: "red"}}> {errors.phoneNumber} </span>}
       </div>
@@ -170,6 +179,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.email}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {enableComponents}
         />
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
       </div>
@@ -184,6 +194,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.password}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {enableComponents}
         />
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
       </div>
@@ -198,14 +209,18 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.confirmPassword}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {enableComponents}
         />
         {errors.confirmPassword && <span style={{color: "red"}}> {errors.confirmPassword} </span>}
       </div>
 
       <br />
-      <Button type="submit" fullWidth>
+      <div>
+        {!enableComponents && 
+        <Button type="submit" fullWidth>
          Save Changes
-      </Button>
+      </Button>}
+      </div>
     </form>
   );
 };
