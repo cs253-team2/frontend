@@ -61,7 +61,17 @@ interface modalDataType {
     content: string;
 }
 
-function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
+interface Notification {
+  id: number;
+  timestamp: Date;
+  subject: string;
+  content: string;
+  mark_as_read: boolean;
+  user: string;
+}
+    
+
+function SearchBar({placeholder,rows}:{placeholder:string, rows:Notification[]}){
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -169,13 +179,13 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                             </tr>
                         </thead>  
                         <tbody>
-                            {filteredData.map((row:any) => (
+                            {filteredData.map((row: Notification) => (
                             <tr key={row.id}>
                                 <td>
                                 <Typography fontWeight="md">{row.id}</Typography>
                                 </td>
-                                <td>{row.date}</td>
-                                <td>
+                                {/* <td>{row.timestamp}</td> */}
+                                {/* <td>
                                 <Chip
                                     variant="soft"
                                     size="sm"
@@ -196,8 +206,8 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                 >
                                     {row.status}
                                 </Chip>
-                                </td>
-                                <td>
+                                </td> */}
+                                {/* <td>
                                 <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                                     <Avatar size="sm">{row.customer.initial}</Avatar>
                                     <div>
@@ -211,10 +221,10 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                     <Typography level="body3">{row.customer.email}</Typography>
                                     </div>
                                 </Box>
-                                </td>
-                                <td style={{textAlign: "center"}}>
+                                </td> */}
+                                {/* <td style={{textAlign: "center"}}>
                                 <Button
-                                onClick={() => handleOpen({title: row.title, content: row.content})}
+                                onClick={() => handleOpen({title: row.subject, content: row.content})}
                                 variant='soft'
                                 >
                                 <NotificationsIcon></NotificationsIcon>
@@ -234,7 +244,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                     </Typography>
                                     </ModalDialog>
                                 </Modal>
-                                </td>
+                                </td> */}
                             </tr>
                             ))}
                         </tbody>

@@ -1,4 +1,7 @@
 import * as React from 'react';
+
+import {useEffect} from 'react';
+import {useState} from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
@@ -14,136 +17,59 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import NotificationsTable from "./components/NotificationsTable";
+import axios from "axios";
 
-const rows = [
-  {
-    id: 'INV-1234',
-    date: 'March 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'O',
-      name: 'Olivia Ryhe',
-      email: 'olivia@email.com',
-    },
-    title: 'Invoice #INV-1234',
-    content: 'Thank you for your business. We look forward to working with you again.',
-    // open: false,
-   
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'S',
-      name: 'Steve Hampton',
-      email: 'steve.hamp@email.com',
-    },
-    title: 'Invoice #INV-1233',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-    
-  },
-  {
-    id: 'INV-1232',
-    date: 'April 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'C',
-      name: 'Ciaran Murray',
-      email: 'ciaran.murray@email.com',
-    },
-    title: 'Invoice #INV-1232',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-   
-  },
-  {
-    id: 'INV-1231',
-    date: 'Feb 3, 2023',
-    status: 'Refunded',
-    customer: {
-      initial: 'M',
-      name: 'Maria Macdonald',
-      email: 'maria.mc@email.com',
-    },
-    title: 'Invoice #INV-1231',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-    
-  },
-  {
-    id: 'INV-1230',
-    date: 'Jan 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'C',
-      name: 'Charles Fulton',
-      email: 'fulton@email.com',
-    },
-    title: 'Invoice #INV-1230',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-  },
-  {
-    id: 'INV-1229',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'J',
-      name: 'Jay Hooper',
-      email: 'hooper@email.com',
-    },
-    title: 'Invoice #INV-1229',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-   
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'K',
-      name: 'Krystal Stevens',
-      email: 'k.stevens@email.com',
-    },
-    title: 'Invoice #INV-1228',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-   
-  },
-  {
-    id: 'INV-1227',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    customer: {
-      initial: 'S',
-      name: 'Sachin Flynn',
-      email: 's.flyn@email.com',
-    },
-    title: 'Invoice #INV-1227',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-    
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    customer: {
-      initial: 'B',
-      name: 'Bradley Rosales',
-      email: 'brad123@email.com',
-    },
-    title: 'Invoice #INV-1226',
-    content: 'Paid in full. Thank you for your business.',
-    // open: false,
-  },
-];
+interface Notification {
+  id: number;
+  timestamp: Date;
+  subject: string;
+  content: string;
+  mark_as_read: boolean;
+  user: string;
+}
+  
+
+
+
+// const rows = [
+//   {
+//     "id": 30,
+//     "timestamp": "2023-03-13T17:34:10.013284Z",
+//     "subject": "Transaction success.",
+//     "content": "Rs. 12 sent successfully to bangar at 17:34, 13-03-2023.",
+//     "mark_as_read": false,
+//     "user": "OFTW855V"
+// },
+// {
+//     "id": 31,
+//     "timestamp": "2023-03-13T17:34:10.014333Z",
+//     "subject": "Transaction success.",
+//     "content": "Rs. 12 received from sahu at 17:34, 13-03-2023.",
+//     "mark_as_read": false,
+//     "user": "2HL7YZK9"
+// },
+// ];
 
 
 export default function App() {
+  const [appState, setAppState] = useState({
+    loading: false,
+    notifs: [] as Notification[],
+    });
+
+    const [rows, setRows] = useState([] as Notification[]);
+  
+  useEffect(() => {
+    setAppState({loading: true , notifs: []});
+    const apiUrl = 'http://127.0.0.1:8000/api/notifications';
+    fetch(apiUrl)
+    .then((data: any) => data.json())
+    .then((notifications: Notification) => {
+    setAppState({ loading: false, notifs: notifications });
+    setRows(notifications);
+    });
+    }, [setAppState, setRows]);
+
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -205,6 +131,10 @@ export default function App() {
           </Box>
 
           {/* <NotificationsTable /> */}
+
+
+          {/* <p>{(JSON.stringify(appState.notifs, null, 2))}</p> */}
+          <p>{(JSON.stringify(rows,null, 2))}</p>
           <NotificationsTable placeholder="Enter to Search" rows={rows} />
         </div>
         
