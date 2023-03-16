@@ -58,17 +58,26 @@ export default function App() {
     });
 
     const [rows, setRows] = useState([] as Notification[]);
+
+    
+
+    React.useEffect(() => {
+      const apiUrl = 'http://127.0.0.1:8000/api/notifications';
+      axios.get(apiUrl).then((response) => {
+        setRows(response.data);
+      });
+    }, [setRows]);
   
-  useEffect(() => {
-    setAppState({loading: true , notifs: []});
-    const apiUrl = 'http://127.0.0.1:8000/api/notifications';
-    fetch(apiUrl)
-    .then((data: any) => data.json())
-    .then((notifications: Notification) => {
-    setAppState({ loading: false, notifs: notifications });
-    setRows(notifications);
-    });
-    }, [setAppState, setRows]);
+  // useEffect(() => {
+  //   setAppState({loading: true , notifs: []});
+    
+  //   fetch(apiUrl)
+  //   .then((data: any) => data.json())
+  //   .then((notifications: Notification) => {
+  //   setAppState({ loading: false, notifs: notifications });
+  //   setRows(notifications);
+  //   });
+  //   }, [setAppState, setRows]);
 
     return (
         <div>
