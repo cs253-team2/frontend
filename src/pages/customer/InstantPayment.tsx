@@ -16,7 +16,7 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileDetails';
+import ProfileCard from './ProfileCard';
 import RegistrationForm from './components/IPyamentForm';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import { useForm } from 'react-hook-form';
