@@ -22,6 +22,7 @@ import TransactionHistory from './TransactionHistory';
 import Customers from './Customers';
 import Profile from './Profile';
 import Settings from './Settings';
+import { Navigate } from 'react-router-dom';
 
 const useEnhancedEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -47,6 +48,10 @@ export default function JoyOrderDashboardTemplate(props) {
   
   function ExportComponent(){
     console.log(options);
+    const userType = localStorage.getItem("type");
+    if(userType == "CUSTOMER" | userType == null){
+      return <Navigate to="/random" />
+    }
     if(options.overview){
       return <Overview/>
     } else if(options.notifications){
