@@ -221,7 +221,6 @@ export default function JoySignInSideTemplate() {
                       navigate('/vendor/overview');
                     }
                   } else {
-                    // navigate('/login');
                     console.log('no user');
                   }
                 });
