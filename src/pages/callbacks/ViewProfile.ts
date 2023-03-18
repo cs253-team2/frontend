@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export interface userDataFieldsBackend {
+export interface UserDataFieldsBackend {
     user_id: string;
     password: string;
     last_login?: any;
@@ -17,7 +17,7 @@ export interface userDataFieldsBackend {
     user_permissions: any[];
 }
 
-export interface userDataFields {
+export interface UserDataFields {
     userName: string;
     userID: string;
     email: string;
@@ -31,12 +31,12 @@ export interface userDataFields {
 
 export const getUserData = async () => {
     console.log("inside callback");
-    const response = await axios.get<userDataFieldsBackend>(
+    const response = await axios.get<UserDataFieldsBackend>(
         "http://localhost:8000/api/users/4NSTXCZJ/"
     );
     console.log(response.data);
 
-    const userData: userDataFields = {
+    const userData: UserDataFields = {
         userName: response.data.username,
         userID: response.data.user_id,
         email: response.data.email,

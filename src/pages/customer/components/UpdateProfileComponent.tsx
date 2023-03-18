@@ -3,11 +3,10 @@ import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
 import { Input, Select, Option, Typography} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
-import { getUserData, userDataFields } from '../../callbacks/RegistrationFormUserData';
+import { getUserData, setUserData, UpdateFormDataFields } from '../../callbacks/UpdateProfile';
 
 
 type UpdateProfileFormProps = {
-  onSubmit: (values: userDataFields) => void;
   disableComponents: boolean;
 };
 
@@ -26,9 +25,14 @@ const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneNumberPattern = /^\d{10}$/;
 
+// const onSubmit = async (data: UpdateFormDataFields) => {
+//   const res = await axios.patch('', data);
 
-const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disableComponents}) => {
-  console.log("registrationn page");
+// }
+
+
+const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents }) => {
+  console.log("registration page");
 
 
   React.useEffect (() => {
@@ -41,7 +45,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
     });
   }, []);
     
-    const [values, setValues] = useState<userDataFields>({
+    const [values, setValues] = useState<UpdateFormDataFields>({
       // userName: UserData.userName,
       // userID: UserData.userID,
       // phoneNumber: UserData.phoneNumber,
@@ -53,17 +57,14 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
     userID: '',
     phoneNumber: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-    userType: '',
   });
 
-  console.log("values is " + values.userName);
+  // console.log("values is " + values.userName + values.userID + values.phoneNumber + values.email);
 
-  const [errors, setErrors] = useState<Partial<userDataFields>>({});
+  const [errors, setErrors] = useState<Partial<UpdateFormDataFields>>({});
 
-  const validate = (values: userDataFields) => {
-    const errors: Partial<userDataFields> = {};
+  const validate = (values: UpdateFormDataFields) => {
+    const errors: Partial<UpdateFormDataFields> = {};
 
     if (!values.phoneNumber.trim()) {
       errors.phoneNumber = 'Phone number is required';
@@ -77,20 +78,19 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
       errors.email = 'Email is invalid';
     }
 
-    if (!values.password.trim()) {
-      errors.password = 'Password is required';
-    } else if(!passwordPattern.test(values.password.trim())) {
-        errors.password = 'Password is invalid';
-    }
+    // if (!values.password.trim()) {
+    //   errors.password = 'Password is required';
+    // } else if(!passwordPattern.test(values.password.trim())) {
+    //     errors.password = 'Password is invalid';
+    // }
 
-    if (!values.confirmPassword.trim()) {
-      errors.confirmPassword = 'Confirm password is required';
-    }
+    // if (!values.confirmPassword.trim()) {
+    //   errors.confirmPassword = 'Confirm password is required';
+    // }
 
-    if (values.password.trim() !== values.confirmPassword.trim()) {
-      errors.confirmPassword = 'Passwords do not match';
-    }
-
+    // if (values.password.trim() !== values.confirmPassword.trim()) {
+    //   errors.confirmPassword = 'Passwords do not match';
+    // }
     return errors;
   };
 
@@ -98,16 +98,12 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
     event.preventDefault();
     console.log(values);
     const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
-    setValues((prevValues) => ({
-      ...prevValues,
-      userType: userTypeInputElement.value,
-    }));
 
     const errors = validate(values);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      onSubmit(values);
+      setUserData(values);
     }
   };
 

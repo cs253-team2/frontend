@@ -20,13 +20,13 @@ import ProfileCard from './UpdateProfileCard';
 import UpdateProfileForm from './components/UpdateProfileComponent';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import { useForm } from 'react-hook-form';
-import { userDataFields } from '../callbacks/RegistrationFormUserData';
+import { UserDataFields } from '../callbacks/ViewProfile';
 
 type ProfileCardProps = {
   disableComponents: boolean;
 }
 
-const onSubmit = (values: userDataFields) => {
+const onSubmit = (values: UserDataFields) => {
   console.log(values);
 }
 
@@ -119,7 +119,7 @@ export default function App(props: ProfileCardProps) {
                 visibility: 'hidden',
               },
             }}>
-            <UpdateProfileForm disableComponents={props.disableComponents} onSubmit={onSubmit}/>
+            <UpdateProfileForm disableComponents={props.disableComponents} />
           </Box>
 
     </div>

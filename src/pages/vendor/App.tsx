@@ -103,7 +103,7 @@ export default function JoyOrderDashboardTemplate(props) {
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
         <Header />
-        <FirstSidebar />
+        {/* <FirstSidebar /> */}
         <SecondSidebar setOptions={setOptions} options = {options}/>
         <Box
           component="main"

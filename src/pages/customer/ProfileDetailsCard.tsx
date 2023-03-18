@@ -22,10 +22,10 @@ import ProfileCard from './UpdateProfileCard';
 import RegistrationForm from './components/UpdateProfileComponent';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import { useForm } from 'react-hook-form';
-import { userDataFields } from '../callbacks/RegistrationFormUserData';
+import { UserDataFields } from '../callbacks/ViewProfile';
 
 type ProfileCardProps = {
-  UserData: userDataFields;
+  UserData: UserDataFields;
 }
 
 
