@@ -209,7 +209,7 @@ export default function JoySignInSideTemplate() {
                   username: formElements.email.value,
                   password: formElements.password.value,
                 };
-                alert(JSON.stringify(data, null, 2));
+                // alert(JSON.stringify(data, null, 2));
                 getLoggedInUser(data).then((user) => {
                   if (user) {
                     console.log(user);
