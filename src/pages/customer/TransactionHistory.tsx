@@ -14,6 +14,7 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import TransactionTable from './components/TransactionTable';
+import { getTransactionHistory } from '../callbacks/TransactionHistory';
 
 const rows = [
   {
@@ -82,6 +83,7 @@ const rows = [
 ];
 
 export default function App() {
+  console.log(getTransactionHistory());
  
 
     return (

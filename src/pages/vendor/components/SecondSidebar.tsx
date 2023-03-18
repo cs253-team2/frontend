@@ -84,6 +84,9 @@ const vendorpage = () => {
       />
       <Sheet
         className="SecondSidebar"
+        variant="soft"
+        color="primary"
+        invertedColors
         sx={{
           position: {
             xs: 'fixed',

@@ -19,7 +19,7 @@ import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './UpdateProfileCard';
 import { useNavigate } from 'react-router-dom';
-import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
+import { getUserData, UserDataFields } from '../callbacks/ViewProfile';
 import { Card } from '@mui/joy';
 
 export default function App() {

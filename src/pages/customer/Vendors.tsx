@@ -74,10 +74,10 @@ export default function App() {
         <Typography level="h1" fontSize="xl4">
           Vendors
         </Typography>
-        <Box sx={{ flex: 999 }} />
+        {/* <Box sx={{ flex: 999 }} />
         <Button color="success" href="#contained-buttons">
           Add Vendor
-        </Button>
+        </Button> */}
       </Box>
       <Box>
         <VendorTable/>

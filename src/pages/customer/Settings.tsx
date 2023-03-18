@@ -23,7 +23,7 @@ import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import UpdateForm from './components/UpdateProfileComponent';
 import { TagLeftIcon } from '@chakra-ui/react';
-import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
+import { getUserData, UserDataFields } from '../callbacks/ViewProfile';
 import { Card } from '@mui/material';
 import { useEffect } from 'react';
 

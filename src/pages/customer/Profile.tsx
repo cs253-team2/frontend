@@ -20,7 +20,7 @@ import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './UpdateProfileCard';
 import ProfileDetailsCard from './ProfileDetailsCard'
 import { useNavigate } from 'react-router-dom';
-import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
+import { getUserData, UserDataFields } from '../callbacks/ViewProfile';
 import { useEffect } from 'react';
 
 export default function App() {
@@ -33,7 +33,7 @@ export default function App() {
 
   // console.log(getUserData);
 
-  const [UserData, setUsersData] = React.useState<userDataFields>(
+  const [UserData, setUsersData] = React.useState<UserDataFields>(
     {
       userName: "",
       userID: "",
@@ -46,7 +46,7 @@ export default function App() {
   );
 
 
-  const setUserData = (data: userDataFields) => {
+  const setUserData = (data: UserDataFields) => {
     console.log("inside setter function");
     setUsersData(data);
   };
