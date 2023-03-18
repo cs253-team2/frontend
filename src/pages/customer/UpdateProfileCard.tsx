@@ -16,7 +16,7 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import { AlignHorizontalCenter, WifiProtectedSetupSharp } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileCard';
+import ProfileCard from './UpdateProfileCard';
 import UpdateProfileForm from './components/UpdateProfileComponent';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import { useForm } from 'react-hook-form';
@@ -24,7 +24,6 @@ import { userDataFields } from '../callbacks/RegistrationFormUserData';
 
 type ProfileCardProps = {
   disableComponents: boolean;
-  UserData: userDataFields;
 }
 
 const onSubmit = (values: userDataFields) => {
@@ -120,7 +119,7 @@ export default function App(props: ProfileCardProps) {
                 visibility: 'hidden',
               },
             }}>
-            <UpdateProfileForm disableComponents={props.disableComponents} onSubmit={onSubmit} UserData={props.UserData}/>
+            <UpdateProfileForm disableComponents={props.disableComponents} onSubmit={onSubmit}/>
           </Box>
 
     </div>

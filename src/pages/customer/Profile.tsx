@@ -17,7 +17,7 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import { AlignHorizontalCenter, LocalConvenienceStoreOutlined } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileCard';
+import ProfileCard from './UpdateProfileCard';
 import ProfileDetailsCard from './ProfileDetailsCard'
 import { useNavigate } from 'react-router-dom';
 import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';

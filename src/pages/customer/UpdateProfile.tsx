@@ -17,7 +17,7 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileCard';
+import ProfileCard from './UpdateProfileCard';
 import { useNavigate } from 'react-router-dom';
 import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
 import { Card } from '@mui/joy';
@@ -32,32 +32,32 @@ export default function App() {
 
   console.log(getUserData);
 
-  const [UserData, setUsersData] = React.useState<userDataFields>(
-    {
-      userName: "",
-      userID: "",
-      email: "",
-      phoneNumber: "",
-      password: "",
-      confirmPassword: "",
-      userType: "",
-    }
-  );
+  // const [UserData, setUsersData] = React.useState<userDataFields>(
+  //   {
+  //     userName: "",
+  //     userID: "",
+  //     email: "",
+  //     phoneNumber: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //     userType: "",
+  //   }
+  // );
 
-  const setUserData = (data: userDataFields) => {
-    console.log("inside setter function");
-    setUsersData(data);
-  };
+  // const setUserData = (data: userDataFields) => {
+  //   console.log("inside setter function");
+  //   setUsersData(data);
+  // };
 
-  React.useEffect (() => {
-    console.log("use effect called in update profile table");
-    getUserData().then((data) => {
-      console.log("data received in update profile page");
-      console.log(data);
-      setUserData(data);
-      console.log("Vendors Data: ", UserData);
-    });
-  }, []);
+  // React.useEffect (() => {
+  //   console.log("use effect called in update profile table");
+  //   getUserData().then((data) => {
+  //     console.log("data received in update profile page");
+  //     console.log(data);
+  //     setUserData(data);
+  //     console.log("Vendors Data: ", UserData);
+  //   });
+  // }, []);
 
 
     return (
@@ -135,7 +135,7 @@ export default function App() {
           }}
         >
         <Card variant='outlined'>
-          <ProfileCard disableComponents={false} UserData={UserData}/>
+          <ProfileCard disableComponents={false}/>
         </Card>
         {/* <div style={{display:"flex"}}> */}
         </Sheet>

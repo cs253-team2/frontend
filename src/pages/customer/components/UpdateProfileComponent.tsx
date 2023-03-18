@@ -9,7 +9,6 @@ import { getUserData, userDataFields } from '../../callbacks/RegistrationFormUse
 type UpdateProfileFormProps = {
   onSubmit: (values: userDataFields) => void;
   disableComponents: boolean;
-  UserData: userDataFields;
 };
 
 
@@ -28,8 +27,19 @@ const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+
 const phoneNumberPattern = /^\d{10}$/;
 
 
-const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disableComponents, UserData}) => {
+const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disableComponents}) => {
   console.log("registrationn page");
+
+
+  React.useEffect (() => {
+    console.log("use effect called in update profile table");
+    getUserData().then((data) => {
+      console.log("data received in update profile page");
+      console.log(data);
+
+      setValues(data);
+    });
+  }, []);
     
     const [values, setValues] = useState<userDataFields>({
       // userName: UserData.userName,
@@ -39,16 +49,15 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
       // password: '',
       // confirmPassword: '',
       // userType: UserData.userType,
-    userName: UserData.userName,
-    userID: UserData.userID,
-    phoneNumber: UserData.phoneNumber,
-    email: UserData.email,
+    userName: '',
+    userID: '',
+    phoneNumber: '',
+    email: '',
     password: '',
     confirmPassword: '',
-    userType: UserData.userType,
+    userType: '',
   });
 
-  console.log("User data is " + UserData.userName);
   console.log("values is " + values.userName);
 
   const [errors, setErrors] = useState<Partial<userDataFields>>({});
@@ -182,7 +191,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
           id="phoneNumber"
           name="phoneNumber"
           placeholder='123-456-7890'
-          // value={UserData.phoneNumber}
+          value={values.phoneNumber}
           onChange={handleChange}
           style={{width:"100%"}}
           disabled= {disableComponents}
@@ -204,7 +213,9 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
         />
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
       </div>
-      <div>
+        <br />
+      {/* <div>
+        <Typography level="h6">Enter your current password for authentication.</Typography>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
         <Input
@@ -218,8 +229,9 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
           disabled= {disableComponents}
         />
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
-      </div>
-      <div>
+      </div> */}
+
+      {/* <div>
         <label htmlFor="confirmPassword"><b>Confirm Password *</b></label>
         <br />
         <Input
@@ -233,9 +245,8 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disable
           disabled= {disableComponents}
         />
         {errors.confirmPassword && <span style={{color: "red"}}> {errors.confirmPassword} </span>}
-      </div>
+      </div> */}
 
-      <br />
       <div>
         {!disableComponents && 
         <Button type="submit" fullWidth>
