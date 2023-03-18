@@ -1,5 +1,6 @@
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+
 import { ColorPaletteProp } from '@mui/joy/styles';
 import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
@@ -21,6 +22,8 @@ import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { getNotifications } from '../../callbacks/Notifications';
+
 
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
@@ -61,13 +64,24 @@ interface modalDataType {
     content: string;
 }
 
-function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
+interface Notification {
+  id: number;
+  timestamp: Date;
+  subject: string;
+  content: string;
+  mark_as_read: boolean;
+  user: string;
+}
+    
+
+function SearchBar({placeholder}:{placeholder:string}){
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(rows);
+  const [filteredData, setFilteredData] =useState<any>([]);
   const [modalData, setModalData] = React.useState<modalDataType>({title: '', content: ''});
+
   
   
   const handleOpen = ({title, content}:modalDataType) =>{
@@ -79,8 +93,8 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
     const searchWord = event.target.value;
     const newFilter = rows.filter((value:any) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
-              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
-              value.status.toLowerCase().includes(searchWord.toLowerCase()))
+              value.timestamp.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.subject.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(rows);
@@ -89,6 +103,26 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
     }
     
   }
+
+  const [rows, setRows] = useState<Notification[]>([]);
+
+  const setData = (data: Notification[]) => {
+    console.log("inside setter function");
+    setRows(data);
+    setFilteredData(data);
+  };
+
+  useEffect (() => {
+    getNotifications().then((data) => {
+      console.log("data received in notifications table");
+      console.log(data);
+      setData(data);
+      
+      console.log("Notifications: ", data);
+    });
+  }, []);
+
+
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -169,13 +203,13 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                             </tr>
                         </thead>  
                         <tbody>
-                            {filteredData.map((row:any) => (
+                            {filteredData.map((row: Notification) => (
                             <tr key={row.id}>
                                 <td>
                                 <Typography fontWeight="md">{row.id}</Typography>
                                 </td>
-                                <td>{row.date}</td>
-                                <td>
+                                <td>{row.timestamp}</td>
+                                {/* <td>
                                 <Chip
                                     variant="soft"
                                     size="sm"
@@ -196,8 +230,8 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                 >
                                     {row.status}
                                 </Chip>
-                                </td>
-                                <td>
+                                </td> */}
+                                {/* <td>
                                 <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                                     <Avatar size="sm">{row.customer.initial}</Avatar>
                                     <div>
@@ -211,10 +245,10 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                     <Typography level="body3">{row.customer.email}</Typography>
                                     </div>
                                 </Box>
-                                </td>
-                                <td style={{textAlign: "center"}}>
+                                </td> */}
+                                {/* <td style={{textAlign: "center"}}>
                                 <Button
-                                onClick={() => handleOpen({title: row.title, content: row.content})}
+                                onClick={() => handleOpen({title: row.subject, content: row.content})}
                                 variant='soft'
                                 >
                                 <NotificationsIcon></NotificationsIcon>
@@ -234,7 +268,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                     </Typography>
                                     </ModalDialog>
                                 </Modal>
-                                </td>
+                                </td> */}
                             </tr>
                             ))}
                         </tbody>
