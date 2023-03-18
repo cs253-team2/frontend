@@ -12,11 +12,11 @@ import AllduesCustomer from "./pages/customer/AllDues";
 // import AllduesCustomer from "./pages/customer/alldues/Alldues";
 import ClearDues from "./pages/ClearDues/App"
 import ClearDuesTest from "./pages/ClearDues/Checkout"
+import useEffect from "react";
 
 
 export default function App() {
 
-  
   return (
     
     <BrowserRouter>

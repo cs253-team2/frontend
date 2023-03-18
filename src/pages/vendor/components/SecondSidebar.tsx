@@ -13,6 +13,7 @@ import Sheet from '@mui/joy/Sheet';
 import { closeSidebar } from '../utils';
 import { unstable_HistoryRouter, useNavigate, redirect } from 'react-router-dom';
 import SecondSidebarProps from '../vendor';
+import {LogoutUser} from '../../callbacks/LogoutUser';
 
 
 
@@ -54,7 +55,10 @@ const vendorpage = () => {
     window.location.reload();
   };
 
-  
+  const logoutUser = () => {
+    LogoutUser();
+    navigate('/');
+  }
 
 
   return (
@@ -188,7 +192,7 @@ const vendorpage = () => {
             </Typography>
             <Typography level="body2">emailid@email.com</Typography>
           </div>
-          <IconButton variant="plain" sx={{ ml: 'auto' }}>
+          <IconButton variant="plain" sx={{ ml: 'auto' }} onClick={logoutUser}>
             <i data-feather="log-out" />
           </IconButton>
         </Box>

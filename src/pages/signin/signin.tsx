@@ -22,6 +22,8 @@ import LightThemeBackgroundImage from '../../assets/iitkDayImage.jpg';
 import DarkThemeBackgroundImage from '../../assets/iitkNightImage.jpg';
 
 import { useNavigate } from 'react-router-dom';
+import { getLoggedInUser } from '../callbacks/SignIn';
+import { isAuthenticated } from '../callbacks/isAuthenticated';
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -42,7 +44,6 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
   if (!mounted) {
     return <IconButton size="sm" variant="plain" color="neutral" disabled />;
   }
-  
 
   return (
     <IconButton
@@ -75,9 +76,21 @@ export default function JoySignInSideTemplate() {
     window.location.reload();
   };
 
-  // const vendorPage = () => {
-  //   navigate('/vendor');
-  // }
+  React.useEffect(() => {
+    // console.log('isAuthenticated', isAuthenticated());
+    if(isAuthenticated() === true){
+      console.log("the user is authenticated");
+      // navigate('/customer/overview');
+      const userType = localStorage.getItem('type');
+      console.log("userType", userType);
+      if(userType === 'CUSTOMER'){
+        navigate('/customer/overview');
+      }
+      else if(userType === 'VENDOR'){
+        navigate('/vendor/overview');
+      }
+    }
+  }, []);
 
   return (
     <CssVarsProvider
@@ -193,22 +206,29 @@ export default function JoySignInSideTemplate() {
                 event.preventDefault();
                 const formElements = event.currentTarget.elements;
                 const data = {
-                  email: formElements.email.value,
+                  username: formElements.email.value,
                   password: formElements.password.value,
-                  role: formElements.role[1].value,
-                  persistent: formElements.persistent.checked,
                 };
                 // alert(JSON.stringify(data, null, 2));
-                if(data.role === 'vendor') {
-                  navigate('/vendor');
-                } else {
-                  navigate('/customer');
-                }
+                getLoggedInUser(data).then((user) => {
+                  if (user) {
+                    console.log(user);
+                    localStorage.setItem("userid", user.user_id);
+                    localStorage.setItem("type", user.type);
+                    if(user.type === "customer"){
+                      navigate('/customer/overview');
+                    } else {
+                      navigate('/vendor/overview');
+                    }
+                  } else {
+                    console.log('no user');
+                  }
+                });
               }}
             >
               <FormControl required>
                 <FormLabel>Email</FormLabel>
-                <Input placeholder="Enter your email" type="email" name="email" />
+                <Input placeholder="Enter your email" type="text" name="email" />
               </FormControl>
               <FormControl required>
                 <FormLabel>Password</FormLabel>

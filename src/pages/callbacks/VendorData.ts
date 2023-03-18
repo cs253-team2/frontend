@@ -18,7 +18,7 @@ export interface Vendor {
 }
 
 export const getVendorData = async () => {
-    console.log("inside callback");
+    // console.log("inside callback");
     const response = await axios.get<Vendor[]>(
         "http://localhost:8000/api/users/2HL7YZK9/vendors/"
     );
