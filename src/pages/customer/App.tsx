@@ -22,7 +22,7 @@ import TransactionHistory from './TransactionHistory';
 import Vendors from './Vendors';
 import Profile from './Profile';
 import Ipayment from './InstantPayment';
-import Settings from './Settings';
+import UpdateProfile from './UpdateProfile';
 import AddDues from './AddDues';
 import {Navigate} from 'react-router-dom';
 
@@ -77,7 +77,7 @@ export default function JoyOrderDashboardTemplate(props) {
       return <Profile/>
     } else if(options.settings){
       console.log("settings");
-      return <Settings/>
+      return <UpdateProfile/>
     }else if(options.ipayment){
       console.log("ipayment");
       return <Ipayment/>

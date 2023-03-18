@@ -23,6 +23,9 @@ import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import UpdateForm from './components/UpdateProfileComponent';
 import { TagLeftIcon } from '@chakra-ui/react';
+import { getUserData, userDataFields } from '../callbacks/RegistrationFormUserData';
+import { Card } from '@mui/material';
+import { useEffect } from 'react';
 
 const profilePicture = {
   borderRadius: "50%",
@@ -42,7 +45,21 @@ const info =
   pendingDues: '500',
   walletBalance: '623',
 };
+
 export default function App() {
+
+  console.log("inside settings page");
+  // console.log(getUserData);
+
+
+
+
+  // const setUserData = (data: userDataFields) => {
+  //   console.log("inside setter function");
+  //   setUsersData(data);
+  // };
+
+
   
   return (
         <div>
@@ -126,7 +143,9 @@ export default function App() {
               },
             }}>
           <div>
-              <UpdateForm />
+            <Card>
+              {/* <UpdateForm onSubmit={()=>console.log("tera ma ka bhosda")}disableComponents={false}/> */}
+            </Card>
           </div>
           </Box>
           </div>

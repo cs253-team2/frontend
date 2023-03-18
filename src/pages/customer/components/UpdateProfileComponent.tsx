@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
-import { Input, Select, Option} from '@mui/joy';
+import { Input, Select, Option, Typography} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
-import { userDataFields } from '../../callbacks/RegistrationFormUserData';
+import { getUserData, userDataFields } from '../../callbacks/RegistrationFormUserData';
 
 
-type RegistrationFormProps = {
+type UpdateProfileFormProps = {
   onSubmit: (values: userDataFields) => void;
-  enableComponents: boolean;
+  disableComponents: boolean;
 };
 
 
@@ -17,7 +17,6 @@ const selectStyle = {
   borderRadius: "6px",
   border: "1px solid #ccc",
   backgroundColor: "background.body",
-  // color: "#444",
   fontSize: "16px",
   cursor: "pointer",
   width:"100%",
@@ -28,9 +27,30 @@ const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+
 const phoneNumberPattern = /^\d{10}$/;
 
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableComponents }) => {
-  const [values, setValues] = useState<userDataFields>({
+const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ onSubmit, disableComponents}) => {
+  console.log("registrationn page");
+
+
+  React.useEffect (() => {
+    console.log("use effect called in update profile table");
+    getUserData().then((data) => {
+      console.log("data received in update profile page");
+      console.log(data);
+
+      setValues(data);
+    });
+  }, []);
+    
+    const [values, setValues] = useState<userDataFields>({
+      // userName: UserData.userName,
+      // userID: UserData.userID,
+      // phoneNumber: UserData.phoneNumber,
+      // email: UserData.email,
+      // password: '',
+      // confirmPassword: '',
+      // userType: UserData.userType,
     userName: '',
+    userID: '',
     phoneNumber: '',
     email: '',
     password: '',
@@ -38,14 +58,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
     userType: '',
   });
 
+  console.log("values is " + values.userName);
+
   const [errors, setErrors] = useState<Partial<userDataFields>>({});
 
   const validate = (values: userDataFields) => {
     const errors: Partial<userDataFields> = {};
-
-    // if (!values.firstName.trim()) {
-    //   errors.firstName = 'First name is required';
-    // }
 
     if (!values.phoneNumber.trim()) {
       errors.phoneNumber = 'Phone number is required';
@@ -140,18 +158,30 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
       </div> */}
 
       <div>
-        <label htmlFor="userName"><b>User Type *</b></label>
+        <label htmlFor="userID"><b>User ID *</b></label>
         <br />
-        <Input
+        {/* <Input
           type="text"
           id="userName"
           name="userName"
-          placeholder='abc'
-          value={values.userName}
+          placeholder={UserData.userName}
           onChange={handleChange}
           style={{width:"100%"}}
           disabled= {true}
-        />
+        /> */}
+        <Typography level="h6" variant="soft" color="neutral"> {values.userID}</Typography>
+      </div>
+      <div>
+        <label htmlFor="userName"><b>User Name *</b></label>
+          <br />
+          <Input
+            type="text"
+            id="userName"
+            name="userName"
+            value={values.userName}
+            onChange={handleChange}
+            style={{width:"100%"}}
+          />
       </div>
       <div>
         <label htmlFor="phoneNumber"><b>Phone Number *</b></label>
@@ -164,7 +194,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.phoneNumber}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.phoneNumber && <span style={{color: "red"}}> {errors.phoneNumber} </span>}
       </div>
@@ -179,11 +209,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.email}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
       </div>
-      <div>
+        <br />
+      {/* <div>
+        <Typography level="h6">Enter your current password for authentication.</Typography>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
         <Input
@@ -194,11 +226,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.password}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
-      </div>
-      <div>
+      </div> */}
+
+      {/* <div>
         <label htmlFor="confirmPassword"><b>Confirm Password *</b></label>
         <br />
         <Input
@@ -209,14 +242,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.confirmPassword}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.confirmPassword && <span style={{color: "red"}}> {errors.confirmPassword} </span>}
-      </div>
+      </div> */}
 
-      <br />
       <div>
-        {!enableComponents && 
+        {!disableComponents && 
         <Button type="submit" fullWidth>
          Save Changes
       </Button>}
@@ -225,4 +257,4 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
   );
 };
 
-export default RegistrationForm;
+export default UpdateProfileForm;
