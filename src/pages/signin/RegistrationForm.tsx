@@ -5,6 +5,7 @@ import { Input, Select, Option, FormControl} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 import { userDataFields } from '../callbacks/ViewProfile';
 import { FormHelperText } from '@mui/material';
+import { registerUser, userRegistrationData } from '../callbacks/Register';
 
 
 type RegistrationFormProps = {
@@ -40,7 +41,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
   });
 
   const [errors, setErrors] = useState<Partial<userDataFields>>({});
-
+  const [userType, setUserType] = useState<string>('');
   const validate = (values: userDataFields) => {
     const errors: Partial<userDataFields> = {};
 
@@ -90,14 +91,24 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
     setValues((prevValues) => ({
       ...prevValues,
-      userType: userTypeInputElement.value,
+      userType: userType,
     }));
 
     const errors = validate(values);
     setErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      onSubmit(values);
+    if(Object.keys(errors).length === 0) {
+      const data:userRegistrationData = {
+        username: values.userName,
+        password: values.password,
+        email: values.email,
+        phone_number: values.phoneNumber,
+        type: values.userType,
+        confirm_password: values.confirmPassword,
+      } 
+      registerUser(data).then((response) => {
+      // console.log(response);
+      navigate('/');
+      });
     }
   };
 
@@ -107,7 +118,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       ...prevValues,
       [name]: value,
     }));
-
+    // console.log(values);
+    if( name == "userType") {
+      setUserType(value);
+    }
     setErrors((errors) => ({ ...errors, [name]: ''}));
   };
 
@@ -139,8 +153,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
         <br />
         <Input
           type="text"
-          id="firstName"
-          name="firstName"
+          id="userName"
+          name="userName"
           placeholder='abc'
           value={values.userName}
           onChange={handleChange}
@@ -228,9 +242,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
             onChange={handleChange}
             style={selectStyle}
           >
-          <option defaultValue="" disabled></option>
-          <option value="customer">Customer</option>
-          <option value="vendor">Vendor</option>
+          <option defaultValue=""></option>
+          <option value="CUSTOMER">Customer</option>
+          <option value="VENDOR">Vendor</option>
         </select>
         {errors.userType && <span style={{color:"red"}}>{errors.userType}</span>}
       </div>
