@@ -14,6 +14,7 @@ import { closeSidebar } from '../utils';
 import { unstable_HistoryRouter, useNavigate, redirect } from 'react-router-dom';
 import SecondSidebarProps from '../customer';
 import {LogoutUser} from '../../callbacks/LogoutUser';
+import { getUserData, UserDataFields } from '../../callbacks/ViewProfile';
 
 
 export default function SecondSidebar(props: any) {
@@ -22,6 +23,34 @@ export default function SecondSidebar(props: any) {
   const handleClick = (data: SecondSidebarProps) => {
     setOptions(data);
   };
+
+
+  const [UserData, setUsersData] = React.useState<UserDataFields>(
+    {
+      userName: "",
+      userID: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
+      userType: "",
+    }
+  );
+
+
+  const setUserData = (data: UserDataFields) => {
+    console.log("inside setter function");
+    setUsersData(data);
+  };
+
+  React.useEffect (() => {
+    getUserData().then((data) => {
+      console.log("data received in profile page");
+      console.log(data);
+      setUserData(data);
+      console.log("Vendors Data: ", UserData);
+    });
+  }, []);
   
 
   const notificationspage = () => {
@@ -67,8 +96,8 @@ const vendorpage = () => {
   };
   
   const logoutUser = () => {
-    LogoutUser();
     navigate('/');
+    LogoutUser();
   };
 
   return (
@@ -209,10 +238,10 @@ const vendorpage = () => {
 
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
-            <Typography fontWeight="lg" level="body2">
-              Username
+            <Typography fontWeight="lg" level="h4">
+              {UserData.userName}
             </Typography>
-            <Typography level="body2">emailid@email.com</Typography>
+            <Typography level="body1">{UserData.email}</Typography>
           </div>
           <IconButton variant="plain" sx={{ ml: 'auto' }} onClick={logoutUser}>
             <i data-feather="log-out" />

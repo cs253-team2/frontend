@@ -17,9 +17,10 @@ import customTheme from './theme';
 import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
 import ProfileCard from './UpdateProfileCard';
-import RegistrationForm from './components/AddDuesForm';
+import RegistrationForm from './components/IPyamentForm';
 import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
 import { useForm } from 'react-hook-form';
+import { getAllDues } from '../callbacks/AllDues';
 
 interface FormElements extends HTMLFormControlsCollection {
     email: HTMLInputElement;
@@ -34,6 +35,8 @@ interface FormElements extends HTMLFormControlsCollection {
 
 
 export default function App() {
+
+    // console.log(getAllDues());
     const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
 
     
@@ -118,7 +121,7 @@ export default function App() {
                 visibility: 'hidden',
               },
             }}>
-            <RegistrationForm/>
+            <RegistrationForm onSubmit = {() => console.log("Payment made")} formSource={2}/>
           </Box>
 
 

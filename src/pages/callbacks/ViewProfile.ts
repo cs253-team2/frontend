@@ -30,9 +30,14 @@ export interface UserDataFields {
 
 
 export const getUserData = async () => {
+    const userID = localStorage.getItem("userid");
     console.log("inside callback");
+    console.log("user id is: " + userID);
     const response = await axios.get<UserDataFieldsBackend>(
-        "http://localhost:8000/api/users/4NSTXCZJ/"
+        `http://localhost:8000/api/users/${userID}/`,
+        {
+            withCredentials: true,
+        }
     );
     console.log(response.data);
 

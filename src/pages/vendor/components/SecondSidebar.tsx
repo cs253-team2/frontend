@@ -14,6 +14,7 @@ import { closeSidebar } from '../utils';
 import { unstable_HistoryRouter, useNavigate, redirect } from 'react-router-dom';
 import SecondSidebarProps from '../vendor';
 import {LogoutUser} from '../../callbacks/LogoutUser';
+import { getUserData, UserDataFields } from '../../callbacks/ViewProfile';
 
 
 
@@ -59,6 +60,35 @@ const vendorpage = () => {
     LogoutUser();
     navigate('/');
   }
+
+
+  const [UserData, setUsersData] = React.useState<UserDataFields>(
+    {
+      userName: "",
+      userID: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
+      userType: "",
+    }
+  );
+
+
+  const setUserData = (data: UserDataFields) => {
+    console.log("inside setter function");
+    setUsersData(data);
+  };
+
+  React.useEffect (() => {
+    getUserData().then((data) => {
+      console.log("data received in profile page");
+      console.log(data);
+      setUserData(data);
+      console.log("Vendors Data: ", UserData);
+    });
+  }, []);
+
 
 
   return (
@@ -190,7 +220,7 @@ const vendorpage = () => {
         </List>
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
-            <Typography fontWeight="lg" level="body2">
+            <Typography fontWeight="lg" level="h3">
               Username
             </Typography>
             <Typography level="body2">emailid@email.com</Typography>

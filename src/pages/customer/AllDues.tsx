@@ -15,6 +15,7 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import DuesTable from './components/DuesTable';
+import { getAllDues } from '../callbacks/AllDues';
 
 const rows = [
   {
@@ -119,6 +120,8 @@ const rows = [
 ];
 
 export default function App() {
+    // console.log(getAllDues);
+
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>

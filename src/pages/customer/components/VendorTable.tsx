@@ -287,11 +287,11 @@ export default function VendorTable() {
                         <Button
                           variant="solid"
                           size="sm"
-                          color="danger"
+                          color="success"
                           aria-label="Explore Bahamas Islands"
                           sx={{ ml: "auto", fontWeight: 600 }}
                         >
-                          Remove
+                          Clear Dues
                         </Button>
                       </Box>
                     </CardContent>

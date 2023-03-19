@@ -22,7 +22,7 @@ import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { getNotifications } from '../../callbacks/Notifications';
+import { getNotifications, NotificationDataFields } from '../../callbacks/Notifications';
 
 
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
@@ -104,9 +104,9 @@ function SearchBar({placeholder}:{placeholder:string}){
     
   }
 
-  const [rows, setRows] = useState<Notification[]>([]);
+  const [rows, setRows] = useState<NotificationDataFields[]>([]);
 
-  const setData = (data: Notification[]) => {
+  const setData = (data: NotificationDataFields[]) => {
     console.log("inside setter function");
     setRows(data);
     setFilteredData(data);
@@ -176,7 +176,7 @@ function SearchBar({placeholder}:{placeholder:string}){
                         >
                           <thead>
                             <tr>
-                            <th style={{ width: 140, padding: 12 }}>
+                            {/* <th style={{ width: 140, padding: 12 }}>
                                 <Link
                                 underline="none"
                                 color="primary"
@@ -194,21 +194,32 @@ function SearchBar({placeholder}:{placeholder:string}){
                                 >
                                 Notification ID
                                 </Link>
+                            </th> */}
+                            <th style={{ width: "15%", padding: 12 }}>
+                              <Typography level='h4'>Date</Typography>
                             </th>
-                            <th style={{ width: 120, padding: 12 }}>Date</th>
-                            <th style={{ width: 120, padding: 12 }}>Type</th>
-                            <th style={{ width: 220, padding: 12 }}>CustomerID</th>
-                            <th style={{ width: 120, padding: 12 }}>Content</th>
+                            <th style={{ width: "15%", padding: 12 }}>
+                              <Typography level='h4'>Time</Typography>
+                            </th>
+                            <th style={{ width: "25%", padding: 12 }}>
+                              <Typography level='h4'>Subject</Typography>
+                            </th>
+                            <th style={{ width: "30%", padding: 12 }}>
+                              <Typography level='h4'>Content</Typography>
+                            </th>
                             
                             </tr>
                         </thead>  
                         <tbody>
-                            {filteredData.map((row: Notification) => (
+                            {filteredData.map((row: NotificationDataFields) => (
                             <tr key={row.id}>
-                                <td>
+                              <td><Typography level='body1'>{row.date}</Typography></td>
+                              <td><Typography level='h6'>{row.time}</Typography></td>
+                              <td><Typography level='h6'>{row.subject}</Typography></td>
+                              <td><Typography level='body1'>{row.content}</Typography></td>
+                                {/* <td>
                                 <Typography fontWeight="md">{row.id}</Typography>
-                                </td>
-                                <td>{row.timestamp}</td>
+                                </td> */}
                                 {/* <td>
                                 <Chip
                                     variant="soft"

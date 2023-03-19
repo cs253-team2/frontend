@@ -20,7 +20,8 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import { useState } from "react"
+import { useState } from "react";
+import { TransactionHistoryDataFields } from '../../callbacks/TransactionHistory';
 
 
 
@@ -78,17 +79,20 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]}){
+function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHistoryDataFields[]}){
+
+  console.log("Data in Transaction table is");
+  console.log(data);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(data);
+  const [filteredData, setFilteredData] =useState<TransactionHistoryDataFields[]>(data);
   const handleFilter =(event:any) =>{
     const searchWord = event.target.value;
-    const newFilter = data.filter((value) =>{
-      return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
+    const newFilter = data.filter((value : TransactionHistoryDataFields) =>{
+      return (value.receiverID.toLowerCase().includes(searchWord.toLowerCase()) || 
               value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
               value.status.toLowerCase().includes(searchWord.toLowerCase())||
-              value.transactionid.toLowerCase().includes(searchWord.toLowerCase()))
+              value.transactionID.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(data);
@@ -97,6 +101,9 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
     }
     
   }
+
+  console.log("Filtered data is");
+  console.log(filteredData);
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -169,8 +176,9 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                   sx={{ verticalAlign: 'text-bottom' }}
                                 />
                               </th> */}
-                              <th style={{ width: 140, padding: 12 }}>
-                                <Link
+
+
+                                {/* <Link
                                   underline="none"
                                   color="primary"
                                   component="button"
@@ -185,9 +193,9 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                     },
                                   }}
                                 >
-                                  VendorID
-                                </Link>
-                              </th>
+                                </Link> */}
+
+                              <th style={{ width: 120, padding: 12 }}>ReceiverID</th>
                               <th style={{ width: 120, padding: 12 }}>Date</th>
                               <th style={{ width: 120, padding: 12 }}>Status</th>
                               <th style={{ width: 220, padding: 12 }}>TransactionID</th>
@@ -196,8 +204,8 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                           </thead>
                           <tbody>
                             {/* {stableSort(filteredData, getComparator(order, 'id')).map((row) => ( */}
-                            {filteredData.map((row:any) => (
-                              <tr key={row.id}>
+                            {data.map((row:TransactionHistoryDataFields) => (
+                              <tr key={row.transactionID}>
                                 {/* <td style={{ textAlign: 'center' }}>
                                   <Checkbox
                                     checked={selected.includes(row.id)}
@@ -214,7 +222,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                   />
                                 </td> */}
                                 <td>
-                                  <Typography fontWeight="md">{row.id}</Typography>
+                                  <Typography fontWeight="md">{row.receiverID}</Typography>
                                 </td>
                                 <td>{row.date}</td>
                                 <td>
@@ -223,17 +231,17 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                     size="sm"
                                     startDecorator={
                                       {
-                                        Paid: <i data-feather="check" />,
-                                        Refunded: <i data-feather="corner-up-left" />,
-                                        Cancelled: <i data-feather="x" />,
-                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
+                                        Paid: <i data-feather="chevron-right" />,
+                                        Refunded: <i data-feather="circle" />,
+                                        Cancelled: <i data-feather="circle" />,
+                                      }[row.status]
                                     }
                                     color={
                                       {
                                         Paid: 'success',
-                                        Refunded: 'neutral',
-                                        Cancelled: 'danger',
-                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
+                                        Failed: 'danger',
+                                        Pending: 'warning', // yellow
+                                      }[row.status] as ColorPaletteProp
                                     }
                                   >
                                     {row.status}
@@ -248,7 +256,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                         level="body3"
                                         textColor="text.primary"
                                       >
-                                        {row.transactionid}
+                                        {row.transactionID}
                                       </Typography>
                                       
                                     </div>

@@ -118,7 +118,7 @@ export default function App() {
                 visibility: 'hidden',
               },
             }}>
-            <RegistrationForm/>
+            <RegistrationForm onSubmit = {() => console.log("Payment made")} formSource={0}/>
           </Box>
 
 
