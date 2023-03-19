@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
-import { Input, Select, Option} from '@mui/joy';
+import { Input, Select, Option, Typography} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
-import { userDataFields } from '../../callbacks/RegistrationFormUserData';
+import { getUserData, setUserData, UpdateFormDataFields } from '../../callbacks/UpdateProfile';
 
 
-type RegistrationFormProps = {
-  onSubmit: (values: userDataFields) => void;
-  enableComponents: boolean;
+type UpdateProfileFormProps = {
+  disableComponents: boolean;
 };
 
 
@@ -17,7 +16,6 @@ const selectStyle = {
   borderRadius: "6px",
   border: "1px solid #ccc",
   backgroundColor: "background.body",
-  // color: "#444",
   fontSize: "16px",
   cursor: "pointer",
   width:"100%",
@@ -27,25 +25,46 @@ const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneNumberPattern = /^\d{10}$/;
 
+// const onSubmit = async (data: UpdateFormDataFields) => {
+//   const res = await axios.patch('', data);
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableComponents }) => {
-  const [values, setValues] = useState<userDataFields>({
+// }
+
+
+const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents }) => {
+  console.log("registration page");
+
+
+  React.useEffect (() => {
+    console.log("use effect called in update profile table");
+    getUserData().then((data) => {
+      console.log("data received in update profile page");
+      console.log(data);
+
+      setValues(data);
+    });
+  }, []);
+    
+    const [values, setValues] = useState<UpdateFormDataFields>({
+      // userName: UserData.userName,
+      // userID: UserData.userID,
+      // phoneNumber: UserData.phoneNumber,
+      // email: UserData.email,
+      // password: '',
+      // confirmPassword: '',
+      // userType: UserData.userType,
     userName: '',
+    userID: '',
     phoneNumber: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-    userType: '',
   });
 
-  const [errors, setErrors] = useState<Partial<userDataFields>>({});
+  // console.log("values is " + values.userName + values.userID + values.phoneNumber + values.email);
 
-  const validate = (values: userDataFields) => {
-    const errors: Partial<userDataFields> = {};
+  const [errors, setErrors] = useState<Partial<UpdateFormDataFields>>({});
 
-    // if (!values.firstName.trim()) {
-    //   errors.firstName = 'First name is required';
-    // }
+  const validate = (values: UpdateFormDataFields) => {
+    const errors: Partial<UpdateFormDataFields> = {};
 
     if (!values.phoneNumber.trim()) {
       errors.phoneNumber = 'Phone number is required';
@@ -59,20 +78,19 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
       errors.email = 'Email is invalid';
     }
 
-    if (!values.password.trim()) {
-      errors.password = 'Password is required';
-    } else if(!passwordPattern.test(values.password.trim())) {
-        errors.password = 'Password is invalid';
-    }
+    // if (!values.password.trim()) {
+    //   errors.password = 'Password is required';
+    // } else if(!passwordPattern.test(values.password.trim())) {
+    //     errors.password = 'Password is invalid';
+    // }
 
-    if (!values.confirmPassword.trim()) {
-      errors.confirmPassword = 'Confirm password is required';
-    }
+    // if (!values.confirmPassword.trim()) {
+    //   errors.confirmPassword = 'Confirm password is required';
+    // }
 
-    if (values.password.trim() !== values.confirmPassword.trim()) {
-      errors.confirmPassword = 'Passwords do not match';
-    }
-
+    // if (values.password.trim() !== values.confirmPassword.trim()) {
+    //   errors.confirmPassword = 'Passwords do not match';
+    // }
     return errors;
   };
 
@@ -80,16 +98,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
     event.preventDefault();
     console.log(values);
     const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
-    setValues((prevValues) => ({
-      ...prevValues,
-      userType: userTypeInputElement.value,
-    }));
 
     const errors = validate(values);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      onSubmit(values);
+      setUserData(values);
     }
   };
 
@@ -140,18 +154,30 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
       </div> */}
 
       <div>
-        <label htmlFor="userName"><b>User Type *</b></label>
+        <label htmlFor="userID"><b>User ID *</b></label>
         <br />
-        <Input
+        {/* <Input
           type="text"
           id="userName"
           name="userName"
-          placeholder='abc'
-          value={values.userName}
+          placeholder={UserData.userName}
           onChange={handleChange}
           style={{width:"100%"}}
           disabled= {true}
-        />
+        /> */}
+        <Typography level="h6" variant="soft" color="neutral"> {values.userID}</Typography>
+      </div>
+      <div>
+        <label htmlFor="userName"><b>User Name *</b></label>
+          <br />
+          <Input
+            type="text"
+            id="userName"
+            name="userName"
+            value={values.userName}
+            onChange={handleChange}
+            style={{width:"100%"}}
+          />
       </div>
       <div>
         <label htmlFor="phoneNumber"><b>Phone Number *</b></label>
@@ -164,7 +190,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.phoneNumber}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.phoneNumber && <span style={{color: "red"}}> {errors.phoneNumber} </span>}
       </div>
@@ -179,11 +205,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.email}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
       </div>
-      <div>
+        <br />
+      {/* <div>
+        <Typography level="h6">Enter your current password for authentication.</Typography>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
         <Input
@@ -194,11 +222,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.password}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
-      </div>
-      <div>
+      </div> */}
+
+      {/* <div>
         <label htmlFor="confirmPassword"><b>Confirm Password *</b></label>
         <br />
         <Input
@@ -209,14 +238,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
           value={values.confirmPassword}
           onChange={handleChange}
           style={{width:"100%"}}
-          disabled= {enableComponents}
+          disabled= {disableComponents}
         />
         {errors.confirmPassword && <span style={{color: "red"}}> {errors.confirmPassword} </span>}
-      </div>
+      </div> */}
 
-      <br />
       <div>
-        {!enableComponents && 
+        {!disableComponents && 
         <Button type="submit" fullWidth>
          Save Changes
       </Button>}
@@ -225,4 +253,4 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, enableCom
   );
 };
 
-export default RegistrationForm;
+export default UpdateProfileForm;

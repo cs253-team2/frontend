@@ -8,6 +8,7 @@ import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
+import Sheet from "@mui/joy/Sheet";
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
 import OrderTable from './components/OverviewTable';
@@ -16,26 +17,52 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import { AlignHorizontalCenter } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileDetails';
-import RegistrationForm from './components/UpdateProfileComponent';
-import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
-import { useForm } from 'react-hook-form';
-import { userDataFields } from '../callbacks/RegistrationFormUserData';
+import ProfileCard from './UpdateProfileCard';
+import { useNavigate } from 'react-router-dom';
+import { getUserData, UserDataFields } from '../callbacks/ViewProfile';
+import { Card } from '@mui/joy';
 
-type ProfileCardProps = {
-  enableComponents: boolean;
+export default function App() {
 
-}
+  const navigate = useNavigate();
+  const updateprofilepage= () => {
+    navigate('/customer/update_profile');
+    window.location.reload();
+  };
+
+  console.log(getUserData);
+
+  // const [UserData, setUsersData] = React.useState<userDataFields>(
+  //   {
+  //     userName: "",
+  //     userID: "",
+  //     email: "",
+  //     phoneNumber: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //     userType: "",
+  //   }
+  // );
+
+  // const setUserData = (data: userDataFields) => {
+  //   console.log("inside setter function");
+  //   setUsersData(data);
+  // };
+
+  // React.useEffect (() => {
+  //   console.log("use effect called in update profile table");
+  //   getUserData().then((data) => {
+  //     console.log("data received in update profile page");
+  //     console.log(data);
+  //     setUserData(data);
+  //     console.log("Vendors Data: ", UserData);
+  //   });
+  // }, []);
 
 
-
-export default function App(props: ProfileCardProps) {
-    const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
-
-    
     return (
         <div>
-            {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
               aria-label="breadcrumbs"
@@ -66,14 +93,14 @@ export default function App(props: ProfileCardProps) {
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Add Dues
+                Profile
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
-          </Box> */}
-          {/* <Box
+          </Box>
+          <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -87,36 +114,34 @@ export default function App(props: ProfileCardProps) {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-              Add Dues
+              Profile
             </Typography>
             <Box sx={{ flex: 999 }} />
            
-          </Box> */}
-          <Box 
-            component="main"
-            sx={{
-              my: 'auto',
-              py: 2,
-              pb: 5,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 2,
-              
-              maxWidth: '100%',
-              mx: 'auto',
-              borderRadius: 'sm',
-              '& form': {
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-              },
-              [`& .${formLabelClasses.asterisk}`]: {
-                visibility: 'hidden',
-              },
-            }}>
-            <RegistrationForm enableComponents={props.enableComponents}/>
           </Box>
+        
+        <Sheet
+          className="ProfileTableContainer"
+          variant="outlined"
+          sx={{
+            width: "100%",
+            height: "83vh",
+            borderRadius: "md",
+            flex: 1,  
+            overflow: "auto",
+            overflowY: "scroll",
+            minHeight: 0,
+            border:"none"
+          }}
+        >
+        <Card variant='outlined'>
+          <ProfileCard disableComponents={false}/>
+        </Card>
+        {/* <div style={{display:"flex"}}> */}
+        </Sheet>
+        {/* </div> */}
 
-    </div>
+
+      </div>
     )
 }

@@ -8,28 +8,39 @@ import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
-import Sheet from "@mui/joy/Sheet";
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
 import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import { AlignHorizontalCenter } from '@mui/icons-material';
+import { AlignHorizontalCenter, WifiProtectedSetupSharp } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileDetails';
-import { useNavigate } from 'react-router-dom';
+import ProfileCard from './UpdateProfileCard';
+import UpdateProfileForm from './components/UpdateProfileComponent';
+import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
+import { useForm } from 'react-hook-form';
+import { UserDataFields } from '../callbacks/ViewProfile';
 
-export default function App() {
+type ProfileCardProps = {
+  disableComponents: boolean;
+}
 
-  const navigate = useNavigate();
-  const updateprofilepage= () => {
-    navigate('/customer/update_profile');
-    window.location.reload();
-  };
+const onSubmit = (values: UserDataFields) => {
+  console.log(values);
+}
+
+
+
+export default function App(props: ProfileCardProps) {
+    const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
+
+    console.log("Profile card called");
+
+    
     return (
         <div>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
               aria-label="breadcrumbs"
@@ -60,14 +71,14 @@ export default function App() {
                 Dashboard
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
-                Profile
+                Add Dues
               </Typography>
             </Breadcrumbs>
             <ColorSchemeToggle
               sx={{ ml: 'auto', display: { xs: 'none', md: 'inline-flex' } }}
             />
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -81,46 +92,36 @@ export default function App() {
             }}
           >
             <Typography level="h1" fontSize="xl4">
-              Profile
+              Add Dues
             </Typography>
             <Box sx={{ flex: 999 }} />
            
+          </Box> */}
+          <Box 
+            component="main"
+            sx={{
+              my: 'auto',
+              py: 2,
+              pb: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+              
+              maxWidth: '100%',
+              mx: 'auto',
+              borderRadius: 'sm',
+              '& form': {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+              },
+              [`& .${formLabelClasses.asterisk}`]: {
+                visibility: 'hidden',
+              },
+            }}>
+            <UpdateProfileForm disableComponents={props.disableComponents} />
           </Box>
-        
-        <Sheet
-          className="ProfileTableContainer"
-          variant="outlined"
-          sx={{
-            width: "100%",
-            height: "83vh",
-            borderRadius: "md",
-            flex: 1,  
-            overflow: "auto",
-            overflowY: "scroll",
-            minHeight: 0,
-            border:"none"
-          }}
-        >
-        <ProfileCard enableComponents={false} />
-        {/* <div style={{display:"flex"}}> */}
-          <Box sx={{display: 999}}>
-            <Button size="lg"color='danger' variant='solid'
-                sx={{
-                  float: "right", 
-                  marginTop:"5%", 
-                  marginRight:"5%",
-                  fontWeight: 600}}>Delete Profile</Button>
-            <Button size="lg" variant='solid' onClick={updateprofilepage}
-                sx={{
-                    float:"right", 
-                    marginTop:"5%", 
-                    marginRight:"5%",
-                    fontWeight: 600}}>Edit Profile</Button>
-          </Box>
-        </Sheet>
-        {/* </div> */}
 
-
-      </div>
+    </div>
     )
 }

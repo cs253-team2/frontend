@@ -19,7 +19,7 @@ import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import ModalClose from '@mui/joy/ModalClose';
 import { useNavigate } from 'react-router-dom';
-import { Sheet } from '@mui/joy';
+import { Input, Sheet } from '@mui/joy';
 import { getVendorData } from '../callbacks/VendorData';
 import { useEffect } from 'react';
 
@@ -31,10 +31,21 @@ export default function OverviewComponent() {
 
   
   const [open, setOpen] = React.useState(false);
+  const [addMoneyOpen, setMoneyOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   // const [modalData, setModalData] = React.useState<modalDataType>({title: 'Hello', content: 'World'});
 
-  const handleOpen = () =>{
+  const addMoneyHandleClose = () => {
+    setMoneyOpen(false);
+    setValue("");
+    setError("");
+  };
+  
+  const addMoneyHandleOpen = () => {
+    setMoneyOpen(true);
+  };
+
+  const handleOpen = () => {
     setOpen(true);
   };
   const navigate = useNavigate();
@@ -46,6 +57,25 @@ export default function OverviewComponent() {
   const addduespage= () => {
     navigate('/customer/adddues');
     window.location.reload();
+  };
+
+  const [value, setValue] = React.useState<string>();
+  const [error, setError] = React.useState<string>();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setValue(value);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if(Number(value) <= 0) {
+      setError("Please enter a valid amount");
+    }
+    else {
+      //put up a put request here
+      addMoneyHandleClose();
+      alert("Money added successfully");
+    }
   };
   
 
@@ -107,6 +137,7 @@ export default function OverviewComponent() {
               flexDirection: 'row',
               justifyContent: 'space-between',
               width: '50%',
+              paddingTop: '1%',
             }}
             >
               <Card
@@ -151,8 +182,12 @@ export default function OverviewComponent() {
             </Box>
             <Box
             sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignContent: 'center',
               width: '30%',
-              alignItems: 'center',
+              marginRight: '10%',
             }}
             >
               <Button
@@ -174,6 +209,35 @@ export default function OverviewComponent() {
                   <br/>
                   <Button onClick={addduespage}>
                     Add Due
+                  </Button>
+                  </ModalDialog>
+              </Modal>
+
+              <Button
+                      onClick={addMoneyHandleOpen}
+                      color='success'
+              >
+                      Add Money to Wallet
+              </Button>
+              <Modal open={addMoneyOpen} onClose={addMoneyHandleClose}>
+                  <ModalDialog
+                  aria-labelledby="layout-modal-title"
+                  aria-describedby="layout-modal-description"
+                  // layout={open || undefined}
+                  >
+                  <ModalClose />
+                  <Input
+                    type="number"
+                    id="userName"
+                    name="userName"
+                    value={value}
+                    onChange={handleChange}
+                    style={{width:"100%"}}>
+                  </Input>
+                  {error && <span style={{color: 'red'}}>{error}</span>}
+                  <br/>
+                  <Button onClick={handleClick}>
+                    Add Money
                   </Button>
                   </ModalDialog>
               </Modal>

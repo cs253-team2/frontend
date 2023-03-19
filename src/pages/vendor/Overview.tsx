@@ -15,9 +15,11 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import Card from '@mui/joy/Card';
-import { Sheet } from '@mui/joy';
+import { Modal, ModalClose, ModalDialog, Sheet } from '@mui/joy';
 
 export default function OverviewComponent() {
+
+
     return(
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -140,12 +142,11 @@ export default function OverviewComponent() {
                 alignItems: 'center',
                 width: '50%',
               }}
-              variant='soft'
               color='primary'
               size='lg'
-              >
-                <Typography level='h2'>
-                  Pay
+              onClick={() => alert("Notification to clear dues sent to all users")}>
+                <Typography level='h4'>
+                  <b>Request Clear All Dues</b>
                 </Typography>
               </Button>
             </Box>
