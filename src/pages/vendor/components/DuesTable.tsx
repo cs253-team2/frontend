@@ -59,7 +59,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:PendingDue[]}){
   console.log("rows: ", rows);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<PendingDue>(rows);
+  const [filteredData, setFilteredData] =useState<PendingDue[]>(rows);
   const handleFilter =(event:any) =>{
     const searchWord = event.target.value;
     const newFilter = rows.filter((value) =>{
@@ -160,7 +160,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:PendingDue[]}){
                             </thead>
                           <tbody>
                             {filteredData.map((row:PendingDue) => (
-                            <tr key={row.id} style={{alignItems:'center'}}>
+                            <tr key={row.sender_id} style={{alignItems:'center'}}>
                                 <td>
                                     <Typography fontWeight="md">{row.sender_id}</Typography>
                                 </td>
