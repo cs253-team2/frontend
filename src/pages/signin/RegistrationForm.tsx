@@ -3,7 +3,7 @@ import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
 import { Input, Select, Option, FormControl} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
-import { userDataFields } from '../callbacks/ViewProfile';
+import { userDataFields } from '../callbacks/RegistrationFormUserData';
 import { FormHelperText } from '@mui/material';
 import { registerUser, userRegistrationData } from '../callbacks/Register';
 

@@ -20,7 +20,9 @@
     "feather-icon": "^0.1.0",
     "feather-icons": "^4.29.0",
     "framer-motion": "^9.0.2",
+    "js-cookie": "^3.0.1",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.5",
     "react-router-dom": "^6.8.2",
@@ -28,6 +30,7 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
     "@types/node": "^18.15.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",

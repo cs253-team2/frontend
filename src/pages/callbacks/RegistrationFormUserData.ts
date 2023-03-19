@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export interface userDataFields {
     userName: string;
     phoneNumber: string;
