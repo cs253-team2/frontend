@@ -104,8 +104,17 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
 
     if (Object.keys(errors).length === 0) {
       setUserData(values);
+      console.log("values have been set");
+      
+
+      const navigate = useNavigate();
+      setTimeout(() => {
+          navigate("/customer/profile"); 
+      }, 3000);
     }
-  };
+  }
+
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

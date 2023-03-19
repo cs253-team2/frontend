@@ -15,7 +15,7 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import DuesTable from './components/DuesTable';
-import { getAllDues } from '../callbacks/AllDues';
+import { getAllDues, DuesDataFields} from '../callbacks/AllDues';
 
 const rows = [
   {
@@ -120,7 +120,24 @@ const rows = [
 ];
 
 export default function App() {
-    // console.log(getAllDues);
+    // console.log(getAllDues());
+
+    const [DuesData, setDuesData] = React.useState<DuesDataFields[]>([]);
+  
+  
+    const setDuesDataTemp = (data: DuesDataFields[]) => {
+      console.log("inside setter function");
+      setDuesData(data);
+    };
+  
+    React.useEffect (() => {
+      getAllDues().then((data) => {
+        console.log("data received in profile page");
+        console.log(data);
+        setDuesDataTemp(data);
+        console.log("All Dues Data: ", DuesData);
+      });
+    }, []);
 
     return (
         <div>
