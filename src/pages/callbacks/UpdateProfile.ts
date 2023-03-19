@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "./getCookie";
 
 export interface UserDataFieldsBackend {
     user_id: string;
@@ -24,24 +25,10 @@ export interface UpdateFormDataFields {
     phoneNumber: string;
 }
 
-function getCookie(name : string) {
-    if (!document.cookie) {
-      return null;
-    }
-  
-    const xsrfCookies = document.cookie.split(';')
-      .map(c => c.trim())
-      .filter(c => c.startsWith(name + '='));
-  
-    if (xsrfCookies.length === 0) {
-      return null;
-    }
-    return decodeURIComponent(xsrfCookies[0].split('=')[1]);
-  }
-
 export const getUserData = async () => {
     console.log("inside callback");
     const userID = localStorage.getItem("userid");
+    console.log(userID);
     const response = await axios.get<UserDataFieldsBackend>(
         `http://localhost:8000/api/users/${userID}/`,
         {

@@ -34,6 +34,12 @@ const phoneNumberPattern = /^\d{10}$/;
 const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents }) => {
   console.log("registration page");
 
+  const reloadPageonSubmit = useNavigate();
+      function reloadpage() {
+        reloadPageonSubmit('/customer/profile');
+        window.location.reload();
+  }
+
 
   React.useEffect (() => {
     console.log("use effect called in update profile table");
@@ -97,24 +103,19 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(values);
-    const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
+    // const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
 
     const errors = validate(values);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      setUserData(values);
+      setUserData(values); //api call
       console.log("values have been set");
       
-
-      const navigate = useNavigate();
-      setTimeout(() => {
-          navigate("/customer/profile"); 
-      }, 3000);
+      reloadpage();
     }
   }
-
-
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -124,12 +125,6 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
     }));
 
     setErrors((errors) => ({ ...errors, [name]: ''}));
-  };
-
-  const navigate = useNavigate();
-  const signinpage = () => {
-    navigate('/');
-    window.location.reload();
   };
 
   return (

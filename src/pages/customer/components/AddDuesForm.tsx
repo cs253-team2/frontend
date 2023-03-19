@@ -3,21 +3,20 @@ import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
 import { Input, Select, Option} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
+import { PaymentFormValues, makeTransaction } from '../../callbacks/MakeTransaction';
 
 
 type RegistrationFormProps = {
-  onSubmit: (values: RegistrationFormValues) => void;
+  onSubmit: (values: PaymentFormValues) => void;
 };
 
-type RegistrationFormValues = {
-  customerID: string;
-  vendorID: string;
-  email: string;
-  password: string;
-  amount: string;
- 
-  
-};
+// type RegistrationFormValues = {
+//   customerID: string;
+//   vendorID: string;
+//   email: string;
+//   password: string;
+//   amount: string;
+// };
 
 const selectStyle = {
   padding: "8px 12px",
@@ -31,36 +30,38 @@ const selectStyle = {
 
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const receiverIDPattern = /^[A-Z0-9]{8}$/;
 
 
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
-  const [values, setValues] = useState<RegistrationFormValues>({
-    customerID: '',
-    vendorID: '',
-    email: '',
+  const [values, setValues] = useState<PaymentFormValues>({
+    receiverID: '',
     password: '',
-    amount: '',
+    amount: 0,
+    transactionType: 2,
   });
 
-  const [errors, setErrors] = useState<Partial<RegistrationFormValues>>({});
+  const [errors, setErrors] = useState<Partial<PaymentFormValues>>({});
 
-  const validate = (values: RegistrationFormValues) => {
-    const errors: Partial<RegistrationFormValues> = {};
+  const validate = (values: PaymentFormValues) => {
+    const errors: Partial<PaymentFormValues> = {};
 
-    if (!values.customerID.trim()) {
-      errors.customerID = 'Customer ID is required';
+    if (!values.receiverID.trim()) {
+      errors.receiverID = 'Customer ID is required';
+    } else if(!receiverIDPattern.test(values.receiverID.trim())) {
+        errors.receiverID = 'Customer ID is invalid';
     }
-    if (!values.vendorID.trim()) {
-      errors.vendorID = 'Vendor ID is required';
-    }
+    // if (!values.vendorID.trim()) {
+    //   errors.vendorID = 'Vendor ID is required';
+    // }
 
 
-    if (!values.email.trim()) {
-      errors.email = 'Email is required';
-    } else if (!emailPattern.test(values.email.trim())) {
-      errors.email = 'Email is invalid';
-    }
+    // if (!values.email.trim()) {
+    //   errors.email = 'Email is required';
+    // } else if (!emailPattern.test(values.email.trim())) {
+    //   errors.email = 'Email is invalid';
+    // }
 
     if (!values.password.trim()) {
       errors.password = 'Password is required';
@@ -68,9 +69,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
         errors.password = 'Password is invalid';
     }
 
-    if (!values.amount.trim()) {
-        errors.amount = 'Amount is required';
-     }
+    // if (!values.amount.trim()) {
+    //     errors.amount = 'Amount is required';
+    //  }
 
 
 
@@ -90,7 +91,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      onSubmit(values);
+      makeTransaction(values);
     }
   };
 
@@ -113,19 +114,19 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="customerID"><b>Customer ID *</b></label>
+        <label htmlFor="receiverID"><b>Receiver ID *</b></label>
         <br />
         <Input 
           type="text"
-          id="customerID"
-          name="customerID"
+          id="receiverID"
+          name="receiverID"
           placeholder='123'
-          value={values.customerID}
+          value={values.receiverID}
           onChange={handleChange}
           style={{width:"100%"}}
         />
       </div>
-      <div> 
+      {/* <div> 
         <label htmlFor="vendorID"><b>Vendor ID *</b></label>
         <br />
         <Input
@@ -137,9 +138,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{width:"100%"}}
         />
+      </div> */}
 
-      </div>
-      <div>
+      {/* <div>
         <label htmlFor="email"><b>Email ID *</b></label>
         <br />
         <Input
@@ -152,7 +153,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           style={{width:"100%"}}
         />
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
-      </div>
+      </div> */}
+      
       <div>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
@@ -171,10 +173,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
         <label htmlFor="amount"><b>Amount *</b></label>
         <br />
         <Input
-            type="text"
+            type="number"
             id="amount"
             name="amount"
-            placeholder='100'
+            placeholder='110'
             value={values.amount}
             onChange={handleChange}
             style={{width:"100%"}}
