@@ -20,7 +20,8 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { TransactionHistoryDataFields } from '../../callbacks/VendorTransactions';
 
 
 
@@ -78,17 +79,19 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]}){
+function SearchBar({placeholder,data}:{placeholder:string, data:TransactionHistoryDataFields[]}){
+  console.log("inside search bar :", data);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(data);
+  const [filteredData, setFilteredData] =useState<TransactionHistoryDataFields[]>(data);
+  // setFilteredData(data);
+  console.log("inside render table :", filteredData);
   const handleFilter =(event:any) =>{
     const searchWord = event.target.value;
-    const newFilter = data.filter((value) =>{
-      return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
-              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
+    const newFilter = data.filter((value: TransactionHistoryDataFields) =>{
+      return (value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
               value.status.toLowerCase().includes(searchWord.toLowerCase())||
-              value.transactionid.toLowerCase().includes(searchWord.toLowerCase()))
+              value.transactionID.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(data);
@@ -97,6 +100,10 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
     }
     
   }
+
+    useEffect(() => {
+      setFilteredData(data);
+    }, [data]);
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -196,8 +203,8 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                           </thead>
                           <tbody>
                             {/* {stableSort(filteredData, getComparator(order, 'id')).map((row) => ( */}
-                            {filteredData.map((row:any) => (
-                              <tr key={row.id}>
+                            {filteredData.map((row:TransactionHistoryDataFields) => (
+                              <tr key={row.receiverID}>
                                 {/* <td style={{ textAlign: 'center' }}>
                                   <Checkbox
                                     checked={selected.includes(row.id)}
@@ -214,7 +221,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                   />
                                 </td> */}
                                 <td>
-                                  <Typography fontWeight="md">{row.id}</Typography>
+                                  <Typography fontWeight="md">{row.receiverID}</Typography>
                                 </td>
                                 <td>{row.date}</td>
                                 <td>
@@ -248,7 +255,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data:readonly any[]})
                                         level="body3"
                                         textColor="text.primary"
                                       >
-                                        {row.transactionid}
+                                        {row.transactionID}
                                       </Typography>
                                       
                                     </div>

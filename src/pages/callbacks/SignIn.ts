@@ -19,8 +19,16 @@ export const getLoggedInUser = async (data:LoginData) => {
         {
             username: data.username,
             password: data.password,
-        }
+        },
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            withCredentials: true,
+        },
     );
-    console.log(response.data);
+    console.log("response.request",response);
+    // console.log(response.data);
     return response.data;
 }
