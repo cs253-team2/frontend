@@ -215,7 +215,7 @@ export default function JoySignInSideTemplate() {
                     console.log(user);
                     localStorage.setItem("userid", user.user_id);
                     localStorage.setItem("type", user.type);
-                    if(user.type === "customer"){
+                    if(user.type === "CUSTOMER"){
                       navigate('/customer/overview');
                     } else {
                       navigate('/vendor/overview');
