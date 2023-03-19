@@ -212,10 +212,10 @@ export default function JoySignInSideTemplate() {
                 // alert(JSON.stringify(data, null, 2));
                 getLoggedInUser(data).then((user) => {
                   if (user) {
-                    console.log(user);
                     localStorage.setItem("userid", user.user_id);
                     localStorage.setItem("type", user.type);
-                    if(user.type === "customer"){
+                    console.log("User type is " + user.type);
+                    if(user.type === "CUSTOMER"){
                       navigate('/customer/overview');
                     } else {
                       navigate('/vendor/overview');
@@ -227,7 +227,7 @@ export default function JoySignInSideTemplate() {
               }}
             >
               <FormControl required>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Username</FormLabel>
                 <Input placeholder="Enter your email" type="text" name="email" />
               </FormControl>
               <FormControl required>

@@ -14,77 +14,95 @@ import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import TransactionTable from './components/TransactionTable';
-import { getTransactionHistory } from '../callbacks/TransactionHistory';
+import { getTransactionHistory, TransactionHistoryDataFields } from '../callbacks/TransactionHistory';
 
-const rows = [
-  {
-    id: 'INV-1234',
-    date: 'March 3, 2023',
-    status: 'Paid',
-    transactionid : '657489',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transactionid : '688489',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1232',
-    date: 'Jan 3, 2023',
-    status: 'Paid',
-    transactionid : '768947',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1231',
-    date: 'Feb 3, 2023',
-    status: 'Refunded',
-    transactionid : '876457',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1230',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transactionid : '567868',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1229',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '123456',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1228',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '667878',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1227',
-    date: 'April 3, 2023',
-    status: 'Paid',
-    transactionid : '657678',
-    amount : '1234',
-  },
-  {
-    id: 'INV-1226',
-    date: 'Feb 3, 2023',
-    status: 'Cancelled',
-    transactionid : '456789',
-    amount : '1234',
-  },
-];
+// const rows = [
+//   {
+//     id: 'INV-1234',
+//     date: 'March 3, 2023',
+//     status: 'Paid',
+//     transactionid : '657489',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1233',
+//     date: 'Feb 3, 2023',
+//     status: 'Paid',
+//     transactionid : '688489',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1232',
+//     date: 'Jan 3, 2023',
+//     status: 'Paid',
+//     transactionid : '768947',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1231',
+//     date: 'Feb 3, 2023',
+//     status: 'Refunded',
+//     transactionid : '876457',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1230',
+//     date: 'Feb 3, 2023',
+//     status: 'Paid',
+//     transactionid : '567868',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1229',
+//     date: 'Feb 3, 2023',
+//     status: 'Cancelled',
+//     transactionid : '123456',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1228',
+//     date: 'Feb 3, 2023',
+//     status: 'Cancelled',
+//     transactionid : '667878',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1227',
+//     date: 'April 3, 2023',
+//     status: 'Paid',
+//     transactionid : '657678',
+//     amount : '1234',
+//   },
+//   {
+//     id: 'INV-1226',
+//     date: 'Feb 3, 2023',
+//     status: 'Cancelled',
+//     transactionid : '456789',
+//     amount : '1234',
+//   },
+// ];
 
 export default function App() {
-  console.log(getTransactionHistory());
- 
+  // console.log(getTransactionHistory());
+
+
+  const [transactionHistoryData, setTransactionHistoryData] = React.useState<TransactionHistoryDataFields[]>([]);
+
+
+  const setTransactionHistoryDataTemp = (data: TransactionHistoryDataFields[]) => {
+    console.log("inside setter function");
+    setTransactionHistoryData(data);
+  };
+
+  React.useEffect (() => {
+    getTransactionHistory().then((data) => {
+      console.log("data received in profile page");
+      console.log(data);
+      setTransactionHistoryDataTemp(data);
+      console.log("Transaction History Data: ", transactionHistoryData);
+    });
+  }, []);
+
 
     return (
         <div>
@@ -146,7 +164,7 @@ export default function App() {
            
           </Box>
           <Box>
-            <TransactionTable placeholder="Enter to Search" data={rows} />
+            <TransactionTable placeholder="Enter to Search" data={transactionHistoryData} />
           </Box>
 
       

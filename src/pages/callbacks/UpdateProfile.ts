@@ -26,8 +26,12 @@ export interface UpdateFormDataFields {
 
 export const getUserData = async () => {
     console.log("inside callback");
+    const userID = localStorage.getItem("userid");
     const response = await axios.get<UserDataFieldsBackend>(
-        "http://localhost:8000/api/users/4NSTXCZJ/"
+        `http://localhost:8000/api/users/${userID}/`,
+        {
+            withCredentials: true,
+        }
     );
     console.log(response.data);
 
@@ -44,6 +48,6 @@ export const getUserData = async () => {
 
 export const setUserData = async (userValues : UpdateFormDataFields) => {
     console.log("calling backend for update data");
-    const response = await axios.put("http://localhost:8000/auth/update-profile/", userValues);
-    console.log(response);
+    // const response = await axios.patch("http://localhost:8000/api/users/4NSTXCZJ/", userValues);
+    // console.log(response);
 }

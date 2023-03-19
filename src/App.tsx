@@ -4,7 +4,7 @@ import SignIn from "./pages/signin/signin";
 // import Home from "./pages/Home";
 // import Blogs from "./pages/Blogs";
 import Vendor from "./pages/vendor/App";
-import NoPage from "./pages/error/App";
+import NoPage from "./pages/error/NotFound";
 import Register from "./pages/signin/RegisterPage";
 import Customer from "./pages/customer/App";
 import Notifications from "./pages/customer/Notifications";

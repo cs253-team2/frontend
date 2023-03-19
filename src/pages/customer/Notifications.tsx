@@ -19,16 +19,16 @@ import customTheme from './theme';
 import NotificationsTable from "./components/NotificationsTable";
 import axios from "axios";
 import { json } from 'stream/consumers';
-import { getNotifications } from '../callbacks/Notifications';
+import { getNotifications, NotificationDataFields } from '../callbacks/Notifications';
 
-interface Notification {
-  id: number;
-  timestamp: Date;
-  subject: string;
-  content: string;
-  mark_as_read: boolean;
-  user: string;
-}
+// interface Notification {
+//   id: number;
+//   timestamp: Date;
+//   subject: string;
+//   content: string;
+//   mark_as_read: boolean;
+//   user: string;
+// }
   
 
 
@@ -56,6 +56,23 @@ interface Notification {
 export default function App() {
 
 
+  // const [NotificationData, setNotificationData] = React.useState<NotificationDataFields[]>([]);
+
+
+  // const setNotificationDataTemp = (data: NotificationDataFields[]) => {
+  //   console.log("inside setter function");
+  //   setNotificationData(data);
+  // };
+
+  // useEffect (() => {
+  //   getNotifications().then((data) => {
+  //     console.log("data received in notifications.tsx");
+  //     console.log(data);
+  //     setNotificationDataTemp(data);
+  //     console.log("Notification Data: ", NotificationData);
+  //   });
+  // }, []);
+  // console.log(getNotifications());
       
     return (
         <div>
