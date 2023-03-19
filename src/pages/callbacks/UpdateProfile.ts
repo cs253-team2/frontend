@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookie } from "./getCookie";
+import Cookie from "js-cookie";
 
 export interface UserDataFieldsBackend {
     user_id: string;
@@ -52,7 +52,7 @@ export const setUserData = async (userValues : UpdateFormDataFields) => {
 
     console.log(userValues);
 
-    const CSRFToken = getCookie("csrftoken");
+    const CSRFToken = Cookie.get("csrftoken");
     console.log("CSRF Token is :");
     console.log(CSRFToken);
 
