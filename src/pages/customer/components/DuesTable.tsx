@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { ColorPaletteProp } from '@mui/joy/styles';
 import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
@@ -20,6 +20,7 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
+import {PendingDue} from "../../callbacks/CustomerDues";
 
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
@@ -54,24 +55,32 @@ function getComparator<Key extends keyof any>(
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
+function SearchBar({placeholder,rows}:{placeholder:string, rows:PendingDue[]}){
+  // console.log(rows);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(rows);
+  const [filteredData, setFilteredData] =useState<PendingDue[]>(rows);
   const handleFilter =(event:any) =>{
     const searchWord = event.target.value;
     const newFilter = rows.filter((value) =>{
-      return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
-              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
-              value.vendor.name.toLowerCase().includes(searchWord.toLowerCase()));
+      return (value.receiver_name.toLowerCase().includes(searchWord.toLowerCase()) || 
+              value.receiver_id.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.receiver_email.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.dues.toString().toLowerCase().includes(searchWord.toLowerCase()));
     })
     if(searchWord ==""){
       setFilteredData(rows);
     }else{
       setFilteredData(newFilter);
     }
-    
   }
+
+  console.log("filtered Data:",filteredData);
+
+    useEffect(()=>{
+      setFilteredData(rows);
+    },[])
+
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -141,27 +150,27 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                         },
                                     }}
                                     >
-                                    TransactionID
+                                    VendorID
                                     </Link>
                                 </th>
-                                <th style={{ width: 120, padding: 12 }}>Date</th>
+                                <th style={{ width: 120, padding: 12 }}>Vendor Name</th>
                                 {/* <th style={{ width: 120, padding: 12 }}>Status</th> */}
-                                <th style={{ width: 120, padding: 12 }}>Amount</th>
+                                <th style={{ width: 220, padding: 12 }}>Vendor Email</th>
 
-                                <th style={{ width: 220, padding: 12 }}>Vendor</th>
+                                <th style={{ width: 120, padding: 12 }}>Due Amount</th>
                                 </tr>
                             </thead>
                           <tbody>
                             {filteredData.map((row:any) => (
-                            <tr key={row.id} style={{alignItems:'center'}}>
+                            <tr key={row.receiver_id} style={{alignItems:'center'}}>
                                 <td>
-                                    <Typography fontWeight="md">{row.id}</Typography>
+                                    <Typography fontWeight="md">{row.receiver_id}</Typography>
                                 </td>
-                                <td>{row.date}</td>
-                                <td>{row.amount}</td>
+                                <td>{row.receiver_name}</td>
+                                <td>{row.receiver_email}</td>
                                 <td>
                                     <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                                    <Avatar size="sm">{row.vendor.initial}</Avatar>
+                                    {/* <Avatar size="sm">{row.dues}</Avatar> */}
                                     {/* <Modal open={open} onClose={() => setOpen(false)}>
                                         <ModalDialog variant="plain">
                                         <ModalClose />
@@ -176,9 +185,9 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                                         level="body3"
                                         textColor="text.primary"
                                         >
-                                        {row.vendor.name}
+                                        {row.dues}
                                         </Typography>
-                                        <Typography level="body3">{row.vendor.email}</Typography>
+                                        {/* <Typography level="body3">{row.dues}</Typography> */}
                                     </div>
                                     </Box>
                                 </td>
