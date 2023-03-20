@@ -18,5 +18,5 @@ export const clearVendorDue = async (vendor_id: string) => {
         },
     );
 
-    console.log(response.data);
+    // //console.log(response.data);
 }

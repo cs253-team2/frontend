@@ -60,19 +60,19 @@ export default function App() {
 
 
   // const setNotificationDataTemp = (data: NotificationDataFields[]) => {
-  //   console.log("inside setter function");
+  //   //console.log("inside setter function");
   //   setNotificationData(data);
   // };
 
   // useEffect (() => {
   //   getNotifications().then((data) => {
-  //     console.log("data received in notifications.tsx");
-  //     console.log(data);
+  //     //console.log("data received in notifications.tsx");
+  //     //console.log(data);
   //     setNotificationDataTemp(data);
-  //     console.log("Notification Data: ", NotificationData);
+  //     //console.log("Notification Data: ", NotificationData);
   //   });
   // }, []);
-  // console.log(getNotifications());
+  // //console.log(getNotifications());
       
     return (
         <div>

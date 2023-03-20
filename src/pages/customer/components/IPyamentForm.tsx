@@ -37,7 +37,7 @@ const receiverIDPattern = /^[A-Z0-9]{8}$/;
 
 const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) => {
 
-  console.log("Form source is " + formSource);
+  // //console.log("Form source is " + formSource);
   const [values, setValues] = useState<PaymentFormValues>({
     receiverID: '',
     password: '',
@@ -83,7 +83,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
+    // //console.log(values);
     // const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
     // setValues((prevValues) => ({
     //   ...prevValues,
@@ -94,8 +94,8 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      console.log("The following values are being submitted");
-      console.log(values);
+      // //console.log("The following values are being submitted");
+      // //console.log(values);
       makeTransaction(values);
     }
   };
@@ -192,7 +192,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
       <br />
       <Button type="submit" fullWidth 
       // onClick={signinpage}
-      // onClick = { () => console.log(values)}
+      // onClick = { () => //console.log(values)}
       >
                 Make Payment
       </Button>

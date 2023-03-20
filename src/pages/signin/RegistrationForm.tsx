@@ -87,7 +87,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
+    //console.log(values);
     const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
     setValues((prevValues) => ({
       ...prevValues,
@@ -106,7 +106,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
         confirm_password: values.confirmPassword,
       } 
       registerUser(data).then((response) => {
-      // console.log(response);
+      // //console.log(response);
       navigate('/');
       });
     }
@@ -118,7 +118,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       ...prevValues,
       [name]: value,
     }));
-    // console.log(values);
+    // //console.log(values);
     if( name == "userType") {
       setUserType(value);
     }
@@ -307,7 +307,7 @@ export default RegistrationForm;
 
 //     return (
 //         <div>
-//             <form onSubmit={handleSubmit(console.log)}>
+//             <form onSubmit={handleSubmit(//console.log)}>
 //                 <label>First Name *</label>
 //                 <input  {...register("firstName")} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} placeholder="First name" type="text" name="fname"/>
 //                 {/* {errors.firstName && <p style={{color: "red"}}>Please enter the name</p>} */}
@@ -359,7 +359,7 @@ export default RegistrationForm;
 
 //     return (
 //         <div>
-//             <form onSubmit={handleSubmit(console.log)}>
+//             <form onSubmit={handleSubmit(//console.log)}>
 //                 <label>First Name *</label>
 //                 <input {...register("firstName", { required: true })} placeholder="First name" type="text" name="fname"/>
 //                 {errors.firstName && <p style={{color: "red"}}>Please enter the name</p>}

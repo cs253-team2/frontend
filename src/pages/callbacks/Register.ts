@@ -17,7 +17,7 @@ export interface userRegistrationResponse {
 }
 
 export const registerUser = async (data: userRegistrationData) => {
-    console.log("inside registration callback",data);
+    // //console.log("inside registration callback",data);
     const response = await axios.post<userRegistrationResponse>(
         "http://localhost:8000/auth/register/",
         data,
@@ -28,6 +28,6 @@ export const registerUser = async (data: userRegistrationData) => {
             },
         },
     );
-    console.log(response.data);
+    // //console.log(response.data);
     return response.data;
 }

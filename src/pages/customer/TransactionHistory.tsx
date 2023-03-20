@@ -83,23 +83,23 @@ import { getTransactionHistory, TransactionHistoryDataFields } from '../callback
 // ];
 
 export default function App() {
-  // console.log(getTransactionHistory());
+  // //console.log(getTransactionHistory());
 
 
   const [transactionHistoryData, setTransactionHistoryData] = React.useState<TransactionHistoryDataFields[]>([]);
 
 
   const setTransactionHistoryDataTemp = (data: TransactionHistoryDataFields[]) => {
-    console.log("inside setter function");
+    //console.log("inside setter function");
     setTransactionHistoryData(data);
   };
 
   React.useEffect (() => {
     getTransactionHistory().then((data) => {
-      console.log("data received in profile page");
-      console.log(data);
+      //console.log("data received in profile page");
+      //console.log(data);
       setTransactionHistoryDataTemp(data);
-      console.log("Transaction History Data: ", transactionHistoryData);
+      //console.log("Transaction History Data: ", transactionHistoryData);
     });
   }, []);
 

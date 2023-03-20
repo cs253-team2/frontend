@@ -80,12 +80,12 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 }
 
 function SearchBar({placeholder,data}:{placeholder:string, data:TransactionHistoryDataFields[]}){
-  console.log("inside search bar :", data);
+  //console.log("inside search bar :", data);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
   const [filteredData, setFilteredData] =useState<TransactionHistoryDataFields[]>(data);
   // setFilteredData(data);
-  console.log("inside render table :", filteredData);
+  //console.log("inside render table :", filteredData);
   const handleFilter =(event:any) =>{
     const searchWord = event.target.value;
     const newFilter = data.filter((value: TransactionHistoryDataFields) =>{

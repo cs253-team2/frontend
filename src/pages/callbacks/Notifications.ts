@@ -26,7 +26,7 @@ export const getNotifications = async () => {
           withCredentials: true,
         }
     );
-    // console.log(response.data);
+    // //console.log(response.data);
 
     const returnData : NotificationDataFields[] = [];
     let n = response.data.length;
@@ -42,8 +42,8 @@ export const getNotifications = async () => {
         returnData[n - i - 1].date = returnData[n - i - 1].date.substring(8,10) + "/" + returnData[n - i - 1].date.substring(5,7) + "/" + returnData[n - i - 1].date.substring(0,4);
     }
 
-    console.log(returnData[0].date + " " + returnData[0].time);
-    console.log(returnData[1].date + " " + returnData[1].time);
+    // //console.log(returnData[0].date + " " + returnData[0].time);
+    // //console.log(returnData[1].date + " " + returnData[1].time);
 
     return returnData;
 };

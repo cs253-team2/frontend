@@ -182,25 +182,25 @@ export default function VendorTable() {
   };
 
   const handleClearDues = (user_id: string) => {
-    console.log("Clear Dues", user_id);
+    //console.log("Clear Dues", user_id);
     clearVendorDue(user_id).then((data:string) => {
-      console.log(data);
+      //console.log(data);
     });
   };
 
   const setVendorData = (data: Vendor[]) => {
-    console.log("inside setter function");
+    //console.log("inside setter function");
     setVendorsData(data);
     setFilteredData(data);
   };
 
   useEffect (() => {
-    // console.log("use effect called in vendor table");
+    // //console.log("use effect called in vendor table");
     getVendorData().then((data) => {
-      console.log("data received in vendor table");
-      console.log(data);
+      //console.log("data received in vendor table");
+      //console.log(data);
       setVendorData(data);
-      console.log("Vendors Data: ",vendorsData);
+      //console.log("Vendors Data: ",vendorsData);
     });
   }, []);
 

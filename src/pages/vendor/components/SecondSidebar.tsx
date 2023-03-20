@@ -76,16 +76,16 @@ const vendorpage = () => {
 
 
   const setUserData = (data: UserDataFields) => {
-    console.log("inside setter function");
+    //console.log("inside setter function");
     setUsersData(data);
   };
 
   React.useEffect (() => {
     getUserData().then((data) => {
-      console.log("data received in profile page");
-      console.log(data);
+      //console.log("data received in profile page");
+      //console.log(data);
       setUserData(data);
-      console.log("Vendors Data: ", UserData);
+      //console.log("Vendors Data: ", UserData);
     });
   }, []);
 

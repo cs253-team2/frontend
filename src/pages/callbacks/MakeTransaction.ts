@@ -35,5 +35,5 @@ export const makeTransaction = async (data: PaymentFormValues) => {
             headers: headers,
             withCredentials: true,
         },
-    ).then((response) => {console.log(response)}).catch((error) => {console.log(error)});
+    ).then((response) => {}).catch((error) => {console.log(error)});
 }

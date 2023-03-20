@@ -88,10 +88,10 @@ export default function App() {
   const [rows, setRows] = React.useState<TransactionHistoryDataFields[]>([]);
 
   useEffect(()=>{
-    console.log("useEffect called");
+    //console.log("useEffect called");
     const userid:string|null = localStorage.getItem('userid');
     getTransactions(userid).then((data:TransactionHistoryDataFields[])=>{
-      console.log("data is ", data);
+      //console.log("data is ", data);
       setRows(data);
     });
 
