@@ -232,8 +232,10 @@ function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHist
                                     startDecorator={
                                       {
                                         Paid: <i data-feather="chevron-right" />,
-                                        Refunded: <i data-feather="circle" />,
-                                        Cancelled: <i data-feather="circle" />,
+                                        Failed: <i data-feather="circle" />,
+                                        Pending: <i data-feather="circle" />,
+                                        InReview: <i data-feather="circle" />,
+                                        Cleared: <i data-feather="circle" />,
                                       }[row.status]
                                     }
                                     color={
@@ -241,6 +243,8 @@ function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHist
                                         Paid: 'success',
                                         Failed: 'danger',
                                         Pending: 'warning', // yellow
+                                        InReview: 'warning', // yellow
+                                        Cleared: 'success',
                                       }[row.status] as ColorPaletteProp
                                     }
                                   >

@@ -15,8 +15,14 @@ import ColorSchemeToggle from "./components/ColorSchemeToggle";
 import customTheme from "./theme";
 import VendorTable from "./components/VendorTable";
 import { useEffect } from "react";
-import { getVendorData } from "../callbacks/VendorData";
+import { clearDues } from "../callbacks/CustomerClearDues";
+
 export default function App() {
+
+  const handleClick = () => {
+    clearDues();
+  };
+
 
   return (
     <div>
@@ -75,7 +81,7 @@ export default function App() {
           Vendors
         </Typography>
         <Box sx={{ flex: 999 }} />
-        <Button color="danger" href="#contained-buttons">
+        <Button color="danger" onClick={handleClick}>
           Clear All Dues
         </Button>
       </Box>
