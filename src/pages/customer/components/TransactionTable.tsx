@@ -104,6 +104,11 @@ function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHist
 
   console.log("Filtered data is");
   console.log(filteredData);
+
+  React.useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
+
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -204,7 +209,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHist
                           </thead>
                           <tbody>
                             {/* {stableSort(filteredData, getComparator(order, 'id')).map((row) => ( */}
-                            {data.map((row:TransactionHistoryDataFields) => (
+                            {filteredData.map((row:TransactionHistoryDataFields) => (
                               <tr key={row.transactionID}>
                                 {/* <td style={{ textAlign: 'center' }}>
                                   <Checkbox
@@ -244,7 +249,7 @@ function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHist
                                         Failed: 'danger',
                                         Pending: 'warning', // yellow
                                         InReview: 'warning', // yellow
-                                        Cleared: 'success',
+                                        Cleared: 'primary',
                                       }[row.status] as ColorPaletteProp
                                     }
                                   >
