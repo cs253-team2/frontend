@@ -1,29 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
-import { Input, Select, Option} from '@mui/joy';
+import { Input, Select, Option, Typography} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
+import { getUserData, setUserData, UpdateFormDataFields } from '../../callbacks/UpdateProfile';
 
 
-type RegistrationFormProps = {
-  onSubmit: (values: RegistrationFormValues) => void;
+type UpdateProfileFormProps = {
+  disableComponents: boolean;
 };
 
-type RegistrationFormValues = {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 
 const selectStyle = {
   padding: "8px 12px",
   borderRadius: "6px",
   border: "1px solid #ccc",
   backgroundColor: "background.body",
-  // color: "#444",
   fontSize: "16px",
   cursor: "pointer",
   width:"100%",
@@ -33,26 +25,52 @@ const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneNumberPattern = /^\d{10}$/;
 
+// const onSubmit = async (data: UpdateFormDataFields) => {
+//   const res = await axios.patch('', data);
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
-  const [values, setValues] = useState<RegistrationFormValues>({
-    firstName: '',
-    lastName: '',
+// }
+
+
+const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents }) => {
+  console.log("registration page");
+
+  const reloadPageonSubmit = useNavigate();
+      function reloadpage() {
+        reloadPageonSubmit('/vendor/profile');
+        window.location.reload();
+  }
+
+
+  React.useEffect (() => {
+    console.log("use effect called in update profile table");
+    getUserData().then((data) => {
+      console.log("data received in update profile page");
+      console.log(data);
+
+      setValues(data);
+    });
+  }, []);
+    
+    const [values, setValues] = useState<UpdateFormDataFields>({
+      // userName: UserData.userName,
+      // userID: UserData.userID,
+      // phoneNumber: UserData.phoneNumber,
+      // email: UserData.email,
+      // password: '',
+      // confirmPassword: '',
+      // userType: UserData.userType,
+    userName: '',
+    userID: '',
     phoneNumber: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-   
   });
 
-  const [errors, setErrors] = useState<Partial<RegistrationFormValues>>({});
+  // console.log("values is " + values.userName + values.userID + values.phoneNumber + values.email);
 
-  const validate = (values: RegistrationFormValues) => {
-    const errors: Partial<RegistrationFormValues> = {};
+  const [errors, setErrors] = useState<Partial<UpdateFormDataFields>>({});
 
-    if (!values.firstName.trim()) {
-      errors.firstName = 'First name is required';
-    }
+  const validate = (values: UpdateFormDataFields) => {
+    const errors: Partial<UpdateFormDataFields> = {};
 
     if (!values.phoneNumber.trim()) {
       errors.phoneNumber = 'Phone number is required';
@@ -66,39 +84,38 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
       errors.email = 'Email is invalid';
     }
 
-    if (!values.password.trim()) {
-      errors.password = 'Password is required';
-    } else if(!passwordPattern.test(values.password.trim())) {
-        errors.password = 'Password is invalid';
-    }
+    // if (!values.password.trim()) {
+    //   errors.password = 'Password is required';
+    // } else if(!passwordPattern.test(values.password.trim())) {
+    //     errors.password = 'Password is invalid';
+    // }
 
-    if (!values.confirmPassword.trim()) {
-      errors.confirmPassword = 'Confirm password is required';
-    }
+    // if (!values.confirmPassword.trim()) {
+    //   errors.confirmPassword = 'Confirm password is required';
+    // }
 
-    if (values.password.trim() !== values.confirmPassword.trim()) {
-      errors.confirmPassword = 'Passwords do not match';
-    }
-
-    
+    // if (values.password.trim() !== values.confirmPassword.trim()) {
+    //   errors.confirmPassword = 'Passwords do not match';
+    // }
+    return errors;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(values);
-    const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
-    setValues((prevValues) => ({
-      ...prevValues,
-      userType: userTypeInputElement.value,
-    }));
+    // const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
 
     const errors = validate(values);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      onSubmit(values);
+      setUserData(values); //api call
+      console.log("values have been set");
+      
+      reloadpage();
     }
-  };
+  }
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -110,15 +127,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
     setErrors((errors) => ({ ...errors, [name]: ''}));
   };
 
-  const navigate = useNavigate();
-  const signinpage = () => {
-    navigate('/');
-    window.location.reload();
-  };
-
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      {/* <div>
         <label htmlFor="firstName"><b>First Name *</b></label>
         <br />
         <Input
@@ -144,6 +155,33 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           onChange={handleChange}
           style={{width:"100%"}}
         />
+      </div> */}
+
+      <div>
+        <label htmlFor="userID"><b>User ID *</b></label>
+        <br />
+        {/* <Input
+          type="text"
+          id="userName"
+          name="userName"
+          placeholder={UserData.userName}
+          onChange={handleChange}
+          style={{width:"100%"}}
+          disabled= {true}
+        /> */}
+        <Typography level="h6" variant="soft" color="neutral"> {values.userID}</Typography>
+      </div>
+      <div>
+        <label htmlFor="userName"><b>User Name *</b></label>
+          <br />
+          <Input
+            type="text"
+            id="userName"
+            name="userName"
+            value={values.userName}
+            onChange={handleChange}
+            style={{width:"100%"}}
+          />
       </div>
       <div>
         <label htmlFor="phoneNumber"><b>Phone Number *</b></label>
@@ -156,6 +194,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.phoneNumber}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {disableComponents}
         />
         {errors.phoneNumber && <span style={{color: "red"}}> {errors.phoneNumber} </span>}
       </div>
@@ -170,10 +209,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.email}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {disableComponents}
         />
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
       </div>
-      <div>
+        <br />
+      {/* <div>
+        <Typography level="h6">Enter your current password for authentication.</Typography>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
         <Input
@@ -184,10 +226,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.password}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {disableComponents}
         />
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
-      </div>
-      <div>
+      </div> */}
+
+      {/* <div>
         <label htmlFor="confirmPassword"><b>Confirm Password *</b></label>
         <br />
         <Input
@@ -198,16 +242,19 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
           value={values.confirmPassword}
           onChange={handleChange}
           style={{width:"100%"}}
+          disabled= {disableComponents}
         />
         {errors.confirmPassword && <span style={{color: "red"}}> {errors.confirmPassword} </span>}
-      </div>
+      </div> */}
 
-      <br />
-      <Button type="submit" fullWidth>
+      <div>
+        {!disableComponents && 
+        <Button type="submit" fullWidth>
          Save Changes
-      </Button>
+      </Button>}
+      </div>
     </form>
   );
 };
 
-export default RegistrationForm;
+export default UpdateProfileForm;

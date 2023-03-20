@@ -3,6 +3,7 @@ import Button from '@mui/joy/Button';
 import FormLabel from '@mui/joy/FormLabel';
 import { Input, Select, Option} from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
+import { PaymentFormValues, makeTransaction } from '../../callbacks/MakeTransaction';
 
 
 type PaymentFormProps = {
@@ -10,13 +11,13 @@ type PaymentFormProps = {
   formSource: number;
 };
 
-type PaymentFormValues = {
-  receiverID: string;
-  // vendorID: string;
-  // email: string;
-  password: string;
-  amount: string;
-};
+// type PaymentFormValues = {
+//   receiverID: string;
+//   // vendorID: string;
+//   // email: string;
+//   password: string;
+//   amount: string;
+// };
 
 const selectStyle = {
   padding: "8px 12px",
@@ -39,10 +40,9 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
   console.log("Form source is " + formSource);
   const [values, setValues] = useState<PaymentFormValues>({
     receiverID: '',
-    // vendorID: '',
-    // email: '',
     password: '',
-    amount: '',
+    amount: 0,
+    transactionType: formSource,
   });
 
   const [errors, setErrors] = useState<Partial<PaymentFormValues>>({});
@@ -73,9 +73,9 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
         errors.password = 'Password is invalid';
     }
 
-    if (!values.amount.trim()) {
-      errors.amount = 'Amount is required';
-    }
+    // if (!values.amount.trim()) {
+    //   errors.amount = 'Amount is required';
+    // } else if(values.amount <= 0) {}
 
 
     return errors;
@@ -94,7 +94,9 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      onSubmit(values);
+      console.log("The following values are being submitted");
+      console.log(values);
+      makeTransaction(values);
     }
   };
 
@@ -177,7 +179,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
         <label htmlFor="amount"><b>Amount *</b></label>
         <br />
         <Input
-          type="text"
+          type="number"
           id="amount"
           name="amount"
           placeholder='100'
@@ -190,7 +192,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
       <br />
       <Button type="submit" fullWidth 
       // onClick={signinpage}
-      onClick = { () => console.log(values)}
+      // onClick = { () => console.log(values)}
       >
                 Make Payment
       </Button>
