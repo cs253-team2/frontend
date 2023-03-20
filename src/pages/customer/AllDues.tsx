@@ -120,10 +120,13 @@ import {PendingDues, PendingDue, getPendingDues} from '../callbacks/CustomerDues
 // ];
 
 export default function App() {
-    // console.log(getAllDues());
-
     const [rows, setRows] = React.useState<PendingDue[]>([]);
 
+    
+    
+    
+    
+    
     React.useEffect(() => {
         getPendingDues().then((data: PendingDue[]) => {
             setRows(data);
