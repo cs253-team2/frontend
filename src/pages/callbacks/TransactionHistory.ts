@@ -45,7 +45,10 @@ export const getTransactionHistory = async () => {
         returnData[n - i - 1] = {
             receiverID: response.data[i].receiver,
             date: response.data[i].timestamp.substring(0,10),
-            status: response.data[i].transaction_status === 0 ? 'Paid' : (response.data[i].transaction_status === 1 ? 'Failed' : 'Pending'),
+            status: response.data[i].transaction_status === 0 ? 'Paid' :
+                    response.data[i].transaction_status === 1 ? 'Failed' :
+                    response.data[i].transaction_status === 2 ? 'Pending' :
+                    response.data[i].transaction_status === 3 ? 'In Review' : "Cleared",
             transactionID: response.data[i].transaction_id,
             amount: response.data[i].transaction_amount,
         };

@@ -79,7 +79,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:PendingDue[]}){
 
     useEffect(()=>{
       setFilteredData(rows);
-    },[])
+    },[rows])
 
     return (
         <div className="search">
