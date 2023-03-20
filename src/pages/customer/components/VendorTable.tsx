@@ -30,6 +30,7 @@ import { border } from "@chakra-ui/react";
 import { flexbox } from '@mui/system';
 import { useEffect } from "react";
 import { Vendor, getVendorData } from "../../callbacks/VendorData";
+import { clearVendorDue } from "../../callbacks/CustomerClearVendorDues";
 
 // const rows = [
 //   {
@@ -180,6 +181,13 @@ export default function VendorTable() {
     }
   };
 
+  const handleClearDues = (user_id: string) => {
+    console.log("Clear Dues", user_id);
+    clearVendorDue(user_id).then((data:string) => {
+      console.log(data);
+    });
+  };
+
   const setVendorData = (data: Vendor[]) => {
     console.log("inside setter function");
     setVendorsData(data);
@@ -279,10 +287,10 @@ export default function VendorTable() {
                       </Typography>
                       <Box sx={{ display: "flex", pt: 1 }}>
                         <div>
-                          <Typography level="body3">Vendor since:</Typography>
+                          {/* <Typography level="body3">Vendor since:</Typography>
                           <Typography fontSize="16px" fontWeight="lg">
                             {row.last_login}
-                          </Typography>
+                          </Typography> */}
                         </div>
                         <Button
                           variant="solid"
@@ -290,6 +298,8 @@ export default function VendorTable() {
                           color="success"
                           aria-label="Explore Bahamas Islands"
                           sx={{ ml: "auto", fontWeight: 600 }}
+
+                          onClick={()=>handleClearDues(row.user_id)}
                         >
                           Clear Dues
                         </Button>
