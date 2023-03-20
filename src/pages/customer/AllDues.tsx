@@ -187,7 +187,6 @@ export default function App() {
               All Dues
             </Typography>
             <Box sx={{ flex: 999 }} />
-
            
           </Box>
           <DuesTable placeholder="Enter to search" rows={rows}/>
