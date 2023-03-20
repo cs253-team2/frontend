@@ -48,14 +48,14 @@ const info =
 
 export default function App() {
 
-  console.log("inside settings page");
-  // console.log(getUserData);
+  //console.log("inside settings page");
+  // //console.log(getUserData);
 
 
 
 
   // const setUserData = (data: userDataFields) => {
-  //   console.log("inside setter function");
+  //   //console.log("inside setter function");
   //   setUsersData(data);
   // };
 
@@ -144,7 +144,7 @@ export default function App() {
             }}>
           <div>
             <Card>
-              {/* <UpdateForm onSubmit={()=>console.log("tera ma ka bhosda")}disableComponents={false}/> */}
+              {/* <UpdateForm onSubmit={()=>//console.log("tera ma ka bhosda")}disableComponents={false}/> */}
             </Card>
           </div>
           </Box>

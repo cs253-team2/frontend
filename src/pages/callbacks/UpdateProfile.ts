@@ -26,16 +26,16 @@ export interface UpdateFormDataFields {
 }
 
 export const getUserData = async () => {
-    console.log("inside callback");
+    // //console.log("inside callback");
     const userID = localStorage.getItem("userid");
-    console.log(userID);
+    // //console.log(userID);
     const response = await axios.get<UserDataFieldsBackend>(
         `http://localhost:8000/api/users/${userID}/`,
         {
             withCredentials: true,
         }
     );
-    console.log(response.data);
+    //console.log(response.data);
 
     const userData: UpdateFormDataFields = {
         userName: response.data.username,
@@ -43,18 +43,18 @@ export const getUserData = async () => {
         email: response.data.email,
         phoneNumber: response.data.phone_number,
     };
-    console.log("final data to be passed:");
-    console.log(userData);
+    // //console.log("final data to be passed:");
+    // //console.log(userData);
     return userData;
 };
 
 export const setUserData = async (userValues : UpdateFormDataFields) => {
 
-    console.log(userValues);
+    // //console.log(userValues);
 
     const CSRFToken = Cookie.get("csrftoken");
-    console.log("CSRF Token is :");
-    console.log(CSRFToken);
+    // //console.log("CSRF Token is :");
+    // //console.log(CSRFToken);
 
     const headers = {
         'Content-Type': 'application/json',  //specifies the format of data
@@ -62,7 +62,7 @@ export const setUserData = async (userValues : UpdateFormDataFields) => {
         'X-CSRFToken': CSRFToken,
     };
 
-    console.log("calling backend for update data");
+    // //console.log("calling backend for update data");
     const response = await axios.put(
         `http://localhost:8000/auth/update-profile/`, 
         {
@@ -75,6 +75,5 @@ export const setUserData = async (userValues : UpdateFormDataFields) => {
             headers: headers,
             withCredentials: true,
         },
-    ).then((response) => {console.log(response)}).catch((error) => {console.log(error)});
-    // console.log(response);
+    ).then((response) => {}).catch((error) => {console.log(error)});
 }

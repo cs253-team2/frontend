@@ -19,15 +19,15 @@ export interface Vendor {
 
 export const getVendorData = async () => {
     const userID = localStorage.getItem("userid");
-    // console.log("inside callback");
+    // //console.log("inside callback");
     const response = await axios.get<Vendor[]>(
         `http://localhost:8000/api/users/${userID}/vendors/`,
         {
             withCredentials: true,
         }
     );
-    console.log("vendor data is: ");
-    console.log(response.data);
+    // //console.log("vendor data is: ");
+    // //console.log(response.data);
     return response.data;
 };
 

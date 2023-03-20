@@ -31,8 +31,8 @@ export default function OverviewComponent() {
     content: string;
   }
 
-  console.log("inside overview component");
-  console.log(getOverviewRecentTransactions());
+  //console.log("inside overview component");
+  //console.log(getOverviewRecentTransactions());
   
   const [ open, setOpen ] = React.useState(false);
   const [ addMoneyOpen, setMoneyOpen ] = React.useState(false);

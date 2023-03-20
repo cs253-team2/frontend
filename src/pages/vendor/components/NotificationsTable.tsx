@@ -75,7 +75,7 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
     setOpen(true);
   };
   const handleFilter =(event:any) =>{
-    console.log(event);
+    //console.log(event);
     const searchWord = event.target.value;
     const newFilter = rows.filter((value:any) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 

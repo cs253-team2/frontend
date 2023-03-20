@@ -20,23 +20,23 @@ export interface TransactionHistoryDataFields {
 export const getTransactionHistory = async () => {
     // localStorage.getItem("userid");
     const userID = localStorage.getItem("userid");
-    console.log("userID is ", userID);
-    console.log("inside transaction history callback");
+    // //console.log("userID is ", userID);
+    // //console.log("inside transaction history callback");
     const response = await axios.get<TransactionHistoryDataFieldsBackend[]>(
         `http://localhost:8000/api/users/${userID}/transactions/`,
         {
             withCredentials: true,
         }
     );
-    console.log("transaction history data is (in callback): ");
-    console.log(response.data);
-    // console.log("transaction history timestamp is: " + response.data[0].timestamp);
+    // //console.log("transaction history data is (in callback): ");
+    // //console.log(response.data);
+    // //console.log("transaction history timestamp is: " + response.data[0].timestamp);
     // const date = response.data[3].timestamp.substring(0,10);
-    // console.log("date is: " + date);
+    // //console.log("date is: " + date);
     // const time = response.data[3].timestamp.substring(11,19);
-    // console.log("time is: " + time);
+    // //console.log("time is: " + time);
 
-    // console.log("receiver is : " + response.data[1].receiver);
+    // //console.log("receiver is : " + response.data[1].receiver);
 
     const returnData : TransactionHistoryDataFields[] = [];
     let n = response.data.length;
@@ -54,6 +54,6 @@ export const getTransactionHistory = async () => {
         };
         returnData[n - i - 1].date = returnData[n - i - 1].date.substring(8,10) + "/" + returnData[n - i - 1].date.substring(5,7) + "/" + returnData[n - i - 1].date.substring(0,4);
     }
-    // console.log(returnData);
+    // //console.log(returnData);
     return returnData;
 };

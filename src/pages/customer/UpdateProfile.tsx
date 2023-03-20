@@ -30,7 +30,7 @@ export default function App() {
     window.location.reload();
   };
 
-  console.log(getUserData);
+  //console.log(getUserData);
 
   // const [UserData, setUsersData] = React.useState<userDataFields>(
   //   {
@@ -45,17 +45,17 @@ export default function App() {
   // );
 
   // const setUserData = (data: userDataFields) => {
-  //   console.log("inside setter function");
+  //   //console.log("inside setter function");
   //   setUsersData(data);
   // };
 
   // React.useEffect (() => {
-  //   console.log("use effect called in update profile table");
+  //   //console.log("use effect called in update profile table");
   //   getUserData().then((data) => {
-  //     console.log("data received in update profile page");
-  //     console.log(data);
+  //     //console.log("data received in update profile page");
+  //     //console.log(data);
   //     setUserData(data);
-  //     console.log("Vendors Data: ", UserData);
+  //     //console.log("Vendors Data: ", UserData);
   //   });
   // }, []);
 

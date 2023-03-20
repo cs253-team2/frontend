@@ -27,7 +27,7 @@ type ProfileCardProps = {
 }
 
 const onSubmit = (values: UserDataFields) => {
-  console.log(values);
+  //console.log(values);
 }
 
 
@@ -35,7 +35,7 @@ const onSubmit = (values: UserDataFields) => {
 export default function App(props: ProfileCardProps) {
     const { register, handleSubmit, formState: { errors } } = useForm(); //destucturing useForm
 
-    console.log("Profile card called");
+    //console.log("Profile card called");
 
     
     return (

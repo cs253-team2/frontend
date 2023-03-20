@@ -9,5 +9,5 @@ export const clearDues = async () => {
         },
     );
 
-    console.log(response.data);
+    //console.log(response.data);
 }

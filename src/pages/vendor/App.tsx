@@ -47,7 +47,7 @@ export default function JoyOrderDashboardTemplate(props) {
   
   
   function ExportComponent(){
-    console.log(options);
+    //console.log(options);
     const userType = localStorage.getItem("type");
     if(userType == "CUSTOMER" | userType == null){
       return <Navigate to="/random" />
@@ -55,22 +55,22 @@ export default function JoyOrderDashboardTemplate(props) {
     if(options.overview){
       return <Overview/>
     } else if(options.notifications){
-      console.log("notifications");
+      //console.log("notifications");
       return <Notifications/>
     } else if(options.alldues){
-      console.log("Alldues");
+      //console.log("Alldues");
       return <AllDues/>
     } else if(options.transaction_history){
-      console.log("transaction_history");
+      //console.log("transaction_history");
       return <TransactionHistory/>
     } else if(options.customers){
-      console.log("vendors");
+      //console.log("vendors");
       return <Customers/>
     } else if(options.profile){
-      console.log("profile");
+      //console.log("profile");
       return <Profile/>
     } else if(options.settings){
-      console.log("settings");
+      //console.log("settings");
       return <Settings/>
     }
   }

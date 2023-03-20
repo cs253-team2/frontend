@@ -32,21 +32,21 @@ const phoneNumberPattern = /^\d{10}$/;
 
 
 const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents }) => {
-  console.log("registration page");
+  //console.log("registration page");
 
   const reloadPageonSubmit = useNavigate();
       function reloadpage() {
-        console.log("window reload called");
+        //console.log("window reload called");
         // reloadPageonSubmit('/vendor/profile');
         // window.location.reload();
   }
 
 
   React.useEffect (() => {
-    console.log("use effect called in update profile table");
+    //console.log("use effect called in update profile table");
     getUserData().then((data) => {
-      console.log("data received in update profile page");
-      console.log(data);
+      //console.log("data received in update profile page");
+      //console.log(data);
 
       setValues(data);
     });
@@ -66,7 +66,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
     email: '',
   });
 
-  // console.log("values is " + values.userName + values.userID + values.phoneNumber + values.email);
+  // //console.log("values is " + values.userName + values.userID + values.phoneNumber + values.email);
 
   const [errors, setErrors] = useState<Partial<UpdateFormDataFields>>({});
 
@@ -103,7 +103,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
+    //console.log(values);
     // const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
 
     const errors = validate(values);
@@ -111,7 +111,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
 
     if (Object.keys(errors).length === 0) {
       setUserData(values); //api call
-      console.log("values have been set");
+      //console.log("values have been set");
       
       reloadpage();
     }

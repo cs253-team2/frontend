@@ -31,7 +31,7 @@ export default function App() {
     window.location.reload();
   };
 
-  // console.log(getUserData);
+  // //console.log(getUserData);
 
   const [UserData, setUsersData] = React.useState<UserDataFields>(
     {
@@ -47,16 +47,16 @@ export default function App() {
 
 
   const setUserData = (data: UserDataFields) => {
-    console.log("inside setter function");
+    //console.log("inside setter function");
     setUsersData(data);
   };
 
   useEffect (() => {
     getUserData().then((data) => {
-      console.log("data received in profile page");
-      console.log(data);
+      //console.log("data received in profile page");
+      //console.log(data);
       setUserData(data);
-      console.log("Vendors Data: ", UserData);
+      //console.log("Vendors Data: ", UserData);
     });
   }, []);
 
