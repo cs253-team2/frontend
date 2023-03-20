@@ -22,23 +22,45 @@ import { useNavigate } from 'react-router-dom';
 import { Input, Sheet } from '@mui/joy';
 import { getVendorData } from '../callbacks/VendorData';
 import { useEffect } from 'react';
+import { getOverviewNavbarData, OverviewNavbarFields, getOverviewRecentTransactions, TransactionsDataOverviewPage, TransactionsVendorOverviewPage, TransactionsNonVendorOverviewPage } from '../callbacks/Overview';
+import { addMoneyToWallet } from '../callbacks/AddMoneytoWallet';
 
 export default function OverviewComponent() {
   interface modalDataType {
     title: string;
     content: string;
-}
+  }
 
+  console.log("inside overview component");
+  console.log(getOverviewRecentTransactions());
   
-  const [open, setOpen] = React.useState(false);
-  const [addMoneyOpen, setMoneyOpen] = React.useState(false);
+  const [ open, setOpen ] = React.useState(false);
+  const [ addMoneyOpen, setMoneyOpen ] = React.useState(false);
+  const [ navbarData, setNavbarData ] = React.useState<OverviewNavbarFields>({balance: 0, pendingDues: 0});
+  const [ recentVendorTransactionData, setRecentVendorTransactionData ] = React.useState<TransactionsVendorOverviewPage[]>([]);
+  const [ recentNonVendorTransactionData, setRecentNonVendorTransactionData ] = React.useState<TransactionsNonVendorOverviewPage[]>([]);
   const handleClose = () => setOpen(false);
+
+
+  React.useEffect(() => {
+    getOverviewNavbarData().then((data: OverviewNavbarFields) => {
+        setNavbarData(data);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    getOverviewRecentTransactions().then((data: TransactionsDataOverviewPage) => {
+      setRecentVendorTransactionData(data.recentTransactions.transactionsVendor);
+      setRecentNonVendorTransactionData(data.recentTransactions.transactionsNonVendor);
+    });
+  }, []);
+
   // const [modalData, setModalData] = React.useState<modalDataType>({title: 'Hello', content: 'World'});
 
   const addMoneyHandleClose = () => {
-    setMoneyOpen(false);
     setValue("");
     setError("");
+    setMoneyOpen(false);
   };
   
   const addMoneyHandleOpen = () => {
@@ -72,12 +94,13 @@ export default function OverviewComponent() {
       setError("Please enter a valid amount");
     }
     else {
+      addMoneyToWallet(Number(value));
       //put up a put request here
       addMoneyHandleClose();
       alert("Money added successfully");
+      window.location.reload();
     }
   };
-  
 
   
   return(
@@ -144,16 +167,17 @@ export default function OverviewComponent() {
               sx={{
                 alignItems: 'center',
                 marginLeft: '10%',
-                marginRight: '5%'
+                marginRight: '5%',
+                padding: '3rem',
               }}
               variant='plain'
               >
                 <Typography level="h5">
                   Total Dues
                 </Typography>
-                1000
+                {navbarData.pendingDues}
               </Card>
-              <Card
+              {/* <Card
               sx={{
                 alignItems: 'center',
                 marginLeft: '5%',
@@ -165,19 +189,20 @@ export default function OverviewComponent() {
                   Due Date
                 </Typography>
                 April 1, 2023
-              </Card>
+              </Card> */}
               <Card
               sx={{
                 alignItems: 'center',
                 marginLeft: '5%',
                 marginRightt: '10%',
+                padding: '3rem',
               }}
               variant='plain'
               >
                 <Typography level="h5">
                   Balance
                 </Typography>
-                1000
+                {navbarData.balance}
               </Card>
             </Box>
             <Box
@@ -197,7 +222,10 @@ export default function OverviewComponent() {
                       Make Payment
               </Button>
               <Modal open={open} onClose={handleClose}>
-                  <ModalDialog
+                  <ModalDialog 
+                  sx={{
+                    gap: '0.5rem',
+                  }}
                   aria-labelledby="layout-modal-title"
                   aria-describedby="layout-modal-description"
                   // layout={open || undefined}
@@ -266,14 +294,18 @@ export default function OverviewComponent() {
               Recent Vendors
             </Typography>
             <br />
-            <OverviewTable />
+            <OverviewTable 
+              // rows={recentVendorTransactionData}
+            />
             <br />
             <br />
             <Typography level="h3">
               Recent People
             </Typography>
             <br />
-            <OverviewTable />
+            <OverviewTable 
+              // rows={recentNonVendorTransactionData}
+            />
           </Box>
           </Sheet>
         </div>

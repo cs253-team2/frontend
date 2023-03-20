@@ -8,23 +8,58 @@ import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import useScript from './useScript';
+import Sheet from "@mui/joy/Sheet";
 import FirstSidebar from './components/FirstSidebar';
 import SecondSidebar from './components/SecondSidebar';
 import OrderTable from './components/OverviewTable';
 import Header from './components/Header';
 import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
-import { AlignHorizontalCenter } from '@mui/icons-material';
+import { AlignHorizontalCenter, LocalConvenienceStoreOutlined } from '@mui/icons-material';
 import { TableRow, TableCell, TableHead, Grid } from '@mui/material';
-import ProfileCard from './ProfileDetails';
+import ProfileCard from './UpdateProfileCard';
+import ProfileDetailsCard from './ProfileDetails'
 import { useNavigate } from 'react-router-dom';
+import { getUserData, UserDataFields } from '../callbacks/ViewProfile';
+import { useEffect } from 'react';
 
 export default function App() {
+
   const navigate = useNavigate();
   const updateprofilepage= () => {
-    navigate('/vendor/update_profile');
+    navigate('/customer/update_profile');
     window.location.reload();
   };
+
+  // console.log(getUserData);
+
+  const [UserData, setUsersData] = React.useState<UserDataFields>(
+    {
+      userName: "",
+      userID: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      confirmPassword: "",
+      userType: "",
+    }
+  );
+
+
+  const setUserData = (data: UserDataFields) => {
+    console.log("inside setter function");
+    setUsersData(data);
+  };
+
+  useEffect (() => {
+    getUserData().then((data) => {
+      console.log("data received in profile page");
+      console.log(data);
+      setUserData(data);
+      console.log("Vendors Data: ", UserData);
+    });
+  }, []);
+
     return (
         <div>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -84,8 +119,22 @@ export default function App() {
             <Box sx={{ flex: 999 }} />
            
           </Box>
-        <ProfileCard />
-        {/* <div style={{display:"flex"}}> */}
+        
+        <Sheet
+          className="ProfileTableContainer"
+          variant="outlined"
+          sx={{
+            width: "100%",
+            height: "83vh",
+            borderRadius: "md",
+            flex: 1,  
+            overflow: "auto",
+            overflowY: "scroll",
+            minHeight: 0,
+            border:"none"
+          }}
+        >
+        <ProfileDetailsCard UserData = {UserData} />
           <Box sx={{display: 999}}>
             <Button size="lg"color='danger' variant='solid'
                 sx={{
@@ -100,8 +149,7 @@ export default function App() {
                     marginRight:"5%",
                     fontWeight: 600}}>Edit Profile</Button>
           </Box>
-        {/* </div> */}
-
+        </Sheet>
 
       </div>
     )

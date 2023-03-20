@@ -27,8 +27,7 @@ export const makeTransaction = async (data: PaymentFormValues) => {
     const response = await axios.post(
         `http://localhost:8000/api/users/${userID}/transactions/make/`, 
         {
-            sender: userID,
-            receiver: data.receiverID,
+            receiver_id: data.receiverID,
             transaction_amount: data.amount,
             transaction_status: data.transactionType,
         },

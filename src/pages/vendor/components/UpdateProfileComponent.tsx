@@ -36,8 +36,9 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
 
   const reloadPageonSubmit = useNavigate();
       function reloadpage() {
-        reloadPageonSubmit('/vendor/profile');
-        window.location.reload();
+        console.log("window reload called");
+        // reloadPageonSubmit('/vendor/profile');
+        // window.location.reload();
   }
 
 
