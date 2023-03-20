@@ -77,12 +77,12 @@ export default function JoySignInSideTemplate() {
   };
 
   React.useEffect(() => {
-    // console.log('isAuthenticated', isAuthenticated());
+    // //console.log('isAuthenticated', isAuthenticated());
     if(isAuthenticated() === true){
-      console.log("the user is authenticated");
+      //console.log("the user is authenticated");
       // navigate('/customer/overview');
       const userType = localStorage.getItem('type');
-      console.log("userType", userType);
+      //console.log("userType", userType);
       if(userType === 'CUSTOMER'){
         navigate('/customer/overview');
       }
@@ -220,7 +220,7 @@ export default function JoySignInSideTemplate() {
                       navigate('/vendor/overview');
                     }
                   } else {
-                    console.log('no user');
+                    //console.log('no user');
                   }
                 });
               }}

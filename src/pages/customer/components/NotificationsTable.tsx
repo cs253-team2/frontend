@@ -89,7 +89,7 @@ function SearchBar({placeholder}:{placeholder:string}){
     setOpen(true);
   };
   const handleFilter =(event:any) =>{
-    console.log(event);
+    //console.log(event);
     const searchWord = event.target.value;
     const newFilter = rows.filter((value:any) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
@@ -107,18 +107,18 @@ function SearchBar({placeholder}:{placeholder:string}){
   const [rows, setRows] = useState<NotificationDataFields[]>([]);
 
   const setData = (data: NotificationDataFields[]) => {
-    console.log("inside setter function");
+    //console.log("inside setter function");
     setRows(data);
     setFilteredData(data);
   };
 
   useEffect (() => {
     getNotifications().then((data) => {
-      console.log("data received in notifications table");
-      console.log(data);
+      //console.log("data received in notifications table");
+      //console.log(data);
       setData(data);
       
-      console.log("Notifications: ", data);
+      //console.log("Notifications: ", data);
     });
   }, []);
 

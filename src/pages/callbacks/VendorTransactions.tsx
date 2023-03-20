@@ -24,7 +24,7 @@ export const getTransactions = async (userid: string|null) => {
             withCredentials: true,
         },
     );
-    console.log("transaction history data is (in callback): ", response.data);
+    // //console.log("transaction history data is (in callback): ", response.data);
     const returnData : TransactionHistoryDataFields[] = [];
     let n = response.data.length;
 
@@ -38,7 +38,7 @@ export const getTransactions = async (userid: string|null) => {
         };
         returnData[n - i - 1].date = returnData[n - i - 1].date.substring(8,10) + "/" + returnData[n - i - 1].date.substring(5,7) + "/" + returnData[n - i - 1].date.substring(0,4);
     }
-    console.log("returnData is ",returnData);
+    // //console.log("returnData is ",returnData);
     return returnData;
 }
   

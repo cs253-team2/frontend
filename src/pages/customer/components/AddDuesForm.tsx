@@ -80,7 +80,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
+    // //console.log(values);
     const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
     setValues((prevValues) => ({
       ...prevValues,

@@ -20,5 +20,5 @@ export const addMoneyToWallet = async (data: number) => {
             headers: headers,
             withCredentials: true,
         }
-    ).then((response) => { console.log(response) }).catch((error) => { console.log(error) });
+    ).then((response) => {}).catch((error) => { console.log(error) });
 }

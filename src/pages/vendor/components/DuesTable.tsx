@@ -56,7 +56,7 @@ function getComparator<Key extends keyof any>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 function SearchBar({placeholder,rows}:{placeholder:string, rows:PendingDue[]}){
-  console.log("rows: ", rows);
+  //console.log("rows: ", rows);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
   const [filteredData, setFilteredData] =useState<PendingDue[]>(rows);

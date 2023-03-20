@@ -81,8 +81,8 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 
 function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHistoryDataFields[]}){
 
-  console.log("Data in Transaction table is");
-  console.log(data);
+  //console.log("Data in Transaction table is");
+  //console.log(data);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
   const [filteredData, setFilteredData] =useState<TransactionHistoryDataFields[]>(data);
@@ -102,8 +102,8 @@ function SearchBar({placeholder,data}:{placeholder:string, data: TransactionHist
     
   }
 
-  console.log("Filtered data is");
-  console.log(filteredData);
+  //console.log("Filtered data is");
+  //console.log(filteredData);
 
   React.useEffect(() => {
     setFilteredData(data);

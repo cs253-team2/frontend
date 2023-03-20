@@ -90,7 +90,7 @@ export const getOverviewRecentTransactions = async () => {
         }
     );
 
-    console.log(response.data.recent_transactions.transactions_vendor[0].timestamp);
+    //console.log(response.data.recent_transactions.transactions_vendor[0].timestamp);
 
     const returnData: TransactionsDataOverviewPage = {
         recentTransactions: {
@@ -119,7 +119,7 @@ export const getOverviewRecentTransactions = async () => {
         }
     };
 
-    console.log(returnData);
+    //console.log(returnData);
     return returnData;
 
 }

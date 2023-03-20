@@ -6,7 +6,7 @@ interface LogoutData {
 }
 
 export const LogoutUser = async () => {
-    console.log("inside logout");
+    //console.log("inside logout");
     const response = await axios.post<LogoutData>(
         "http://localhost:8000/auth/logout/",
         {
@@ -16,6 +16,6 @@ export const LogoutUser = async () => {
     localStorage.removeItem("userid");
     localStorage.removeItem("type");
     Cookies.remove("csrftoken", { path: "/" });
-    Cookies.remove("sessionid", { path: "/" , domain: "localhost"});
-    console.log(response.data);
+    Cookies.remove("sessionid", { path: "/" });
+    // //console.log(response.data);
 }
