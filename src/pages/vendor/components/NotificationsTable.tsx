@@ -21,6 +21,7 @@ import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { getNotifications, NotificationDataFields } from '../../callbacks/Notifications';
 
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
@@ -61,12 +62,12 @@ interface modalDataType {
     content: string;
 }
 
-function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
+function SearchBar({placeholder}:{placeholder:string}){
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [order, setOrder] = React.useState<Order>('desc');
-  const [filteredData, setFilteredData] =useState<any>(rows);
+  const [filteredData, setFilteredData] =useState<any>([]);
   const [modalData, setModalData] = React.useState<modalDataType>({title: '', content: ''});
   
   
@@ -79,8 +80,8 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
     const searchWord = event.target.value;
     const newFilter = rows.filter((value:any) =>{
       return (value.id.toLowerCase().includes(searchWord.toLowerCase()) || 
-              value.date.toLowerCase().includes(searchWord.toLowerCase()) ||
-              value.status.toLowerCase().includes(searchWord.toLowerCase()))
+              value.timestamp.toLowerCase().includes(searchWord.toLowerCase()) ||
+              value.subject.toLowerCase().includes(searchWord.toLowerCase()))
     })
     if(searchWord ==""){
       setFilteredData(rows);
@@ -89,6 +90,24 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
     }
     
   }
+
+  const [rows, setRows] = useState<NotificationDataFields[]>([]);
+
+  const setData = (data: NotificationDataFields[]) => {
+    //console.log("inside setter function");
+    setRows(data);
+    setFilteredData(data);
+  };
+
+  React.useEffect (() => {
+    getNotifications().then((data) => {
+      //console.log("data received in notifications table");
+      //console.log(data);
+      setData(data);
+      
+      //console.log("Notifications: ", data);
+    });
+  }, []);
     return (
         <div className="search">
             <Box className="searchInput" sx={{
@@ -142,99 +161,28 @@ function SearchBar({placeholder,rows}:{placeholder:string, rows:any[]}){
                         >
                           <thead>
                             <tr>
-                            <th style={{ width: 140, padding: 12 }}>
-                                <Link
-                                underline="none"
-                                color="primary"
-                                component="button"
-                                onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
-                                fontWeight="lg"
-                                endDecorator={<i data-feather="arrow-down" />}
-                                sx={{
-                                    '& svg': {
-                                    transition: '0.2s',
-                                    transform:
-                                        order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
-                                    },
-                                }}
-                                >
-                                Notification ID
-                                </Link>
+                            <th style={{ width: "15%", padding: 12 }}>
+                              <Typography level='h4'>Date</Typography>
                             </th>
-                            <th style={{ width: 120, padding: 12 }}>Date</th>
-                            <th style={{ width: 120, padding: 12 }}>Type</th>
-                            <th style={{ width: 220, padding: 12 }}>CustomerID</th>
-                            <th style={{ width: 120, padding: 12 }}>Content</th>
+                            <th style={{ width: "15%", padding: 12 }}>
+                              <Typography level='h4'>Time</Typography>
+                            </th>
+                            <th style={{ width: "25%", padding: 12 }}>
+                              <Typography level='h4'>Subject</Typography>
+                            </th>
+                            <th style={{ width: "30%", padding: 12 }}>
+                              <Typography level='h4'>Content</Typography>
+                            </th>
                             
                             </tr>
                         </thead>  
                         <tbody>
-                            {filteredData.map((row:any) => (
+                            {filteredData.map((row:NotificationDataFields) => (
                             <tr key={row.id}>
-                                <td>
-                                <Typography fontWeight="md">{row.id}</Typography>
-                                </td>
-                                <td>{row.date}</td>
-                                <td>
-                                <Chip
-                                    variant="soft"
-                                    size="sm"
-                                    startDecorator={
-                                    {
-                                        Paid: <i data-feather="check" />,
-                                        Refunded: <i data-feather="corner-up-left" />,
-                                        Cancelled: <i data-feather="x" />,
-                                    }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
-                                    }
-                                    color={
-                                    {
-                                        Paid: 'success',
-                                        Refunded: 'neutral',
-                                        Cancelled: 'danger',
-                                    }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
-                                    }
-                                >
-                                    {row.status}
-                                </Chip>
-                                </td>
-                                <td>
-                                <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                                    <Avatar size="sm">{row.customer.initial}</Avatar>
-                                    <div>
-                                    <Typography
-                                        fontWeight="lg"
-                                        level="body3"
-                                        textColor="text.primary"
-                                    >
-                                        {row.customer.name}
-                                    </Typography>
-                                    <Typography level="body3">{row.customer.email}</Typography>
-                                    </div>
-                                </Box>
-                                </td>
-                                <td style={{textAlign: "center"}}>
-                                <Button
-                                onClick={() => handleOpen({title: row.title, content: row.content})}
-                                variant='soft'
-                                >
-                                <NotificationsIcon></NotificationsIcon>
-                                </Button>
-                                <Modal open={open} onClose={handleClose}>
-                                    <ModalDialog
-                                    aria-labelledby="layout-modal-title"
-                                    aria-describedby="layout-modal-description"
-                                    // layout={open || undefined}
-                                    >
-                                    <ModalClose />
-                                    <Typography id="layout-modal-title" component="h2">
-                                        {modalData.title}
-                                    </Typography>
-                                    <Typography id="layout-modal-description" textColor="text.tertiary">
-                                        {modalData.content}
-                                    </Typography>
-                                    </ModalDialog>
-                                </Modal>
-                                </td>
+                              <td><Typography level='body1'>{row.date}</Typography></td>
+                              <td><Typography level='h6'>{row.time}</Typography></td>
+                              <td><Typography level='h6'>{row.subject}</Typography></td>
+                              <td><Typography level='body1'>{row.content}</Typography></td>
                             </tr>
                             ))}
                         </tbody>

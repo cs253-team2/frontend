@@ -221,9 +221,9 @@ const vendorpage = () => {
         <Box sx={{ pl: 1, mt: 'auto', display: 'flex', alignItems: 'center' }}>
           <div>
             <Typography fontWeight="lg" level="h3">
-              Username
+              {UserData.userName}
             </Typography>
-            <Typography level="body2">emailid@email.com</Typography>
+            <Typography level="body2">{UserData.userID}</Typography>
           </div>
           <IconButton variant="plain" sx={{ ml: 'auto' }} onClick={logoutUser}>
             <i data-feather="log-out" />
