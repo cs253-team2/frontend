@@ -231,16 +231,20 @@ function SearchBar({placeholder,data}:{placeholder:string, data:TransactionHisto
                                     startDecorator={
                                       {
                                         Paid: <i data-feather="check" />,
-                                        Refunded: <i data-feather="corner-up-left" />,
-                                        Cancelled: <i data-feather="x" />,
-                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled']
+                                        InReview: <i data-feather="circle" />,
+                                        Pending: <i data-feather="circle" />,
+                                        Failed: <i data-feather="circle" />,
+                                        Cleared: <i data-feather="circle" />,
+                                      }[row.status]
                                     }
                                     color={
                                       {
                                         Paid: 'success',
-                                        Refunded: 'neutral',
-                                        Cancelled: 'danger',
-                                      }[row.status as 'Paid' | 'Refunded' | 'Cancelled'] as ColorPaletteProp
+                                        Failed: 'danger',
+                                        Pending: 'warning',
+                                        InReview: 'warning',
+                                        Cleared: 'primary',
+                                      }[row.status] as ColorPaletteProp
                                     }
                                   >
                                     {row.status}

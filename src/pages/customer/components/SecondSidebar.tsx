@@ -241,7 +241,7 @@ const vendorpage = () => {
             <Typography fontWeight="lg" level="h4">
               {UserData.userName}
             </Typography>
-            <Typography level="body1">{UserData.email}</Typography>
+            <Typography level="body1">{UserData.userID}</Typography>
           </div>
           <IconButton variant="plain" sx={{ ml: 'auto' }} onClick={logoutUser}>
             <i data-feather="log-out" />
