@@ -177,13 +177,13 @@ function SearchBar({placeholder,data}:{placeholder:string, data:TransactionHisto
                                 />
                               </th> */}
                               <th style={{ width: 140, padding: 12 }}>
-                                <Link
+                                {/* <Link
                                   underline="none"
                                   color="primary"
                                   component="button"
-                                  onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
+                                  // onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
                                   fontWeight="lg"
-                                  endDecorator={<i data-feather="arrow-down" />}
+                                  // endDecorator={<i data-feather="arrow-down" />}
                                   sx={{
                                     '& svg': {
                                       transition: '0.2s',
@@ -191,9 +191,9 @@ function SearchBar({placeholder,data}:{placeholder:string, data:TransactionHisto
                                         order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
                                     },
                                   }}
-                                >
+                                > */}
                                   CustomerID
-                                </Link>
+                                {/* </Link> */}
                               </th>
                               <th style={{ width: 120, padding: 12 }}>Date</th>
                               <th style={{ width: 120, padding: 12 }}>Status</th>

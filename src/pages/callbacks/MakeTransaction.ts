@@ -3,7 +3,7 @@ import { getCookie } from './getCookie';
 
 export interface InstantTransactionData {
     sender: string
-    receiver: string-k 
+    receiver: string
     transaction_amount: number
     transaction_status: number
 }
