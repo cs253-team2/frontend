@@ -3,14 +3,14 @@ import { getCookie } from './getCookie';
 
 export interface InstantTransactionData {
     sender: string
-    receiver: string
+    receiver: string-k 
     transaction_amount: number
     transaction_status: number
 }
 
 export interface PaymentFormValues {
     receiverID: string
-    password: string
+    // password: string
     amount: number
     transactionType: number
 };
