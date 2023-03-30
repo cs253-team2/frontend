@@ -100,7 +100,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
       // window.location.reload();
       setValues({
         receiverID: '',
-        password: '',
+        // password: '',
         amount: 0,
         transactionType: formSource,
       });
