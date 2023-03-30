@@ -12,8 +12,7 @@ interface LoginData {
 }
 
 export const getLoggedInUser = async (data:LoginData) => {
-    // //console.log("inside callback");
-    // //console.log(data.username);
+    
     const response = await axios.post<SessionData>(
         "http://localhost:8000/auth/login/",
         {
@@ -28,7 +27,5 @@ export const getLoggedInUser = async (data:LoginData) => {
             withCredentials: true,
         },
     );
-    // //console.log("response.request",response);
-    // //console.log(response.data);
     return response.data;
 }

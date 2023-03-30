@@ -27,8 +27,6 @@ import { TagLeftIcon } from '@chakra-ui/react';
 const profilePicture = {
   borderRadius: "50%",
   alignItems: 'center',
-  // maxHeight: "150px",
-  // minHeight: "150px",
 }
 
 const info = 
