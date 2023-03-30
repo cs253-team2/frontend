@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input, Sheet } from '@mui/joy';
 import { getVendorData } from '../callbacks/VendorData';
 import { useEffect } from 'react';
-import { getOverviewNavbarData, OverviewNavbarFields, getOverviewRecentTransactions, TransactionsDataOverviewPage, TransactionsVendorOverviewPage, TransactionsNonVendorOverviewPage } from '../callbacks/Overview';
+import { getOverviewNavbarData, OverviewNavbarFields, getOverviewRecentTransactions, TransactionsDataOverviewPage, TransactionsVendorOverviewPage, TransactionsNonVendorOverviewPage, TransactionsVendorPage } from '../callbacks/Overview';
 import { addMoneyToWallet } from '../callbacks/AddMoneytoWallet';
 
 export default function OverviewComponent() {
@@ -37,21 +37,19 @@ export default function OverviewComponent() {
   const [ open, setOpen ] = React.useState(false);
   const [ addMoneyOpen, setMoneyOpen ] = React.useState(false);
   const [ navbarData, setNavbarData ] = React.useState<OverviewNavbarFields>({balance: 0, pendingDues: 0});
-  const [ recentVendorTransactionData, setRecentVendorTransactionData ] = React.useState<TransactionsVendorOverviewPage[]>([]);
-  const [ recentNonVendorTransactionData, setRecentNonVendorTransactionData ] = React.useState<TransactionsNonVendorOverviewPage[]>([]);
+  const [ recentVendorTransactionData, setRecentVendorTransactionData ] = React.useState<TransactionsVendorPage[]>([]);
+  const [ recentNonVendorTransactionData, setRecentNonVendorTransactionData ] = React.useState<TransactionsVendorPage[]>([]);
   const handleClose = () => setOpen(false);
-
 
   React.useEffect(() => {
     getOverviewNavbarData().then((data: OverviewNavbarFields) => {
-        setNavbarData(data);
+      setNavbarData(data);
     });
-  }, []);
-
-  React.useEffect(() => {
     getOverviewRecentTransactions().then((data: TransactionsDataOverviewPage) => {
+      // console.log("data in Overview.tsx: ", data.recentTransactions.transactionsVendor);
       setRecentVendorTransactionData(data.recentTransactions.transactionsVendor);
       setRecentNonVendorTransactionData(data.recentTransactions.transactionsNonVendor);
+      // console.log("this is recentNonVendroTransactionrls.s.s",recentVendorTransactionData);
     });
   }, []);
 
@@ -294,18 +292,14 @@ export default function OverviewComponent() {
               Recent Vendors
             </Typography>
             <br />
-            <OverviewTable 
-              // rows={recentVendorTransactionData}
-            />
+            <OverviewTable data={recentVendorTransactionData} />
             <br />
             <br />
             <Typography level="h3">
               Recent People
             </Typography>
             <br />
-            <OverviewTable 
-              // rows={recentNonVendorTransactionData}
-            />
+            <OverviewTable data={recentNonVendorTransactionData}/>
           </Box>
           </Sheet>
         </div>

@@ -16,9 +16,24 @@ import ColorSchemeToggle from './components/ColorSchemeToggle';
 import customTheme from './theme';
 import Card from '@mui/joy/Card';
 import { Modal, ModalClose, ModalDialog, Sheet } from '@mui/joy';
+import { getOverviewNavbarData, OverviewNavbarFields, getVendorOverviewRecentTransactions, TransactionsVendorPage, TransactionsDataOverviewPage } from '../callbacks/Overview';
+import {requestDueClearance} from '../callbacks/RequestDueClearance';
 
 export default function OverviewComponent() {
-
+    const [navbarData, setNavbarData] = React.useState<OverviewNavbarFields>({balance: 0, pendingDues: 0});
+    const [recentVendorTransactionData, setRecentVendorTransactionData] = React.useState<TransactionsVendorPage[]>([]);
+    const [recentNonVendorTransactionData, setRecentNonVendorTransactionData] = React.useState<TransactionsVendorPage[]>([]);
+    React.useEffect(() => {
+        getOverviewNavbarData().then((data: OverviewNavbarFields) => {
+            setNavbarData(data);
+        });
+        getVendorOverviewRecentTransactions().then((data: TransactionsDataOverviewPage) => {
+            // console.log("data in Overview.tsx: ", data.recentTransactions.transactionsVendor);
+            setRecentVendorTransactionData(data.recentTransactions.transactionsVendor);
+            setRecentNonVendorTransactionData(data.recentTransactions.transactionsNonVendor);
+            // console.log("this is recentNonVendroTransactionrls.s.s",recentVendorTransactionData);
+        });
+    },[]);
 
     return(
         <div>
@@ -102,7 +117,7 @@ export default function OverviewComponent() {
                 <Typography level="h5">
                   Total Dues
                 </Typography>
-                1000
+                {navbarData.pendingDues}
               </Card>
               <Card
               sx={{
@@ -128,7 +143,7 @@ export default function OverviewComponent() {
                 <Typography level="h5">
                   Balance
                 </Typography>
-                1000
+                {navbarData.balance}
               </Card>
             </Box>
             <Box
@@ -144,7 +159,7 @@ export default function OverviewComponent() {
               }}
               color='primary'
               size='lg'
-              onClick={() => alert("Notification to clear dues sent to all users")}>
+              onClick={() => requestDueClearance()}>
                 <Typography level='h4'>
                   <b>Request Clear All Dues</b>
                 </Typography>
@@ -169,18 +184,13 @@ export default function OverviewComponent() {
             alignItems: 'center',
           }}
           >
-            <Typography level="h3">
-              Recent Vendors
-            </Typography>
-            <br />
-            <OverviewTable />
             <br />
             <br />
             <Typography level="h3">
               Recent People
             </Typography>
             <br />
-            <OverviewTable />
+            <OverviewTable data={recentVendorTransactionData}/>
 
           </Box>
           </Sheet>

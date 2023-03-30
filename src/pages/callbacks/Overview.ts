@@ -56,6 +56,16 @@ export interface TransactionsVendorOverviewPage {
     receiverID: number
 }
 
+export interface TransactionsVendorPage {
+    transactionID: string
+    time: string
+    date: string
+    transactionAmount: string
+    transactionStatus: number
+    senderID: number
+    receiverID: number
+}
+
 export interface TransactionsNonVendorOverviewPage {
     transactionID: string
     time: string
@@ -91,7 +101,6 @@ export const getOverviewRecentTransactions = async () => {
     );
 
     //console.log(response.data.recent_transactions.transactions_vendor[0].timestamp);
-
     const returnData: TransactionsDataOverviewPage = {
         recentTransactions: {
             transactionsVendor: response.data.recent_transactions.transactions_vendor.map((transaction) => {
@@ -119,7 +128,49 @@ export const getOverviewRecentTransactions = async () => {
         }
     };
 
-    //console.log(returnData);
+    // console.log(returnData);
+    return returnData;
+
+}
+
+export const getVendorOverviewRecentTransactions = async () => {
+    const userID = localStorage.getItem('userid');
+    const response = await axios.get<TransactionsDataBackend>(
+        `http://localhost:8000/api/users/${userID}/overview/`,
+        {
+            withCredentials: true,
+        }
+    );
+
+    //console.log(response.data.recent_transactions.transactions_vendor[0].timestamp);
+    const returnData: TransactionsDataOverviewPage = {
+        recentTransactions: {
+            transactionsVendor: response.data.recent_transactions.transactions_non_vendor.map((transaction) => {
+                return {
+                    transactionID: transaction.transaction_id,
+                    time: transaction.timestamp.split('T')[1].split('.')[0],
+                    date: transaction.timestamp.split('T')[0],
+                    transactionAmount: transaction.transaction_amount,
+                    transactionStatus: transaction.transaction_status,
+                    senderID: transaction.sender,
+                    receiverID: transaction.receiver,
+                }
+            }),
+            transactionsNonVendor: response.data.recent_transactions.transactions_non_vendor.map((transaction) => {
+                return {
+                    transactionID: transaction.transaction_id,
+                    time: transaction.timestamp.split('T')[1].split('.')[0],
+                    date: transaction.timestamp.split('T')[0],
+                    transactionAmount: transaction.transaction_amount,
+                    transactionStatus: transaction.transaction_status,
+                    senderID: transaction.sender,
+                    receiverID: transaction.receiver,
+                }
+            }),
+        }
+    };
+
+    // console.log(returnData);
     return returnData;
 
 }

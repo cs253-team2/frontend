@@ -183,7 +183,7 @@ export default function VendorTable() {
 
   const handleClearDues = (user_id: string) => {
     //console.log("Clear Dues", user_id);
-    clearVendorDue(user_id).then((data:string) => {
+    clearVendorDue(user_id).then(() => {
       //console.log(data);
     });
   };
