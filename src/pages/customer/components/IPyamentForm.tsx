@@ -97,7 +97,14 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
       // //console.log("The following values are being submitted");
       // //console.log(values);
       makeTransaction(values);
-      window.location.reload();
+      // window.location.reload();
+      setValues({
+        receiverID: '',
+        password: '',
+        amount: 0,
+        transactionType: formSource,
+      });
+
     }
   };
 
