@@ -17,6 +17,6 @@ export const clearVendorDue = async (vendor_id: string) => {
             withCredentials: true,
         },
     );
-
+        
     // //console.log(response.data);
 }

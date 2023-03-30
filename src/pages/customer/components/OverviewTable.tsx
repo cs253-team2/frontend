@@ -20,7 +20,7 @@ import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
 import IconButton, { iconButtonClasses } from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-
+import { TransactionsVendorPage } from '../../callbacks/Overview';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -101,40 +101,46 @@ const rows = [
 
 ];
 
-export default function OverviewTable() {
+export default function OverviewTable({data}:{data:TransactionsVendorPage[]}) {
+  const [tableData, setTableData] = React.useState<TransactionsVendorPage[]>(data);
   const [order, setOrder] = React.useState<Order>('desc');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [open, setOpen] = React.useState(false);
-  const renderFilters = () => (
-    <React.Fragment>
-      <FormControl size="sm">
-        <FormLabel>Status</FormLabel>
-        <Select
-          placeholder="Filter by status"
-          slotProps={{ button: { sx: { whiteSpace: 'nowrap' } } }}
-        >
-          <Option value="paid">Paid</Option>
-          <Option value="pending">Pending</Option>
-          <Option value="refunded">Refunded</Option>
-          <Option value="cancelled">Cancelled</Option>
-        </Select>
-      </FormControl>
+  React.useEffect(()=>{
+    setTableData(data);
+    console.log(data);
+    console.log(tableData);
+  }, [data]);
+  // const renderFilters = () => (
+  //   <React.Fragment>
+  //     <FormControl size="sm">
+  //       <FormLabel>Status</FormLabel>
+  //       <Select
+  //         placeholder="Filter by status"
+  //         slotProps={{ button: { sx: { whiteSpace: 'nowrap' } } }}
+  //       >
+  //         <Option value="paid">Paid</Option>
+  //         <Option value="pending">Pending</Option>
+  //         <Option value="refunded">Refunded</Option>
+  //         <Option value="cancelled">Cancelled</Option>
+  //       </Select>
+  //     </FormControl>
 
-      <FormControl size="sm">
-        <FormLabel>Category</FormLabel>
-        <Select placeholder="All">
-          <Option value="all">All</Option>
-        </Select>
-      </FormControl>
+  //     <FormControl size="sm">
+  //       <FormLabel>Category</FormLabel>
+  //       <Select placeholder="All">
+  //         <Option value="all">All</Option>
+  //       </Select>
+  //     </FormControl>
 
-      <FormControl size="sm">
-        <FormLabel>Customer</FormLabel>
-        <Select placeholder="All">
-          <Option value="all">All</Option>
-        </Select>
-      </FormControl>
-    </React.Fragment>
-  );
+  //     <FormControl size="sm">
+  //       <FormLabel>Customer</FormLabel>
+  //       <Select placeholder="All">
+  //         <Option value="all">All</Option>
+  //       </Select>
+  //     </FormControl>
+  //   </React.Fragment>
+  // );
 
 
   return (
@@ -277,8 +283,9 @@ export default function OverviewTable() {
             </tr>
           </thead>
           <tbody>
-            {stableSort(rows, getComparator(order, 'id')).map((row) => (
-              <tr key={row.id}>
+            {/* {stableSort(rows, getComparator(order, 'id')).map((row) => ( */}
+            {tableData.map((row: TransactionsVendorPage) => (
+              <tr key={row.transactionID}>
                 {/* <td style={{ textAlign: 'center' }}>
                   <Checkbox
                     checked={selected.includes(row.id)}
@@ -295,29 +302,33 @@ export default function OverviewTable() {
                   />
                 </td> */}
                 <td>
-                  <Typography fontWeight="md">{row.id}</Typography>
+                  <Typography fontWeight="md">{row.transactionID}</Typography>
                 </td>
-                <td>{row.date}</td>
+                <td>{row.time}</td>
                 <td>
                   <Chip
                     variant="soft"
                     size="sm"
                     startDecorator={
                       {
-                        Paid: <i data-feather="check" />,
-                        Refunded: <i data-feather="corner-up-left" />,
-                        Cancelled: <i data-feather="x" />,
-                      }[row.status]
+                        0: <i data-feather="chevron-right" />,
+                        1: <i data-feather="circle" />,
+                        2: <i data-feather="circle" />,
+                        3: <i data-feather="circle" />,
+                        4: <i data-feather="circle" />,
+                      }[row.transactionStatus]
                     }
                     color={
                       {
-                        Paid: 'success',
-                        Refunded: 'neutral',
-                        Cancelled: 'danger',
-                      }[row.status] as ColorPaletteProp
+                        0: 'success', // green // paid
+                        1: 'danger', // red // failed
+                        2: 'warning', // yellow // pending
+                        3: 'warning', // yellow // in review
+                        4: 'primary', // blue // cleared
+                      }[row.transactionStatus] as ColorPaletteProp
                     }
                   >
-                    {row.status}
+                    {row.transactionStatus === 0 ? "Paid": row.transactionStatus === 1 ? "Failed": row.transactionStatus === 2 ? "Pending": row.transactionStatus === 3 ? "InReview": row.transactionStatus === 4 ? "Cleared": "Unknown"}
                   </Chip>
                 </td>
                 <td>
@@ -335,10 +346,10 @@ export default function OverviewTable() {
                     </div>
                   </Box> */}
                   {
-                    row.transaction_id
+                    row.transactionID
                   }
                 </td>
-                <td>{row.amount}</td>
+                <td>{row.transactionAmount}</td>
               </tr>
             ))}
           </tbody>
