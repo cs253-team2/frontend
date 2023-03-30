@@ -40,7 +40,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
   // //console.log("Form source is " + formSource);
   const [values, setValues] = useState<PaymentFormValues>({
     receiverID: '',
-    password: '',
+    // password: '',
     amount: 0,
     transactionType: formSource,
   });
@@ -67,11 +67,11 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
     //   errors.email = 'Email is invalid';
     // }
 
-    if (!values.password.trim()) {
-      errors.password = 'Password is required';
-    } else if(!passwordPattern.test(values.password.trim())) {
-        errors.password = 'Password is invalid';
-    }
+    // if (!values.password.trim()) {
+    //   errors.password = 'Password is required';
+    // } else if(!passwordPattern.test(values.password.trim())) {
+    //     errors.password = 'Password is invalid';
+    // }
 
     // if (!values.amount.trim()) {
     //   errors.amount = 'Amount is required';
@@ -169,7 +169,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
         {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
       </div> */}
 
-      <div>
+      {/* <div>
         <label htmlFor="password"><b>Password *</b></label>
         <br />
         <Input
@@ -182,7 +182,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
           style={{width:"100%"}}
         />
         {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
-      </div>
+      </div> */}
       <div>
         <label htmlFor="amount"><b>Amount *</b></label>
         <br />

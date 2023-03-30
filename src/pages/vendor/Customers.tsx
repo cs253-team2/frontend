@@ -72,9 +72,7 @@ export default function App() {
           Customers
         </Typography>
         <Box sx={{ flex: 999 }} />
-        <Button color="success" href="#contained-buttons">
-          Add Customer
-        </Button>
+        
       </Box>
       <Box>
         <VendorTable/>
