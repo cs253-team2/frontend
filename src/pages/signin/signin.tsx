@@ -24,6 +24,8 @@ import DarkThemeBackgroundImage from '../../assets/iitkNightImage.jpg';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUser } from '../callbacks/SignIn';
 import { isAuthenticated } from '../callbacks/isAuthenticated';
+import Alert from '@mui/material/Alert';
+
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -76,21 +78,6 @@ export default function JoySignInSideTemplate() {
     window.location.reload();
   };
 
-  React.useEffect(() => {
-    // //console.log('isAuthenticated', isAuthenticated());
-    if(isAuthenticated() === true){
-      //console.log("the user is authenticated");
-      // navigate('/customer/overview');
-      const userType = localStorage.getItem('type');
-      //console.log("userType", userType);
-      if(userType === 'CUSTOMER'){
-        navigate('/customer/overview');
-      }
-      else if(userType === 'VENDOR'){
-        navigate('/vendor/overview');
-      }
-    }
-  }, []);
 
   return (
     <CssVarsProvider
@@ -151,16 +138,7 @@ export default function JoySignInSideTemplate() {
               startDecorator={
                 <Box
                   component="span"
-                  // sx={{
-                  //   width: 40,
-                  //   height: 40,
-                  //   background: (theme) =>
-                  //     `linear-gradient(45deg, ${theme.vars.palette.primary.solidBg}, ${theme.vars.palette.primary.solidBg} 30%, ${theme.vars.palette.primary.softBg})`,
-                  //   borderRadius: '50%',
-                  //   boxShadow: (theme) => theme.shadow.md,
-                  //   '--joy-shadowChannel': (theme) =>
-                  //     theme.vars.palette.primary.mainChannel,
-                  // }}
+                 
                 >
                   <img width={40} height={40} src= "https://www.shutterstock.com/image-vector/initial-letter-cp-linked-circle-260nw-463344173.jpg" alt="CampusPay Logo"></img>
                 </Box>
@@ -209,7 +187,7 @@ export default function JoySignInSideTemplate() {
                   username: formElements.email.value,
                   password: formElements.password.value,
                 };
-                // alert(JSON.stringify(data, null, 2));
+                
                 getLoggedInUser(data).then((user) => {
                   if (user) {
                     localStorage.setItem("userid", user.user_id);
@@ -219,10 +197,18 @@ export default function JoySignInSideTemplate() {
                     } else {
                       navigate('/vendor/overview');
                     }
-                  } else {
-                    //console.log('no user');
-                  }
-                });
+                  } 
+                })
+                .catch((error) => {
+                  console.log(error.response.status);
+                  if(error.response.status === 400){
+                    alert("Invalid username or password");
+                }
+                else{
+                    alert("Something went wrong");
+                }
+              }
+                );
               }}
             >
               <FormControl required>
@@ -233,13 +219,7 @@ export default function JoySignInSideTemplate() {
                 <FormLabel>Password</FormLabel>
                 <Input placeholder="•••••••" type="password" name="password" />
               </FormControl>
-              <FormControl required>
-                <FormLabel>Are you a vendor or customer?</FormLabel>
-                <Select name="role">
-                  <Option value="customer">Customer</Option>
-                  <Option value="vendor">Vendor</Option>
-                </Select>
-              </FormControl>
+              
               <Box
                 sx={{
                   display: 'flex',
@@ -247,7 +227,6 @@ export default function JoySignInSideTemplate() {
                   alignItems: 'center',
                 }}
               >
-                <Checkbox size="sm" label="Remember for 30 days" name="persistent" />
                 <Link fontSize="sm" href="#replace-with-a-link" fontWeight="lg">
                   Forgot password
                 </Link>
@@ -260,14 +239,6 @@ export default function JoySignInSideTemplate() {
                 NOT REGISTERED? SIGN UP
               </Button>
             </form>
-            {/* <Button
-              variant="outlined"
-              color="neutral"
-              fullWidth
-              startDecorator={<GoogleIcon />}
-            >
-              Sign in with Google
-            </Button> */}
           </Box>
 
 
