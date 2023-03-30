@@ -10,7 +10,7 @@ export interface InstantTransactionData {
 
 export interface PaymentFormValues {
     receiverID: string
-    password: string
+    // password: string
     amount: number
     transactionType: number
 };
