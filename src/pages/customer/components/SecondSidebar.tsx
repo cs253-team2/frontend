@@ -129,11 +129,15 @@ const vendorpage = () => {
         sx={{
           position: {
             xs: 'fixed',
+            md: 'sticky',
             lg: 'sticky',
+            sm: 'sticky'
           },
           transform: {
             xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--FirstSidebar-width, 0px)))',
             lg: 'none',
+            md: 'none',
+            sm: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--FirstSidebar-width, 0px)))',
           },
           borderRight: '1px solid',
           borderColor: 'divider',
@@ -173,9 +177,7 @@ const vendorpage = () => {
                 <i data-feather="bell" />
               </ListItemDecorator>
               <ListItemContent>Notifications</ListItemContent>
-              {/* <Chip variant="soft" size="sm">
-                10
-              </Chip> */}
+              
             </ListItemButton>
           </ListItem>
           <ListItem>
