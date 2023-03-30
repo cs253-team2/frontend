@@ -37,6 +37,9 @@ export const makeTransaction = async (data: PaymentFormValues) => {
         },
     ).then((response) => {
         console.log(response)
+        if(response.status === 200) {
+            alert("Transaction Successful.")
+        }
     })
     .catch((error) => {
         console.log(error.response.status);

@@ -36,9 +36,9 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
 
   const reloadPageonSubmit = useNavigate();
       function reloadpage() {
-        //console.log("window reload called");
-        // reloadPageonSubmit('/vendor/profile');
-        // window.location.reload();
+        console.log("window reload called");
+        reloadPageonSubmit('/vendor/profile');
+        window.location.reload();
   }
 
 
@@ -53,13 +53,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
   }, []);
     
     const [values, setValues] = useState<UpdateFormDataFields>({
-      // userName: UserData.userName,
-      // userID: UserData.userID,
-      // phoneNumber: UserData.phoneNumber,
-      // email: UserData.email,
-      // password: '',
-      // confirmPassword: '',
-      // userType: UserData.userType,
+      
     userName: '',
     userID: '',
     phoneNumber: '',
@@ -85,19 +79,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
       errors.email = 'Email is invalid';
     }
 
-    // if (!values.password.trim()) {
-    //   errors.password = 'Password is required';
-    // } else if(!passwordPattern.test(values.password.trim())) {
-    //     errors.password = 'Password is invalid';
-    // }
-
-    // if (!values.confirmPassword.trim()) {
-    //   errors.confirmPassword = 'Confirm password is required';
-    // }
-
-    // if (values.password.trim() !== values.confirmPassword.trim()) {
-    //   errors.confirmPassword = 'Passwords do not match';
-    // }
+    
     return errors;
   };
 
@@ -130,46 +112,12 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <div>
-        <label htmlFor="firstName"><b>First Name *</b></label>
-        <br />
-        <Input
-          type="text"
-          id="firstName"
-          name="firstName"
-          placeholder='abc'
-          value={values.firstName}
-          onChange={handleChange}
-          style={{width:"100%"}}
-        />
-        {errors.firstName && <span style={{color: "red"}}>{errors.firstName}</span>}
-      </div>
-      <div>
-        <label htmlFor="lastName"><b>Last Name</b></label>
-        <br />
-        <Input
-          type="text"
-          id="lastName"
-          name="lastName"
-          placeholder='xyz'
-          value={values.lastName}
-          onChange={handleChange}
-          style={{width:"100%"}}
-        />
-      </div> */}
+      
 
       <div>
         <label htmlFor="userID"><b>User ID *</b></label>
         <br />
-        {/* <Input
-          type="text"
-          id="userName"
-          name="userName"
-          placeholder={UserData.userName}
-          onChange={handleChange}
-          style={{width:"100%"}}
-          disabled= {true}
-        /> */}
+        
         <Typography level="h6" variant="soft" color="neutral"> {values.userID}</Typography>
       </div>
       <div>

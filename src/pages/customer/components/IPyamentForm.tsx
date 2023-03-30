@@ -119,8 +119,7 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
         {errors.amount && <span style={{color: "red"}}> {errors.amount} </span>}
       </div>
       <br />
-      <Button type="submit" fullWidth 
-      > 
+      <Button type="submit" fullWidth > 
         Submit
                 
       </Button>

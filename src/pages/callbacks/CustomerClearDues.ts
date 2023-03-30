@@ -7,7 +7,18 @@ export const clearDues = async () => {
         {
             withCredentials: true,
         },
-    );
+    )
+    .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+            alert("Dues Cleared Successfully.");
+        }
+    })
+    .catch((error) => {
+        console.log(error.response.status);
+        if (error.response.status === 500) {
+            alert("Dues could not be cleared.");
+        }
+    });
 
-    //console.log(response.data);
 }
