@@ -11,13 +11,7 @@ type PaymentFormProps = {
   formSource: number;
 };
 
-// type PaymentFormValues = {
-//   receiverID: string;
-//   // vendorID: string;
-//   // email: string;
-//   password: string;
-//   amount: string;
-// };
+
 
 const selectStyle = {
   padding: "8px 12px",
@@ -37,7 +31,6 @@ const receiverIDPattern = /^[A-Z0-9]{8}$/;
 
 const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) => {
 
-  // //console.log("Form source is " + formSource);
   const [values, setValues] = useState<PaymentFormValues>({
     receiverID: '',
     // password: '',
@@ -56,51 +49,22 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
         errors.receiverID = 'Receiver ID is invalid';
     }
 
-    // if (!values.vendorID.trim()) {
-    //   errors.vendorID = 'Vendor ID is required';
-    // }
-
-
-    // if (!values.email.trim()) {
-    //   errors.email = 'Email is required';
-    // } else if (!emailPattern.test(values.email.trim())) {
-    //   errors.email = 'Email is invalid';
-    // }
-
-    // if (!values.password.trim()) {
-    //   errors.password = 'Password is required';
-    // } else if(!passwordPattern.test(values.password.trim())) {
-    //     errors.password = 'Password is invalid';
-    // }
-
-    // if (!values.amount.trim()) {
-    //   errors.amount = 'Amount is required';
-    // } else if(values.amount <= 0) {}
-
-
     return errors;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // //console.log(values);
-    // const userTypeInputElement = event.currentTarget.elements[0] as HTMLInputElement;
-    // setValues((prevValues) => ({
-    //   ...prevValues,
-    //   userType: userTypeInputElement.value,
-    // }));
+    
 
     const errors = validate(values);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      // //console.log("The following values are being submitted");
-      // //console.log(values);
+      
       makeTransaction(values);
-      // window.location.reload();
+      
       setValues({
         receiverID: '',
-        // password: '',
         amount: 0,
         transactionType: formSource,
       });
@@ -140,49 +104,6 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
         />
         {errors.receiverID && <span style ={{color:"red"}}>{errors.receiverID}</span>}
       </div>
-      {/* <div> 
-        <label htmlFor="vendorID"><b>Vendor ID *</b></label>
-        <br />
-        <Input
-          type="text"
-          id="vendorID"
-          name="vendorID"
-          placeholder='123'
-          value={values.vendorID}
-          onChange={handleChange}
-          style={{width:"100%"}}
-        />
-      </div> */}
-
-      {/* <div>
-        <label htmlFor="email"><b>Email ID *</b></label>
-        <br />
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          placeholder='abc.xyz@gmail.com'
-          value={values.email}
-          onChange={handleChange}
-          style={{width:"100%"}}
-        />
-        {errors.email && <span style ={{color:"red"}}>{errors.email}</span>}
-      </div> */}
-
-      {/* <div>
-        <label htmlFor="password"><b>Password *</b></label>
-        <br />
-        <Input
-          type="password"
-          id="password"
-          name="password"
-          placeholder='abcxyz@123'
-          value={values.password}
-          onChange={handleChange}
-          style={{width:"100%"}}
-        />
-        {errors.password && <span style={{color: "red"}}> {errors.password} </span>}
-      </div> */}
       <div>
         <label htmlFor="amount"><b>Amount *</b></label>
         <br />
@@ -199,10 +120,9 @@ const RegistrationForm: React.FC<PaymentFormProps> = ({ onSubmit, formSource }) 
       </div>
       <br />
       <Button type="submit" fullWidth 
-      // onClick={signinpage}
-      // onClick = { () => //console.log(values)}
-      >
-                Make Payment
+      > 
+        Submit
+                
       </Button>
 
     </form>

@@ -211,6 +211,7 @@ export default function OverviewComponent() {
               alignContent: 'center',
               width: '30%',
               marginRight: '10%',
+
             }}
             >
               <Button

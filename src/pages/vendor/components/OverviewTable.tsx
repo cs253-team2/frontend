@@ -62,44 +62,7 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-const rows = [
-  {
-    id: 'INV-1234',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transaction_id: '123123',
-    amount: 1234
-  },
-  {
-    id: 'INV-1233',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transaction_id: '123123',
-    amount: 1234
-  },
-  {
-    id: 'INV-1232',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transaction_id: '123123',
-    amount: 1234
-  },
-  {
-    id: 'INV-1231',
-    date: 'Feb 3, 2023',
-    status: 'Refunded',
-    transaction_id: '123123',
-    amount: 1234
-  },
-  {
-    id: 'INV-1230',
-    date: 'Feb 3, 2023',
-    status: 'Paid',
-    transaction_id: '123123',
-    amount: 1234
-  },
 
-];
 
 export default function OverviewTable({data}:{data:TransactionsVendorPage[]}) {
   const [tableData, setTableData] = React.useState<TransactionsVendorPage[]>(data);
@@ -111,107 +74,12 @@ export default function OverviewTable({data}:{data:TransactionsVendorPage[]}) {
     console.log(data);
     console.log(tableData);
   }, [data]);
-  // const renderFilters = () => (
-  //   <React.Fragment>
-  //     <FormControl size="sm">
-  //       <FormLabel>Status</FormLabel>
-  //       <Select
-  //         placeholder="Filter by status"
-  //         slotProps={{ button: { sx: { whiteSpace: 'nowrap' } } }}
-  //       >
-  //         <Option value="paid">Paid</Option>
-  //         <Option value="pending">Pending</Option>
-  //         <Option value="refunded">Refunded</Option>
-  //         <Option value="cancelled">Cancelled</Option>
-  //       </Select>
-  //     </FormControl>
-
-  //     <FormControl size="sm">
-  //       <FormLabel>Category</FormLabel>
-  //       <Select placeholder="All">
-  //         <Option value="all">All</Option>
-  //       </Select>
-  //     </FormControl>
-
-  //     <FormControl size="sm">
-  //       <FormLabel>Customer</FormLabel>
-  //       <Select placeholder="All">
-  //         <Option value="all">All</Option>
-  //       </Select>
-  //     </FormControl>
-  //   </React.Fragment>
-  // );
+  
 
 
   return (
     <React.Fragment>
-      {/* <Sheet
-        className="SearchAndFilters-mobile"
-        sx={{
-          display: {
-            xs: 'flex',
-            sm: 'none',
-          },
-          my: 1,
-          gap: 1,
-        }}
-      >
-        <Input
-          size="sm"
-          placeholder="Search"
-          startDecorator={<i data-feather="search" />}
-          sx={{ flexGrow: 1 }}
-        />
-        <IconButton
-          size="sm"
-          variant="outlined"
-          color="neutral"
-          onClick={() => setOpen(true)}
-        >
-          <i data-feather="filter" />
-        </IconButton>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <ModalDialog aria-labelledby="filter-modal" layout="fullscreen">
-            <ModalClose />
-            <Typography id="filter-modal" level="h2">
-              Filters
-            </Typography>
-            <Divider sx={{ my: 2 }} />
-            <Sheet sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {renderFilters()}
-              <Button color="primary" onClick={() => setOpen(false)}>
-                Submit
-              </Button>
-            </Sheet>
-          </ModalDialog>
-        </Modal>
-      </Sheet> */}
-      {/* <Box
-        className="SearchAndFilters-tabletUp"
-        sx={{
-          borderRadius: 'sm',
-          py: 2,
-          display: {
-            xs: 'none',
-            sm: 'flex',
-          },
-          flexWrap: 'wrap',
-          gap: 1.5,
-          '& > *': {
-            minWidth: {
-              xs: '120px',
-              md: '160px',
-            },
-          },
-        }}
-      >
-        <FormControl sx={{ flex: 1 }} size="sm">
-          <FormLabel>Search</FormLabel>
-          <Input placeholder="Search" startDecorator={<i data-feather="search" />} />
-        </FormControl>
-
-        {renderFilters()}
-      </Box> */}
+      
       <Sheet
         className="OrderTableContainer"
         variant="outlined"
@@ -238,25 +106,7 @@ export default function OverviewTable({data}:{data:TransactionsVendorPage[]}) {
         >
           <thead>
             <tr>
-              {/* <th style={{ width: 48, textAlign: 'center', padding: 12 }}>
-                <Checkbox
-                  indeterminate={
-                    selected.length > 0 && selected.length !== rows.length
-                  }
-                  checked={selected.length === rows.length}
-                  onChange={(event) => {
-                    setSelected(
-                      event.target.checked ? rows.map((row) => row.id) : [],
-                    );
-                  }}
-                  color={
-                    selected.length > 0 || selected.length === rows.length
-                      ? 'primary'
-                      : undefined
-                  }
-                  sx={{ verticalAlign: 'text-bottom' }}
-                />
-              </th> */}
+              
               <th style={{ width: 140, padding: 12 }}>
                 <Link
                   underline="none"
