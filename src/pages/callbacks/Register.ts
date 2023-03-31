@@ -27,7 +27,13 @@ export const registerUser = async (data: userRegistrationData) => {
                 Accept: "application/json",
             },
         },
-    );
+    ).then((response) => {
+        // //console.log(response);
+        console.log(response.data);
+        return response.data;
+    }).catch((error) => {
+        console.log(error);
+        alert("Error in registering user. Please try again later or contact the admin.");
+    });
     // //console.log(response.data);
-    return response.data;
 }

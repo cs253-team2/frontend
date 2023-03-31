@@ -92,7 +92,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ disableComponents
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      setUserData(values); //api call
+      var res=setUserData(values); //api call
       //console.log("values have been set");
       
       reloadpage();
