@@ -152,7 +152,7 @@ export default function OverviewComponent() {
               alignItems: 'center',
             }}
             >
-              <Button
+              {/* <Button
               sx={{
                 alignItems: 'center',
                 width: '50%',
@@ -163,7 +163,7 @@ export default function OverviewComponent() {
                 <Typography level='h4'>
                   <b>Request Clear All Dues</b>
                 </Typography>
-              </Button>
+              </Button> */}
             </Box>
           </Box>
           <br />
