@@ -287,10 +287,7 @@ export default function VendorTable() {
                       </Typography>
                       <Box sx={{ display: "flex", pt: 1 }}>
                         <div>
-                          {/* <Typography level="body3">Vendor since:</Typography>
-                          <Typography fontSize="16px" fontWeight="lg">
-                            {row.last_login}
-                          </Typography> */}
+                          
                         </div>
                         <Button
                           variant="solid"

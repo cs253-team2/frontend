@@ -75,5 +75,11 @@ export const setUserData = async (userValues : UpdateFormDataFields) => {
             headers: headers,
             withCredentials: true,
         },
-    ).then((response) => {}).catch((error) => {console.log(error)});
+    ).then((response) => {
+       console.log(response);
+       return response.status
+    }).catch((error) => {
+        console.log(error)});
+
+    
 }

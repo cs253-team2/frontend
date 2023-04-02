@@ -20,7 +20,7 @@ import customTheme from './theme';
 import GoogleIcon from './GoogleIcon';
 import LightThemeBackgroundImage from '../../assets/iitkDayImage.jpg';
 import DarkThemeBackgroundImage from '../../assets/iitkNightImage.jpg';
-
+import { LogoutUser } from '../callbacks/LogoutUser';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUser } from '../callbacks/SignIn';
 import { isAuthenticated } from '../callbacks/isAuthenticated';
@@ -80,6 +80,7 @@ export default function JoySignInSideTemplate() {
 
 
   return (
+
     <CssVarsProvider
       defaultMode="dark"
       disableTransitionOnChange
@@ -187,7 +188,8 @@ export default function JoySignInSideTemplate() {
                   username: formElements.email.value,
                   password: formElements.password.value,
                 };
-                
+
+                LogoutUser();
                 getLoggedInUser(data).then((user) => {
                   if (user) {
                     localStorage.setItem("userid", user.user_id);
