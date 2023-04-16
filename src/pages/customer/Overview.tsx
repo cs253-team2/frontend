@@ -118,7 +118,7 @@ export default function OverviewComponent() {
                 px: 0,
               }}
             >
-              <Link
+              {/* <Link
                 underline="none"
                 color="neutral"
                 fontSize="inherit"
@@ -126,14 +126,14 @@ export default function OverviewComponent() {
                 aria-label="Home"
               >
                 <i data-feather="home" />
-              </Link>
+              </Link> */}
               <Link
                 underline="hover"
                 color="neutral"
                 fontSize="inherit"
                 href="/customer/overview"
               >
-                Dashboard
+                Overview
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
                 Overview

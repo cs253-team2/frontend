@@ -54,22 +54,22 @@ export default function App() {
                 px: 0,
               }}
             >
-              <Link
+              {/* <Link
                 underline="none"
                 color="neutral"
                 fontSize="inherit"
-                href="#some-link"
+                href="/"
                 aria-label="Home"
               >
                 <i data-feather="home" />
-              </Link>
+              </Link> */}
               <Link
                 underline="hover"
                 color="neutral"
                 fontSize="inherit"
-                href="#some-link"
+                href="/customer/overview"
               >
-                Dashboard
+                Overview
               </Link>
               <Typography fontSize="inherit" variant="soft" color="primary">
                 Add Dues
