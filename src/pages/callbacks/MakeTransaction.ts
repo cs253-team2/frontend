@@ -46,5 +46,9 @@ export const makeTransaction = async (data: PaymentFormValues) => {
         if(error.response.status === 500) {
             alert("Transaction Failed.")
         }
+        else if(error.response.status === 400) {
+            alert("Insufficient Balance.")
+        }
+
     });
 }
