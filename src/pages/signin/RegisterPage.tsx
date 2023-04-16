@@ -188,7 +188,7 @@ export default function JoySignInSideTemplate() {
               <Typography level="body2" sx={{ my: 1, mb: 3 }}>
                 <b>Registe Here. Please enter the following details.</b><br /><br />
                 Fields marked with * are compulsory <br /><br />
-                Password must have at least 8 characters, with at least 1 digit and 1 special character
+                Password must have at least 8 characters, with at least 1 digit and 1 special character and a capital letter.
               </Typography>
             </div>
               <RegistrationForm />

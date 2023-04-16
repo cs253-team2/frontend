@@ -44,7 +44,7 @@ export const makeTransaction = async (data: PaymentFormValues) => {
     .catch((error) => {
         console.log(error.response.status);
         if(error.response.status === 500) {
-            alert("Transaction Failed. Receiver ID does not exist.")
+            alert("Transaction Failed.")
         }
     });
 }
